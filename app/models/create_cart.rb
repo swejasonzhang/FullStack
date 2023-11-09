@@ -1,0 +1,2 @@
+class CreateCart < ApplicationRecord
+end

@@ -1,2 +1,0 @@
-class CreateItem < ApplicationRecord
-end

@@ -1,5 +1,8 @@
-class User < ApplicationRecord
-    validates :username, uniqueness: true
+class User < ApplicationRecord  
+    has_secure_password
+
+    validates :username,
+        uniqueness: true
     validates :email, 
         uniqueness: true, 
         format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -11,11 +14,16 @@ class User < ApplicationRecord
     def self.find_by_credentials(credential, password)
         field = credential =~ URI::MailTo::EMAIL_REGEXP ? :email : :username
         user = User.find_by(field => credential)
-        user&.authenticate(password)
+        if user&.authenticate(password)
+            return user
+        else 
+            nil 
+        end
     end
 
     def reset_session_token!
-        self.update!(session_token: generate_unique_session_token)
+        self.session_token = generate_unique_session_token
+        self.save!
         self.session_token
     end
 

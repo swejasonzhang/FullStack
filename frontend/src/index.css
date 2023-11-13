@@ -1,1 +1,4 @@
-/* TODO Add site wide styles */
+@font-face {
+    font-family: 'AmazonEmberMedium';
+    src: url('fonts/AmazonEmber_Rg.ttf') format('opentype');
+}

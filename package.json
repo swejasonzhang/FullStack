@@ -5,5 +5,29 @@
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.2"
-  }
+  },
+  "name": "fullstack-project",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "version": "1.0.0",
+  "directories": {
+    "lib": "lib"
+  },
+  "engines": {
+    "node": "16.x"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Helionster/FullStack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Helionster/FullStack/issues"
+  },
+  "homepage": "https://github.com/Helionster/FullStack#readme"
 }

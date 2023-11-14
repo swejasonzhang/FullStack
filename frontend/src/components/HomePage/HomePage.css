@@ -1,0 +1,54 @@
+.navbar {
+    display: flex;
+    background-color: black;
+    height: 50px; 
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; 
+    align-items: center;
+}
+
+.divamazeonhome {
+    width: 100px;
+    height: 60px;
+}
+
+.amazeonhome {
+    display: flex; 
+    height: 60px;
+    width: 100%;
+}
+
+.navbar div {
+    justify-content: space-between;
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.search-container {
+    text-align: center;
+}
+
+.catagories {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-box {
+    width: 500px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

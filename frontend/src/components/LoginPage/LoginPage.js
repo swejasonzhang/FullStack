@@ -9,6 +9,7 @@ import './LoginPage.css';
 function LoginPage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const [setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -38,6 +39,9 @@ function LoginPage() {
     };
 
     const demoSubmit = (e) => {
+        setUsername("demo")
+        setEmail("demouser@gmail.com")
+        setPassword("password")
         history.push('/')
     }
     

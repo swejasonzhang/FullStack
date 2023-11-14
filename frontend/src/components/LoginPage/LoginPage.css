@@ -1,0 +1,111 @@
+.amazeonlogin {
+    display: flex;
+    margin: auto;
+    height: auto;
+    width: 115px;
+    margin-top: 3%;
+}
+
+html {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: AmazonEmber;
+    font-size: 14px;
+}
+
+.loginheader {
+    margin-top: 1%;
+    font-weight: 200;
+}
+
+.loginemail, .loginpassword {
+    font-weight: bolder;
+}
+
+.login-container {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 15px;
+    border-radius: 8px;
+    width: 320px;
+    height: 340px;
+}
+
+.loginform {
+    margin-bottom: 15px;
+}
+
+.loginform label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.loginform input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.loginform button {
+    display: block;
+    justify-content: center;
+    background-color: #FFD814;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    font-family: AmazonEmber;
+}
+
+.haveaccount a {
+    color: #0066C0;
+    text-decoration: none;
+}
+
+.haveaccount a:hover {
+    text-decoration: underline;
+}
+
+.loginform input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #c8f3fa;
+}
+
+.createaccount button {
+    display: block;
+    justify-content: center;
+    background-color: #FFFFFF;
+    color: #0F1111;
+    padding: 10px;
+    border: 1px solid #D5D9D9;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 92%;
+    margin-left: 15px;
+    font-family: AmazonEmber;
+}
+
+.demologin button {
+    display: block;
+    justify-content: center;
+    background-color: #FFD814;
+    color: #0F1111;
+    padding: 10px;
+    border: 1px solid #D5D9D9;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    font-family: AmazonEmber;
+}

@@ -1,91 +1,160 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+  
 .navbar {
     display: flex;
-    background-color: black;
-    height: 50px; 
+    background-color: #131921;
+    height: 60px;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; 
+    z-index: 1000;
+    align-items: center;
+    padding: 0 20px; 
+    color: white;
+}
+  
+.amazeonhome {
+    display: flex;
     align-items: center;
 }
-
-.divamazeonhome {
-    width: 100px;
-    height: 60px;
+  
+.amazeonhomepage {
+    height: 30px; 
+    width: auto;
+    margin-right: 10px; 
 }
-
-.amazeonhome {
-    display: flex; 
-    height: 60px;
-    width: 100%;
+  
+.searchcontainer {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-left: 165px;
+    border-radius: 5px;
 }
-
-.navbar div {
-    justify-content: space-between;
-    float: left;
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-.search-container {
-    text-align: center;
-}
-
-.catagories {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.search-box {
-    width: 500px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.search-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.navbar .dropdown {
+  
+.categories-container {
     position: relative;
-    display: inline-block;
 }
   
-.navbar .dropdown-btn {
-    background-color: black;
-    color: white;
-    padding: 10px;
-    border: none;
+.categories, .searchbox, .searchbutton {
+    height: 40px;
+    box-sizing: border-box;
+}
+  
+.categories {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 0.9em;
     cursor: pointer;
+    border: none;
+    color: #0F1111;
+    background-color: #e6e6e6;
+    text-align: left;
+    padding-top: 13px;
+    position: relative;
 }
   
-.navbar .dropdown-content {
+.categories .arrowdown {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #000;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+  
+.dropdowncontent {
     display: none;
     position: absolute;
+    top: 100%;
+    left: 0;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
   
-.navbar .dropdown-content a {
+.categories:hover .dropdowncontent {
+    display: block;
+}
+
+.searchbox {
+    width: 660px;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #FFFFFF;
+    text-align: left;
+    padding-left: 5px;
+}
+  
+.searchbutton {
+    background-color: #febd69;
+    color: #111;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 0; 
+    transition: background-color 0.3s;
+}
+
+.searchbutton:hover {
+  background-color: #ddb347; 
+}
+  
+.search-icon {
+    font-size: 20px;
+}
+  
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 100px;
+}
+  
+.dropdownbutton {
+    background-color: #232f3e; 
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-left: 80px;
+}
+  
+.accountdropdowncontent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+  
+.accountdropdowncontent a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
   
-  .navbar .dropdown-content a:hover {
-    background-color: #f1f1f1;
+.accountdropdowncontent a:hover {
+    color: #e77600; 
+    text-decoration: underline;
 }
   
-  .navbar .dropdown:hover .dropdown-content {
+.dropdown:hover .accountdropdowncontent {
     display: block;
 }
+  
+.cart {
+    margin-left: 40px;
+    padding: 14px 16px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+  

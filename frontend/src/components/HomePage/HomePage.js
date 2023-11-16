@@ -1,13 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import amazeonhomepage from '../images/amazeonhomepage.jpeg';
 import './HomePage.css';
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import amazeoncart from '../images/AmazeonCart.jpeg';
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const [username, setUsername] = useState(""); 
+  const session = useSelector(state => state.session);
+
+  useEffect(() => {
+    if (session && session.user && session.user.username) {
+      setUsername(session.user.username);
+    } else {
+      setUsername("User");
+    }
+  }, [session]);
 
   const homesignout = async (e) => {
     e.preventDefault();
@@ -22,30 +35,41 @@ const HomePage = () => {
           <img className="amazeonhomepage" src={amazeonhomepage} alt="amazeonhomelogo" />
         </div>
 
-        <div class="searchcontainer">
-          <div class="categories-container">
-            <button class="categories">All
-              <div class="arrowdown"></div>
-              <div class="dropdowncontent">
-                <p>All Departments</p>
-                <p>Alexa Skills</p>
-              </div>
-            </button>
+        <div className="searchcontainer">
+          <div className="categoriescontainer">
+            <select className="categories">
+              <option value="AllDepartments">All Departments</option>
+              <option value="AlexaSkills">Alexa Skills</option>
+            </select>
           </div>
-          <input type="text" class="searchbox" placeholder="Search Amazeon" />
-          <button class="searchbutton">
-            <span class="search-icon">&#x1F50D;</span>
+          <input type="text" className="searchbox" placeholder="Search Amazeon" />
+          <button className="searchbutton">
+            <div className="searchbuttonicon">
+              <FontAwesomeIcon icon={faSearch} />
+            </div>
           </button>
         </div>
 
         <div className="dropdown">
-          <button className="dropdownbutton">Account &#9660;</button>
+          <div className="greeting">Hello, {username}</div>
+          <button className="dropdownbutton">Account & Lists</button>
           <div className="accountdropdowncontent">
-            <a href="/login" onClick={homesignout}>Sign Out</a>
+            <h3>Your Account</h3>
+
+            <div className="homesignoutlink">
+              <a href="/login" onClick={homesignout}>Sign Out</a>
+            </div>
           </div>
         </div>
-
-        <div className="cart">Cart</div>
+        <div className="amazeoncartsection">
+          <img className="amazeoncartimg" src={amazeoncart} alt="" />
+          <div className="cartcontainer">
+            <div className="number">0</div>
+            <div className="cart">
+              <h3>Cart</h3>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

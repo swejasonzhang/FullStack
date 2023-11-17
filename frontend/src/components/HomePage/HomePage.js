@@ -13,6 +13,7 @@ const HomePage = () => {
   const history = useHistory();
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
+  let [counterOfItems] = useState();
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -27,6 +28,14 @@ const HomePage = () => {
     await dispatch(sessionActions.logout());
     history.push('/login');
   };
+
+  const redirectcart = async(e) => {
+    history.push('/cart')
+  }
+
+  const increaseOfItems = async(e) => {
+    counterOfItems += 1
+  }
 
   return (
     <>
@@ -55,16 +64,15 @@ const HomePage = () => {
           <button className="dropdownbutton">Account & Lists</button>
           <div className="accountdropdowncontent">
             <h3>Your Account</h3>
-
             <div className="homesignoutlink">
               <a href="/login" onClick={homesignout}>Sign Out</a>
             </div>
           </div>
         </div>
-        <div className="amazeoncartsection">
+        <div className="amazeoncartsection" onClick={redirectcart}>
           <img className="amazeoncartimg" src={amazeoncart} alt="" />
           <div className="cartcontainer">
-            <div className="number">0</div>
+            <div className="number" onClick={increaseOfItems}>{counterOfItems}</div>
             <div className="cart">
               <h3>Cart</h3>
             </div>

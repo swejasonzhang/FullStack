@@ -1,12 +1,11 @@
 class Api::ItemsController < ApplicationController
-    def show 
-
+    def index
+        @items = Item.all
+        render :index
     end
 
-    def 
-
-    private
-    def user_params
-        params.require(:user).permit(:email, :username, :password)
+    def show
+        @item = Item.find_by(id: params[:id])
+        render :show
     end
 end

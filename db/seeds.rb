@@ -1,3 +1,5 @@
+require "open-uri"
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -6,7 +8,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-ApplicationRecord.transaction do 
+# ApplicationRecord.transaction do 
   puts "Destroying tables..."
   # Unnecessary if using `rails db:seed:replant`
   User.destroy_all
@@ -32,6 +34,18 @@ ApplicationRecord.transaction do
     }) 
   end
 
+  ValorantGiftCard = Item.create!({
+    name: "VALORANT $100 Gift Card - PC [Online Game Code]",
+    cost: 100,
+    category: "Video Games",
+    stock: "138",
+    description: "The perfect gift for anyone who enjoys VALORANT or thinking about trying it out for the first time.
+    This card unlocks in-game currency that can be used to purchase in game currency to purchase skins or agents, characters, alike."
+  })
+
+  ValorantGiftCard.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Valorant+Gift+Card.jpg"), filename: "ValorantGiftCard.png")
+
   puts "Done!"
-end
+# end
+
   

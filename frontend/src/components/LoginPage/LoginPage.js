@@ -3,7 +3,7 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
-import amazeon from '../images/amazeon.jpeg';
+import amazeon from '../Images/amazeon.jpeg';
 import './LoginPage.css';
 
 function LoginPage() {
@@ -40,7 +40,7 @@ function LoginPage() {
     const demoSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential: "demouser@gmail.com", password: "password" }))
+        return dispatch(sessionActions.login({ credential: "Demouser@gmail.com", password: "Password" }))
         .catch(async (res) => {
             let data;
             try {

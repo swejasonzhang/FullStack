@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
-import amazeonhomepage from '../images/amazeonhomepage.jpeg';
+import amazeonhomepage from '../Images/amazeonhomepage.jpeg';
+import amazeoncart from '../Images/AmazeonCart.jpeg';
 import './HomePage.css';
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import amazeoncart from '../images/AmazeonCart.jpeg';
+import ItemsIndex from "../Items/ItemsIndex";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
-  let [counterOfItems] = useState();
+  let [counterOfItems] = useState(0);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -31,10 +32,6 @@ const HomePage = () => {
 
   const redirectcart = async(e) => {
     history.push('/cart')
-  }
-
-  const increaseOfItems = async(e) => {
-    counterOfItems += 1
   }
 
   return (
@@ -63,21 +60,32 @@ const HomePage = () => {
           <div className="greeting">Hello, {username}</div>
           <button className="dropdownbutton">Account & Lists</button>
           <div className="accountdropdowncontent">
-            <h3>Your Account</h3>
-            <div className="homesignoutlink">
-              <a href="/login" onClick={homesignout}>Sign Out</a>
-            </div>
+          <h3>Your Account</h3>
+            {session.user ? (
+          <div className="homesignoutlink">
+            <a href="/login" onClick={homesignout}>Sign Out</a>
           </div>
+          ) : (
+          <div className="homesigninlink">
+            <a href="/login">Sign In</a>
+          </div>
+           )}
+          </div>  
         </div>
-        <div className="amazeoncartsection" onClick={redirectcart}>
+
+        <button className="amazeoncartsection" onClick={redirectcart}>
           <img className="amazeoncartimg" src={amazeoncart} alt="" />
           <div className="cartcontainer">
-            <div className="number" onClick={increaseOfItems}>{counterOfItems}</div>
-            <div className="cart">
-              <h3>Cart</h3>
+            <div className="number">{counterOfItems}</div>
+              <div className="cart">
+                  <h3>Cart</h3>
+              </div>
             </div>
-          </div>
-        </div>
+        </button>
+      </div>
+
+      <div className="pagecontent">
+        <ItemsIndex />
       </div>
     </>
   );

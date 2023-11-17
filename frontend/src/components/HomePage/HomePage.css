@@ -13,7 +13,6 @@ body {
     left: 0;
     z-index: 1000;
     align-items: center;
-    padding: 0 20px; 
     color: white;
 }
   
@@ -25,7 +24,7 @@ body {
 .amazeonhomepage {
     height: 30px; 
     width: auto;
-    margin-right: 10px; 
+    margin-left: 20px;
 }
   
 .searchcontainer {
@@ -174,11 +173,19 @@ body {
     margin-left: 50px;
 }
 
+.homesigninlink {
+    margin-top: 120px;
+    margin-left: 50px;
+}
+
 .amazeoncartsection {
     display: flex;
     align-items: center;
     margin-left: 100px;
     position: relative;
+    cursor: pointer;
+    background-color: #131921;
+    border: none;
 }
 
 .amazeoncartsection .amazeoncartimg {
@@ -193,8 +200,8 @@ body {
 
 .amazeoncartsection .number {
     position: absolute;
-    bottom: 20px;
-    right: 43px;
+    bottom: 18px;
+    right: 48px;
     font-size: 16px;
     font-weight: bold;
     color: #f08804;
@@ -204,7 +211,18 @@ body {
 }
 
 .amazeoncartsection .cart {
-    cursor: pointer;
     font-size: 0.9em;
     color: white;
+}
+
+.pagecontent {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: auto; 
+    scroll-behavior: smooth;
 }

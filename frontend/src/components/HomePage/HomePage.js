@@ -14,7 +14,7 @@ const HomePage = () => {
   const history = useHistory();
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
-  let [counterOfItems] = useState(0);
+  const counterOfItems = useSelector((state) => state.counterOfItems);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -34,11 +34,15 @@ const HomePage = () => {
     history.push('/cart')
   }
 
+  const redirectToHomePage = async(e) => {
+    history.push("/")
+  }
+
   return (
     <>
       <div className="navbar">
         <div className="amazeonhome">
-          <img className="amazeonhomepage" src={amazeonhomepage} alt="amazeonhomelogo" />
+          <img className="amazeonhomepage" src={amazeonhomepage} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
 
         <div className="searchcontainer">
@@ -77,10 +81,10 @@ const HomePage = () => {
           <img className="amazeoncartimg" src={amazeoncart} alt="" />
           <div className="cartcontainer">
             <div className="number">{counterOfItems}</div>
-              <div className="cart">
-                  <h3>Cart</h3>
-              </div>
+            <div className="cart">
+              <h3>Cart</h3>
             </div>
+          </div>
         </button>
       </div>
 

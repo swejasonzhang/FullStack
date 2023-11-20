@@ -12,7 +12,7 @@ export const receiveItem = (item) => ({
 });
 
 export const getItem = (itemId) => (state) => {return state?.items ? state.items[itemId] : null};
-export const getItems = (state) => {return state.items ? Object.values(state.items) : []};
+export const getItems = (state) => {return state.items ? state.items : []};
 
 export const fetchItems = () => async dispatch => {
     const res = await fetch('/api/items');
@@ -31,14 +31,12 @@ export const fetchItem = (itemId) => async dispatch => {
     }
 }
 
-
-
 const itemsReducer = (state = {}, action) => {
     switch(action.type) {
         case RECEIVE_ITEMS:
             return {...action.items};
         case RECEIVE_ITEM:
-            return {...state, [action.item.id]: action.item};
+            return {...state, [action.item.item.id]: action.item.item};
         default:
             return state;
     }

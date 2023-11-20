@@ -14,8 +14,8 @@ const ItemsIndex = () => {
 
     return (
         <div className="itemindex">
-            {allItems.map((item) => (
-                <ItemDisplay item={item} key={item.id} />
+            {Object.values(allItems).map((item) => (
+                <ItemDisplay key={item.id} item={item} />
             ))}
         </div>
     );

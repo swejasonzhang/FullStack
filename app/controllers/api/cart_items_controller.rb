@@ -2,7 +2,7 @@ class Api::CartItemsController < ApplicationController
   before_action :set_item, only: [:show, :update, :destroy]
 
   def index
-    @items = Item.all
+    @items = CartItem.all
     render json: @items
   end
 
@@ -11,8 +11,12 @@ class Api::CartItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    # debugger
 
+    @item = CartItem.new(cart_item_params)
+    # debugger
+    @item.user_id = current_user.id
+    # debugger
     if @item.save
       render json: @item, status: :created
     else
@@ -21,7 +25,7 @@ class Api::CartItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    if @item.update(cart_item_params)
       render json: @item
     else
       render json: @item.errors, status: :unprocessable_entity
@@ -35,10 +39,10 @@ class Api::CartItemsController < ApplicationController
 
   private
   def set_item
-    @item = Item.find(params[:id])
+    @item = CartItem.find(params[:id])
   end
 
-  def item_params
-    params.require(:item).permit(:user_id, :item_id)
+  def cart_item_params
+    params.require(:cart_item).permit(:user_id, :item_id, :quantity)
   end
 end

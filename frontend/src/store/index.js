@@ -2,21 +2,13 @@ import { createStore,combineReducers,applyMiddleware,compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import itemsReducer from "./item";
+import cartItemsReducer from "./cartitems";
 
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   items: itemsReducer,
-  counterOfItems: (state = 0, action) => {
-    switch (action.type) {
-      case 'INCREMENT_COUNTER':
-        return state + action.payload; 
-      case 'DECREMENT_COUNTER':
-        return state - action.payload;
-      default:
-        return state;
-    }
-  },
+  cartItems: cartItemsReducer,
 });
 
 let enhancer;

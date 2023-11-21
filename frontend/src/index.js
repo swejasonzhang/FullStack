@@ -7,7 +7,8 @@ import App from './App';
 import configureStore from './store';
 import csrfFetch, { restoreCSRF } from './store/csrf';
 import * as sessionActions from './store/session';
-import { fetchItem, getItem } from './store/item.js';
+import * as cartItemsActions from './store/cartitems';
+import { fetchItem, getItem} from './store/item.js';
 
 const store = configureStore();
 
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV !== "production") {
   window.sessionActions = sessionActions;
   window.fetchItem = fetchItem;
   window.getItem = getItem;
+  window.cartItemsActions = cartItemsActions;
 }
 
 function Root() {

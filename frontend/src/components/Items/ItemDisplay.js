@@ -11,8 +11,8 @@ const ItemDisplay = ({ item }) => {
 
     return (
         <div className="displayitem" onClick={() => navigateToItemPage(item.id)}>
-            <div className="valorantImgContainer">
-                <img className="valorantImg" src={item.imageUrl} alt={item.name} />
+            <div className="imgContainer">
+                <img className="img" src={item.imageUrl} alt={item.name} />
             </div>
             <div className="itemName">{item.name}</div>
             <div className="itemCost">${item.cost}</div>

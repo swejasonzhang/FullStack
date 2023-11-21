@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
+import * as sessionActions from "../../store/session";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import amazeonhomepage from '../Images/amazeonhomepage.jpeg';
 import amazeoncart from '../Images/AmazeonCart.jpeg';
 import './HomePage.css';
-import { useHistory } from 'react-router-dom';
-import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import ItemsIndex from "../Items/ItemsIndex";
 
 const HomePage = () => {
@@ -14,7 +14,7 @@ const HomePage = () => {
   const history = useHistory();
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
-  const counterOfItems = useSelector((state) => state.counterOfItems);
+  const cartItems = useSelector(state => state.cartItems);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -31,12 +31,14 @@ const HomePage = () => {
   };
 
   const redirectcart = async(e) => {
-    history.push('/cart')
+    history.push('/cart');
   }
 
   const redirectToHomePage = async(e) => {
     history.push("/")
   }
+
+  const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>
@@ -80,7 +82,7 @@ const HomePage = () => {
         <button className="amazeoncartsection" onClick={redirectcart}>
           <img className="amazeoncartimg" src={amazeoncart} alt="" />
           <div className="cartcontainer">
-            <div className="number">{counterOfItems}</div>
+            <div className="number">{totalItemsInCart}</div>
             <div className="cart">
               <h3>Cart</h3>
             </div>

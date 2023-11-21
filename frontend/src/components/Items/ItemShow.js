@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import amazeonhomepage from '../Images/amazeonhomepage.jpeg';
-import amazeoncart from '../Images/AmazeonCart.jpeg';
-import './ItemShow.css'
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import amazeonhomepage from '../Images/amazeonhomepage.jpeg';
+import amazeoncart from '../Images/AmazeonCart.jpeg';
+import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
+import { createCartItem } from "../../store/cartitems.js"
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -16,13 +17,13 @@ const ItemShow = () => {
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
   const [selectedQuantity, setSelectedQuantity] = useState(1); 
-  const [cartQuantity, setCartQuantity] = useState(0);
+  const [cartQuantity, setCartQuantity] = useState(0); 
   const { itemId } = useParams();
   const item = useSelector(getItem(itemId)) || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [orderStatus, setOrderStatus] = useState("Place Your Order");
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
-
+  const cartItems = useSelector(state => state.cartItems);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -76,16 +77,9 @@ const ItemShow = () => {
   }
 
   const addToCart = () => {
-    const itemCost = item && item.cost ? item.cost : 0;
-  
-    if (!itemCost) {
-      console.error("Item cost is not available.");
-      return;
-    }
-  
-    setCartQuantity((prevCartQuantity) => prevCartQuantity + selectedQuantity);
-    dispatch({ type: 'INCREMENT_COUNTER', payload: selectedQuantity }); 
+    dispatch(createCartItem( { item_id: item.id, quantity: selectedQuantity }));
   };
+  
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -136,11 +130,17 @@ const ItemShow = () => {
   };
 
   const renderCartQuantity = () => {
-    const cartQuantityText = cartQuantity > 99 ? "99+" : cartQuantity;
+    const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+    const cartQuantityText = totalQuantity > 99 ? "99+" : totalQuantity;
     return cartQuantityText;
   };
 
   const cartNumberClass = cartQuantity > 99 ? "bigcartnumber" : cartQuantity >= 10 ? "mediumcartnumber" : "smallcartnumber";
+
+  useEffect(() => {
+    const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+    setCartQuantity(totalQuantity);
+  }, [cartItems]);
 
   return (
     <>
@@ -168,16 +168,16 @@ const ItemShow = () => {
           <div className="greeting">Hello, {username}</div>
           <button className="dropdownbutton">Account & Lists</button>
           <div className="accountdropdowncontent">
-          <h3>Your Account</h3>
+            <h3>Your Account</h3>
             {session.user ? (
-          <div className="homesignoutlink">
-            <a href="/login" onClick={homesignout}>Sign Out</a>
-          </div>
-          ) : (
-          <div className="homesigninlink">
-            <a href="/login">Sign In</a>
-          </div>
-           )}
+              <div className="homesignoutlink">
+                <a href="/login" onClick={homesignout}>Sign Out</a>
+              </div>
+            ) : (
+              <div className="homesigninlink">
+                <a href="/login">Sign In</a>
+              </div>
+            )}
           </div>  
         </div>
 
@@ -195,9 +195,9 @@ const ItemShow = () => {
       <div className="itemcontent">
         <div className="showitemcategory">{item && item?.category ? item.category : "Unknown Category"}</div>
         <div className="itemdetails">
-        <div className="itemshowvalorantcontainer">
+        <div className="itemshowcontainer">
             {item && (
-              <img className="itemshowvalorantimg" src={item.imageUrl} alt={item.name} />
+              <img className="itemshowimg" src={item.imageUrl} alt={item.name} />
             )}
           </div>
 
@@ -209,51 +209,51 @@ const ItemShow = () => {
               </div>
             </div>
           </div>
-            
-          <div className="showitemdiv">
-            <div className={`showitemcost ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-              Cost: ${item && item?.cost ? item.cost : " Unknown Cost"}
-            </div>
-            <div className={`instock ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-              {item && item.stock > 0 ? "In Stock" : "Out Of Stock"}
-            </div>
-            
-            <div className={`showitemdropdown ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-              <label className={`showdropdownbutton ${isModalOpen ? 'modalopen' : ''}`} onClick={() => toggleDropdown()}>
-                <div className="qtxcontainer">
-                  Qty: <span className="qtytext" id="selectedQuantity">1</span>
-                </div>
-              </label>
-              <div className="showdropdowncontent" id="dropdownContent">
-                <label htmlFor="quantity1" onClick={() => updateQuantity(1)}>1</label>
-                <label htmlFor="quantity2" onClick={() => updateQuantity(2)}>2</label>
-                <label htmlFor="quantity3" onClick={() => updateQuantity(3)}>3</label>
-                <label htmlFor="quantity4" onClick={() => updateQuantity(4)}>4</label>
-                <label htmlFor="quantity5" onClick={() => updateQuantity(5)}>5</label>
-                <label htmlFor="quantity6" onClick={() => updateQuantity(6)}>6</label>
-                <label htmlFor="quantity7" onClick={() => updateQuantity(7)}>7</label>
-                <label htmlFor="quantity8" onClick={() => updateQuantity(8)}>8</label>
-                <label htmlFor="quantity9" onClick={() => updateQuantity(9)}>9</label>
-                <label htmlFor="quantity10" onClick={() => updateQuantity(10)}>10</label>
-              </div>
-            </div>
-
-            {item && item.stock > 0 && (
-              <>
-                <button className="addtocartbutton" onClick={addToCart} disabled={item.stock <= 0}>
-                  Add to Cart
-                </button>
-
-                <button className="buynow" onClick={openModal} disabled={item.stock <= 0}>
-                  Buy Now
-                </button>
-              </>
-            )}
-
-            {isModalOpen && (
-              <Modal closeModal={closeModal} />
-            )}
+        </div>
+        
+        <div className="showitemdiv">
+          <div className={`showitemcost ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
+            Cost: ${item && item?.cost ? item.cost : " Unknown Cost"}
           </div>
+          <div className={`instock ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
+            {item && item.stock > 0 ? "In Stock" : "Out Of Stock"}
+          </div>
+          
+          <div className={`showitemdropdown ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
+            <label className={`showdropdownbutton ${isModalOpen ? 'modalopen' : ''}`} onClick={() => toggleDropdown()}>
+              <div className="qtxcontainer">
+                Qty: <span className="qtytext" id="selectedQuantity">1</span>
+              </div>
+            </label>
+            <div className="showdropdowncontent" id="dropdownContent">
+              <label htmlFor="quantity1" onClick={() => updateQuantity(1)}>1</label>
+              <label htmlFor="quantity2" onClick={() => updateQuantity(2)}>2</label>
+              <label htmlFor="quantity3" onClick={() => updateQuantity(3)}>3</label>
+              <label htmlFor="quantity4" onClick={() => updateQuantity(4)}>4</label>
+              <label htmlFor="quantity5" onClick={() => updateQuantity(5)}>5</label>
+              <label htmlFor="quantity6" onClick={() => updateQuantity(6)}>6</label>
+              <label htmlFor="quantity7" onClick={() => updateQuantity(7)}>7</label>
+              <label htmlFor="quantity8" onClick={() => updateQuantity(8)}>8</label>
+              <label htmlFor="quantity9" onClick={() => updateQuantity(9)}>9</label>
+              <label htmlFor="quantity10" onClick={() => updateQuantity(10)}>10</label>
+            </div>
+          </div>
+
+          {item && item.stock > 0 && (
+            <>
+              <button className="addtocartbutton" onClick={addToCart} disabled={item.stock <= 0}> 
+                Add to Cart
+              </button>
+
+              <button className="buynow" onClick={openModal} disabled={item.stock <= 0}>
+                Buy Now
+              </button>
+            </>
+          )}
+
+          {isModalOpen && (
+            <Modal closeModal={closeModal} />
+          )}
         </div>
       </div>
     </>

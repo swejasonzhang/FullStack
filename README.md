@@ -14,7 +14,7 @@ Amazeon was coded using React-Redux for the frontend and as for the backend, it 
 
 The function totalItemsInCart allows the user to see how many items there are in cart by iterating through an object of cart items and getting the quanity of every item, then adding it to the total. The function totalSelectedItems allow us to see how many items are actually selected by seeing if there is a quanity if an item, if there is add one to the total, if not then set the total to zero.
 
-![plot](./HandleCheckboxChange.png) 
+![plot](./HandleCheckBoxChange.png) 
 
 This function handleCheckboxChange checks if the item is currently checked or not. We first check for if the index is in the selectedItems array aka if its checked. If it's not checked then selectedIndex will be -1. If its -1 push the item into a new array. If it's not -1 then we know its in the array and so we can filter it out from the rest of the array.
 

@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import amazeonhomepage from '../Images/amazeonhomepage.jpeg';
-import amazeoncart from '../Images/AmazeonCart.jpeg';
+import amazeoncart from '../Images/AmazeonCart.jpeg'
 import './CartItems.css';
 
 const Cart = () => {

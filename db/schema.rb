@@ -43,9 +43,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_132111) do
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "item_id"
-    t.integer "quantity"
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.integer "quantity", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_cart_items_on_item_id"

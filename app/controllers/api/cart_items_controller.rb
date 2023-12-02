@@ -14,9 +14,8 @@ class Api::CartItemsController < ApplicationController
     # debugger
 
     @item = CartItem.new(cart_item_params)
-    # debugger
     @item.user_id = current_user.id
-    # debugger
+
     if @item.save
       render json: @item, status: :created
     else

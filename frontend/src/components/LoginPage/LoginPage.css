@@ -1,9 +1,11 @@
 .amazeonlogin {
     display: flex;
     margin: auto;
-    height: auto;
-    width: 115px;
+    height: 100px;
+    width: 300px;
     margin-top: 3%;
+    position: relative;
+    right: 5px;
 }
 
 html {
@@ -27,6 +29,7 @@ html {
 }
 
 .login-container {
+    position: relative;
     background-color: white;
     border: 1px solid #ddd;
     padding: 15px;
@@ -34,6 +37,8 @@ html {
     border-radius: 8px;
     width: 320px;
     height: 340px;
+    bottom: 50px;
+    margin-top: 50px;
 }
 
 .loginform {
@@ -94,6 +99,8 @@ html {
     width: 92%;
     margin-left: 15px;
     font-family: AmazonEmber;
+    position: relative;
+    bottom: 50px;
 }
 
 .demologin button {

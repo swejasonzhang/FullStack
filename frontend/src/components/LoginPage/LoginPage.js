@@ -3,7 +3,6 @@ import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
-import amazeon from '../Images/amazeon.jpeg';
 import './LoginPage.css';
 
 function LoginPage() {
@@ -56,7 +55,7 @@ function LoginPage() {
     
     return (
         <>
-            <img className="amazeonlogin" src={amazeon} alt='amazeonloginmain'></img>
+            <img className="amazeonlogin" src={"https://amazeon-seeds.s3.amazonaws.com/amazeon.jpeg"} alt='amazeonloginmain'></img>
             <div className="login-container">
                 <h1 className="loginheader">Sign In</h1>
                 <form onSubmit={handleSubmit}>

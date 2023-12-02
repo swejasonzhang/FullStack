@@ -4,8 +4,6 @@ import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import amazeonhomepage from '../Images/homepage.jpeg';
-import amazeoncart from '../Images/AmazeonCart.jpeg';
 import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
@@ -146,7 +144,7 @@ const ItemShow = () => {
     <>
       <div className="navbar">
         <div className="amazeonhome">
-          <img className="amazeonhomepage" src={amazeonhomepage} onClick={redirectToHomePage} alt="amazeonhomelogo" />
+          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/amazeonhome.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
 
         <div className="searchcontainer">
@@ -182,7 +180,7 @@ const ItemShow = () => {
         </div>
 
         <button className="amazeoncartsection" onClick={redirectCart}>
-          <img className="amazeoncartimg" src={amazeoncart} alt="" />
+          <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/amazeoncart.jpeg"} alt="" />
           <div className={`cartcontainer ${cartNumberClass}`}>
             <div className="number">{renderCartQuantity()}</div>
             <div className="cart">

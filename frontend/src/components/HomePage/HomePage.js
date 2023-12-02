@@ -4,8 +4,6 @@ import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import amazeonhomepage from '../Images/homepage.jpeg';
-import amazeoncart from '../Images/AmazeonCart.jpeg';
 import './HomePage.css';
 import ItemsIndex from "../Items/ItemsIndex";
 
@@ -44,7 +42,7 @@ const HomePage = () => {
     <>
       <div className="navbar">
         <div className="amazeonhome">
-          <img className="amazeonhomepage" src={amazeonhomepage} onClick={redirectToHomePage} alt="amazeonhomelogo" />
+          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/amazeonhome.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
 
         <div className="searchcontainer">
@@ -80,7 +78,7 @@ const HomePage = () => {
         </div>
 
         <button className="amazeoncartsection" onClick={redirectcart}>
-          <img className="amazeoncartimg" src={amazeoncart} alt="" />
+          <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/amazeoncart.jpeg"} alt="" />
           <div className="cartcontainer">
             <div className="number">{totalItemsInCart}</div>
             <div className="cart">

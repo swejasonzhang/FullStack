@@ -1,7 +1,7 @@
 .amazeonsignup {
     display: flex;
     margin: auto;
-    height: 170px;
+    height: 100px;
     width: 300px;
     margin-top: 3%;
     position: relative;
@@ -38,6 +38,7 @@ html {
     height: 450px;
     position: relative;
     bottom: 50px;
+    margin-top: 50px;
 }
 
 .signupform {

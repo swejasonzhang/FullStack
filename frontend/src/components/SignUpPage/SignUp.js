@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from '../../store/session';
-import amazeon from '../Images/amazeon.jpeg'
 import './SignUp.css';
 
 function SignUp () {
@@ -39,7 +38,7 @@ function SignUp () {
 
     return (
         <>
-            <img className="amazeonsignup" src={amazeon} alt='amazeonsignupmain'></img>
+            <img className="amazeonsignup" src={"https://amazeon-seeds.s3.amazonaws.com/amazeon.jpeg"} alt='amazeonsignupmain'></img>
 
             <div className="signup-container">
                 <h1 className="signupheader">Create account</h1>

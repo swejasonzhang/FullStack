@@ -1,7 +1,7 @@
 .amazeonlogin {
     display: flex;
     margin: auto;
-    height: 170px;
+    height: 100px;
     width: 300px;
     margin-top: 3%;
     position: relative;
@@ -38,6 +38,7 @@ html {
     width: 320px;
     height: 340px;
     bottom: 50px;
+    margin-top: 50px;
 }
 
 .loginform {

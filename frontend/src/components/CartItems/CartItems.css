@@ -275,6 +275,8 @@ body {
     width: 1020px;
     background-color: white;
     border-bottom: 1px solid #ddd; 
+    height: 270px;
+    align-items: center;
 }
 
 .cartitemdetails {
@@ -282,6 +284,8 @@ body {
     flex-direction: column;
     text-align: left;
     margin-right: 15px;
+    position: relative;
+    bottom: 30px;
 }
 
 .cartindeximgcontainer {
@@ -328,11 +332,13 @@ body {
     font-family: "AmazonEmber";
     font-size: 20px;
     font-weight: bold;
+    position: relative;
 }
 
 .descriptioncontainer {
-    width: 600px;
-    height: 60px;
+    width: 600px;   
+    height: 100px;
+    text-overflow: ellipsis;
 }
 
 .emptycartmessage {

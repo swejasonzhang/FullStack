@@ -36,6 +36,7 @@ require "open-uri"
   end
 
   ValorantGiftCard = Item.create!({
+    id: 1,
     name: "VALORANT $100 Gift Card - PC [Online Game Code]",
     cost: 100.00,
     category: "Video Games",
@@ -46,6 +47,7 @@ require "open-uri"
   ValorantGiftCard.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Valorant+Gift+Card.jpg"), filename: "ValorantGiftCard.png")
 
   CorsairVirtuoso = Item.create!({
+    id: 2,
     name: "CORSAIR VIRTUOSO RGB WIRELESS XT Multiplatform Gaming Headset With Bluetooth - Dolby Atmos",
     cost: 269.99,
     category: "Headset",
@@ -56,6 +58,7 @@ require "open-uri"
   CorsairVirtuoso.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Corsair+Virtuoso.jpeg"), filename: "Corsair Virtuoso.jpeg")
 
   CorsairMouse = Item.create!({
+    id: 3,
     name: "Corsair M75 AIR Wireless Ultra Lightweight Gaming Mouse – 2.4GHz & Bluetooth – 26,000 DPI – Up to 100hrs Battery – iCUE Compatible – Black",
     cost: 119.98,
     category: "Mouse",
@@ -66,6 +69,7 @@ require "open-uri"
   CorsairMouse.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/CorsairMouse.png"), filename: "CorsairMouse.png")
 
   CorsairKeyboard = Item.create!({
+    id: 4,
     name: "Corsair K65 RGB Mini 60% Mechanical Gaming Keyboard - Cherry MX Speed - Black",
     cost: 76.99,
     category: "Keyboard",

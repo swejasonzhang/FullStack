@@ -23,6 +23,7 @@ const ItemShow = () => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const cartItems = useSelector(state => state.cartItems);
 
+
   useEffect(() => {
     if (session && session.user && session.user.username) {
       setUsername(session.user.username);
@@ -49,6 +50,7 @@ const ItemShow = () => {
     dispatch(fetchItem(itemId));
   }, [dispatch, itemId]);
 
+  
   function toggleDropdown() {
     const dropdown = document.querySelector('.showitemdropdown');
     if (dropdown) {
@@ -75,10 +77,30 @@ const ItemShow = () => {
   }
 
   const addToCart = () => {
-    dispatch(createCartItem( { item_id: item.id, quantity: selectedQuantity }));
+    if (!session.user) {
+      history.push('/login');
+      return;
+    }
+  
+    const itemDetails = item;
+  
+    if (itemDetails) {
+      const cartItem = {
+        user_id: session.user.id,
+        item_id: itemDetails.id,
+        quantity: selectedQuantity,
+        name: itemDetails.name,
+        description: itemDetails.description,
+        cost: itemDetails.cost,
+        image_url: itemDetails.imageUrl,
+      };
+  
+      dispatch(createCartItem(cartItem));
+    }
   };
   
-
+  
+  
   const openModal = () => {
     setIsModalOpen(true);
     document.body.classList.add("amazeonmodalopen");

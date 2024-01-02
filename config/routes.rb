@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :cart_items, only: [:index , :show, :create, :update, :destroy]
   end
 
+  delete '/api/cart_items/delete', to: 'cart_items#destroy_multiple'
   get '*path', to: "static_pages#frontend_index"
   post 'api/test', to: 'application#test'
 end

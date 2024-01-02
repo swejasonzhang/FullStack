@@ -60,14 +60,15 @@ export const createCartItem = (cartItem) => async (dispatch) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(cartItem)
-  })
-  
+    body: JSON.stringify(cartItem),
+  });
+
   if (res.ok) {
-    const cartItem = await res.json();
-    dispatch(addToCart(cartItem));
+    const createdCartItem = await res.json();
+    dispatch(receiveCartItem(createdCartItem));
   }
 };
+
 
 export const deleteCartItem = (itemId) => async (dispatch) => {
   const res = await csrfFetch(`/api/cart_items/${itemId}`, {
@@ -80,12 +81,8 @@ export const deleteCartItem = (itemId) => async (dispatch) => {
 };
 
 export const deleteCartItems = (itemIds) => async (dispatch) => {
-  const res = await csrfFetch('/api/cart_items/delete', {
+  const res = await csrfFetch(`/api/cart_items/${itemIds}`, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ itemIds }),
   });
 
   if (res.ok) {
@@ -102,13 +99,15 @@ const cartItemsReducer = (state = {}, action) => {
     case RECEIVE_CART_ITEMS:
       return action.payload.map(({ item, quantity = 1 }) => ({ item, quantity }));
     case RECEIVE_CART_ITEM:
-      // const { item, quantity } = action.payload;
-      // debugger;
-      return {...state, [action.payload.cartItem.id]: action.payload.cartItem};
+      return { ...state, [action.payload.id]: action.payload };
     case REMOVE_CART_ITEMS:
-      return state.filter((item) => !action.payload.includes(item.id));
+      const updatedState = { ...state };
+      action.payload.forEach((id) => { delete updatedState[id];});
+      return updatedState;
     case REMOVE_CART_ITEM:
-      return state.filter((item) => item.id !== action.payload);
+      const newState = {...state}
+      delete newState[action.payload]
+      return newState
     default:
       return state;
   }

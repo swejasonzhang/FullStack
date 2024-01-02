@@ -375,3 +375,22 @@ body {
     align-items: center;
     height: 100%; 
 }
+
+.itemquantity {
+    position: relative;
+    top: 90px;
+    font-size: small;
+}
+
+.checkoutbutton {
+    position: relative;
+    top: 30px;
+    right: 10px;
+    background-color: #FFD700;
+    border-radius: 10px;
+    height: 30px;
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 30px;
+}

@@ -1,3 +1,3 @@
-json.array! @items do |item|
-    json.extract! item, :id, :user_id, :item_id
-  end
+json.array! @cart_items do |cart_item|
+  json.extract! @cart_item, :image_url, :name, :cost, :description, :user_id, :item_id, :quantity
+end

@@ -38,38 +38,29 @@ const Cart = () => {
 
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
-  const totalSelectedItems = selectedItems.reduce(
-    (total, index) => total + (cartItems[index]?.quantity || 0),
-    0
-  );
-
   const handleCheckboxChange = (index) => {
-    const selectedIndex = selectedItems.indexOf(index);
     let newSelectedItems = [...selectedItems];
-
-    if (selectedIndex === -1) {
+  
+    if (!newSelectedItems.includes(index)) {
       newSelectedItems.push(index);
     } else {
       newSelectedItems = newSelectedItems.filter((item) => item !== index);
     }
-
+  
     setSelectedItems(newSelectedItems);
   };
+  
 
-  const isAnyItemSelected = totalSelectedItems > 0;
-
-  const calculateTotalSelectedItemsCost = () => {
+  const calculateSelectedItemsCost = () => {
     let totalCost = 0;
   
-    selectedItems.forEach((index) => {
-      const cartItem = cartItems[index];
-      if (cartItem) {
-        totalCost += cartItem.quantity * cartItem.item.cost;
-      }
+    selectedItems.forEach((item) => {
+        totalCost += item.quantity * item.cost;
     });
   
     return totalCost.toFixed(2);
   };
+
 
   return (
     <>
@@ -125,8 +116,8 @@ const Cart = () => {
         {cartItems.length === 0 ? (<div className="emptycartmessage">Your Amazeon Cart is empty. Please add items to cart.</div>) :             
         (<div className="shoppingcart">Shopping Cart
          <div className="itemsselected">
-            {isAnyItemSelected ? (
-              <>{totalSelectedItems} Items Selected.</>
+            {selectedItems.length > 0 ? (
+              <>{selectedItems.length} Items Selected.</>
             ) : (
               <>No items selected. </>
             )}
@@ -136,38 +127,40 @@ const Cart = () => {
           {Object.values(cartItems).map((item, index) => (
             <div key={index} className="cartitem">
               <div className="cartcheckbox">
-              <input type="checkbox" id={`checkbox${index}`} onChange={() => handleCheckboxChange(index)} checked={selectedItems.includes(index)}/>
+                <input type="checkbox" id={`checkbox${index}`} onChange={() => handleCheckboxChange(item)} checked={selectedItems.includes(item)}/>
               </div>
               <div className="cartindeximgcontainer">
-                <img className="cartindeximg" src={item.item.imageUrl} alt={item.item.name} />
+                <img className="cartindeximg" src={item.image_url} alt={item.imageUrl} />
               </div>
               <div className="cartitemdetails">
-                <p>{item.item.name}</p>
+                <p>{item.name}</p>
                 <div className="descriptioncontainer">
-                  <p>Description: {item.item.description}</p>
+                  <p>Description: {item.description}</p>
+                  <div className="itemquantity">Quantity: {item.quantity}</div>
                 </div>
                 <div className="cartquantity">
                 </div>
               </div>
-              <p className="costofitem">${item.item.cost?.toFixed(2)}</p>
+              <p className="costofitem">${item.cost?.toFixed(2)}</p>
             </div>
           ))}
         </div>
         )}
 
-        {cartItems.length > 0 && (
-          <div className="checkout">
+        <div className="checkout">
             <div className="subtotal">
-              {totalSelectedItems > 0 ? (
+                {selectedItems.length > 0 ? (
                 <>
-                  Subtotal ({totalSelectedItems} Items): ${calculateTotalSelectedItemsCost()}
+                    <div className="proceedingcheckout">
+                        Subtotal ({selectedItems.length} Items): ${calculateSelectedItemsCost()}
+                        <div className="checkoutbutton">Proceed To Checkout</div>
+                    </div>
                 </>
-              ) : (
+                ) : (
                 "No items selected."
-              )}
+                )}
             </div>
-          </div>
-        )}
+        </div>
       </div>
     </>
   )

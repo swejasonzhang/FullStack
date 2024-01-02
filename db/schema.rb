@@ -43,6 +43,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_132111) do
   end
 
   create_table "cart_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.float "cost", null: false
+    t.text "description", null: false
+    t.string "image_url", null: false
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
     t.integer "quantity", null: false

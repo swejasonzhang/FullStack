@@ -14,7 +14,6 @@ const ItemShow = () => {
   const history = useHistory();
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
-  const [selectedQuantity, setSelectedQuantity] = useState(1); 
   const [cartQuantity, setCartQuantity] = useState(0); 
   const { itemId } = useParams();
   const item = useSelector(getItem(itemId)) || {};
@@ -22,6 +21,7 @@ const ItemShow = () => {
   const [orderStatus, setOrderStatus] = useState("Place Your Order");
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const cartItems = useSelector(state => state.cartItems);
+  const [selectedQuantity, setSelectedQuantity] = useState(1); 
 
 
   useEffect(() => {

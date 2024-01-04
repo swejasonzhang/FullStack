@@ -4,6 +4,12 @@ export const RECEIVE_CART_ITEMS = 'cart_items/RECEIVE_CART_ITEMS';
 export const RECEIVE_CART_ITEM = 'cart_items/RECEIVE_CART_ITEM';
 export const REMOVE_CART_ITEMS = 'cart_items/REMOVE_CART_ITEMS';
 export const REMOVE_CART_ITEM = 'cart_items/REMOVE_CART_ITEM';
+export const UPDATE_CART_ITEM = 'cart_items/UPDATE_CART_ITEM';
+
+export const updateCartItem = (updatedItem) => ({
+  type: UPDATE_CART_ITEM,
+  payload: updatedItem,
+});
 
 export const receiveCartItem = (item) => ({
   type: RECEIVE_CART_ITEM,
@@ -104,6 +110,9 @@ const cartItemsReducer = (state = {}, action) => {
       const updatedState = { ...state };
       action.payload.forEach((id) => { delete updatedState[id];});
       return updatedState;
+    case UPDATE_CART_ITEM:
+      const { id } = action.payload;
+      return { ...state, [id]: action.payload };
     case REMOVE_CART_ITEM:
       const newState = {...state}
       delete newState[action.payload]

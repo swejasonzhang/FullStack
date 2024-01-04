@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './CartItems.css';
-import { deleteCartItem, removeCartItem, removeCartItems } from "../../store/cartitems";
+import { deleteCartItem, removeCartItem, removeCartItems, updateCartItem } from "../../store/cartitems";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const Cart = () => {
   const cartItems = useSelector(state => state.cartItems);
   const [selectedItems, setSelectedItems] = useState([]);
   const [checkoutStatus, setCheckoutStatus] = useState("Proceed To Checkout");
-  const totalQuantity = selectedItems.reduce((total, item) => total + item.quantity, 0);
   const [selectedQuantity, setSelectedQuantity] = useState(1); 
 
   useEffect(() => {
@@ -42,24 +41,20 @@ const Cart = () => {
 
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
-  const handleCheckboxChange = (index) => {
-    let newSelectedItems = [...selectedItems];
-  
-    if (!newSelectedItems.includes(index)) {
-      newSelectedItems.push(index);
-    } else {
-      newSelectedItems = newSelectedItems.filter((item) => item !== index);
-    }
-  
-    setSelectedItems(newSelectedItems);
+  const handleCheckboxChange = (itemId) => {
+    setSelectedItems((prevSelectedItems) => {
+      const updatedItems = prevSelectedItems.includes(itemId) ? prevSelectedItems.filter((id) => id !== itemId) : [...prevSelectedItems, itemId];
+      return updatedItems;
+    });
   };
-  
 
   const calculateSelectedItemsCost = () => {
     let totalCost = 0;
+    const allCartItems = Object.values(cartItems); 
+    const selectedObjects = allCartItems.filter(item => selectedItems.includes(item.id));
   
-    selectedItems.forEach((item) => {
-        totalCost += item.quantity * item.cost;
+    selectedObjects.forEach((item) => {
+      totalCost += item.quantity * item.cost;
     });
   
     return totalCost.toFixed(2);
@@ -85,31 +80,63 @@ const Cart = () => {
     dispatch(removeCartItem(itemId))
   }
 
-  function updateQuantity(quantity) {
-    setSelectedQuantity(quantity);
-    const dropdown = document.querySelector('.showitemdropdown');
-    dropdown.classList.remove('active');
-
-    const qtyTextElement = document.getElementById('selectedQuantity');
-    if (qtyTextElement) {
-      qtyTextElement.textContent = quantity;
-    }
-  }
-
-  function toggleDropdown() {
-    const dropdown = document.querySelector('.showitemdropdown');
+  const toggleDropdown = (index) => {
+    const dropdown = document.getElementById(`cartitemdropdown${index}`);
+    
     if (dropdown) {
       dropdown.classList.toggle('active');
     }
-  }
+  };
   
-  document.addEventListener('click', function (event) {
-    const dropdown = document.querySelector('.showitemdropdown');
-    if (dropdown && !dropdown.contains(event.target)) {
+  const handleDocumentClick = (event) => {
+    const dropdowns = document.querySelectorAll('.cartitemdropdown');
+
+    dropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(event.target)) {
+        dropdown.classList.remove('active');
+      }
+    });
+  };
+  
+  const updateQuantity = (index, quantity) => {
+    setSelectedQuantity(quantity);
+  
+    const item = Object.values(cartItems)[index];
+    const updatedItem = {
+      id: item.id,
+      quantity,
+      name: item.name,
+      cost: item.cost,
+      description: item.description,
+      image_url: item.image_url,
+      item_id: item.item_id,
+      user_id: item.user_id
+    };
+  
+    dispatch(updateCartItem(updatedItem));
+  
+    const dropdownId = `cartitemdropdown${index}`;
+    const dropdown = document.getElementById(dropdownId);
+    if (dropdown) {
       dropdown.classList.remove('active');
     }
-  });
+  };
+      
 
+  const calculateTotalQuantity = (items) => {
+    const allCartItems = Object.values(cartItems); 
+    const selectedObjects = allCartItems.filter(item => selectedItems.includes(item.id));
+    return selectedObjects.reduce((total, item) => total + item.quantity, 0);
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+  
   return (
     <>
       <div className="navbar">
@@ -157,10 +184,9 @@ const Cart = () => {
 
                 <div className="cartcontainer">
                     <div className="number">{totalItemsInCart}</div>
-
-                        <div className="cart">
-                                <h3>Cart</h3>
-                        </div>
+                    <div className="cart">
+                        <h3>Cart</h3>
+                    </div>
                 </div>
             </button>
         </div>
@@ -186,7 +212,7 @@ const Cart = () => {
             {Object.values(cartItems).map((item, index) => (
                 <div key={index} className="cartitem">
                     <div className="cartcheckbox">
-                        <input type="checkbox" id={`checkbox${index}`} onChange={() => handleCheckboxChange(item)} checked={selectedItems.includes(item)}/>
+                        <input type="checkbox" id={`checkbox${index}`} onChange={() => handleCheckboxChange(item.id)} checked={selectedItems.includes(item.id)}/>
                     </div>
 
                     <div className="cartimgcontainer">
@@ -198,14 +224,32 @@ const Cart = () => {
                     </div>
 
                     <div className="cartitemdetails">
-                        <p>{item.name}</p>
-                        <div className="descriptioncontainer">
-                            <p>Description: {item.description}</p>
+                      <p>{item.name}</p>
+                      <div className="descriptioncontainer">
+                          <p>Description: {item.description}</p>
+                      </div>
+
+                      <div className="cartitemdropdown" id={`cartitemdropdown${index}`}>
+                        <label className="cartdropdownbutton" onClick={() => toggleDropdown(index)}>
+                          <div className="cartqtxcontainer">
+                            Qty: <span className="qtytext" id="selectedQuantity">{item.quantity}</span>
+                          </div>
+                        </label>
+
+                        <div className="cartdropdowncontent" id="cartdropdownContent">
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 1)}>1</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 2)}>2</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 3)}>3</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 4)}>4</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 5)}>5</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 6)}>6</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 7)}>7</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 8)}>8</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 9)}>9</label>
+                          <label htmlFor={`cartquantity${index}`} onClick={() => updateQuantity(index, 10)}>10</label>
                         </div>
-
-                        
+                      </div>
                     </div >
-
                     <p className="costofitem">${item.cost?.toFixed(2)}</p>
                 </div>
             ))}
@@ -217,7 +261,7 @@ const Cart = () => {
                 {selectedItems.length > 0 ? (
                 <>
                     <div className="proceedingcheckout">
-                        Subtotal ({totalQuantity} Items): ${calculateSelectedItemsCost()}
+                        Subtotal ({calculateTotalQuantity()} Items): ${calculateSelectedItemsCost()}
                         <div className="checkoutbutton" onClick={proceedingCheckout}> {checkoutStatus}</div>
                     </div>
                 </>

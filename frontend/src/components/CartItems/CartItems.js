@@ -61,19 +61,26 @@ const Cart = () => {
   };
 
   const proceedingCheckout = () => {
-    const deleteIds = selectedItems.map((item) => item.id);
+    const allCartItems = Object.values(cartItems); 
+    const deleteCartIds = allCartItems.filter(item => selectedItems.includes(item.id));
+    const deleteIds = deleteCartIds.map((item) => item.id);
     dispatch(removeCartItems(deleteIds));
-  
-    setCheckoutStatus("Order placed");
+
+    setTimeout(() => {
+      setCheckoutStatus("Proceed To Checkout");
+    }, 1000);
+
+    setTimeout(() => {
+      setCheckoutStatus("Order placed");
+    }, 1500);
+
     setTimeout(() => {
       setCheckoutStatus("Packages are on its way");
-    }, 1000);
-  
-    setCheckoutStatus("Proceed To Checkout");
-  
+    }, 2000);
+
     setTimeout(() => {
       setSelectedItems([]);
-    }, 2000);
+    }, 2500);
   };
 
   const deleteCartItem = (itemId) => {

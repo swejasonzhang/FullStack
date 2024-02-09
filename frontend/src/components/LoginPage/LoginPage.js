@@ -55,7 +55,10 @@ function LoginPage() {
     
     return (
         <>
-            <img className="amazeonlogin" src={"https://amazeon-seeds.s3.amazonaws.com/amazeon.jpeg"} alt='amazeonloginmain'></img>
+            <div className="amazeonlogincontainer">
+                <img className="amazeonlogin" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+SignUp+And+Login.jpeg"} alt='amazeonloginmain'></img>
+            </div>
+
             <div className="login-container">
                 <h1 className="loginheader">Sign In</h1>
                 <form onSubmit={handleSubmit}>

@@ -38,7 +38,9 @@ function SignUp () {
 
     return (
         <>
-            <img className="amazeonsignup" src={"https://amazeon-seeds.s3.amazonaws.com/amazeon.jpeg"} alt='amazeonsignupmain'></img>
+            <div className="amazeonsignupcontainer">
+              <img className="amazeonsignup" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+SignUp+And+Login.jpeg"} alt='amazeonsignupmain'></img>
+            </div>
 
             <div className="signup-container">
                 <h1 className="signupheader">Create account</h1>

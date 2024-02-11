@@ -1,0 +1,456 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    background-color: #131921;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    align-items: center;
+    color: white;
+}
+
+.amazeonhome {
+    display: flex;
+    align-items: center;
+}
+
+.amazeonhomepage {
+    height: 30px;
+    width: auto;
+    margin-left: 20px;
+}
+
+.searchcontainer {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-left: 165px;
+    border-radius: 5px;
+}
+
+.categoriescontainer {
+    position: relative;
+}
+
+.categories, .searchbox, .searchbutton {
+    height: 40px;
+    box-sizing: border-box;
+}
+
+.categories {
+    display: flex;
+    padding: 10px 16px;
+    font-size: 0.9em;
+    cursor: pointer;
+    border: none;
+    color: #0F1111;
+    background-color: #e6e6e6;
+    text-align: left;
+    padding-top: 13px;
+    position: relative;
+}
+
+.categories .arrowdown {
+    width: 0;
+    height: 0;
+    border-left: 4px solid;
+    border-right: 4px solid;
+    border-top: 4px solid #000;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.dropdowncontent {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.categories:hover .dropdowncontent {
+    display: block;
+}
+
+.searchbox {
+    width: 570px;
+    font-size: 0.9em;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    background-color: #FFFFFF;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.searchbutton {
+    background-color: #febd69;
+    color: #111;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    transition: background-color 0.3s;
+}
+
+.searchbutton:hover {
+    background-color: #ddb347;
+}
+
+.searchbuttonicon {
+    font-size: 20px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 70px;
+}
+
+.dropdownbutton {
+    background-color: #131921;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.accountdropdowncontent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    min-height: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: -40px;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.accountdropdowncontent a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.accountdropdowncontent a:hover {
+    color: #e77600;
+    text-decoration: underline;
+}
+
+.dropdown:hover .accountdropdowncontent {
+    display: block;
+}
+
+.greeting {
+    margin-left: 27px;
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.accountdropdowncontent h3 {
+    color: black;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.homesignoutlink,
+.homesigninlink {
+    margin-top: 120px;
+    margin-left: 50px;
+}
+
+.amazeoncartsection {
+    display: flex;
+    align-items: center;
+    margin-left: 100px;
+    position: relative;
+    cursor: pointer;
+    background-color: #131921;
+    border: none;
+}
+
+.amazeoncartsection .amazeoncartimg {
+    max-width: 50px;
+    max-height: 50px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.amazeoncartsection .number {
+    position: absolute;
+    bottom: 18px;
+    right: 43px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #f08804;
+    padding: 5px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.amazeoncartsection .cart {
+    font-size: 0.9em;
+    color: white;
+}
+
+.cartindex {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    min-height: calc(100vh - 50px);
+    padding: 0;
+    box-sizing: border-box;
+    overflow-y: auto; 
+    scroll-behavior: smooth;
+    background-color: #EAEDED;
+}
+
+.cartitems-container {
+    background-color: white; 
+    border-radius: 5px; 
+    margin-bottom: 20px; 
+}
+
+.shoppingcart {
+    font-family: "AmazonEmber";
+    position: relative;
+    left: 20px;
+    top: 60px;
+    padding: 20px;
+    width: 1000px;
+    height: 300px;
+    font-size: 30px;
+    background-color: white;
+    border: 1px solid white;
+}
+
+.itemsselected {
+    font-family: "AmazonEmber";
+    font-weight: none;
+    margin-top: 3px;
+    font-size: 15px;
+}
+
+.price {
+    width: 33px;
+    color: grey;
+    position: absolute;
+    right: 30px;
+    top: 60px; 
+    display: inline-block;
+}
+
+.grayline {
+    margin-top: 5px;
+    width: 100%;
+    height: 1px; 
+    background-color: #ccc; 
+}
+
+.cartitem {
+    position: relative;
+    right: 20px;
+    display: flex;
+    padding: 10px;
+    width: 1020px;
+    background-color: white;
+    border-bottom: 1px solid #ddd; 
+    height: 270px;
+    align-items: center;
+}
+
+.cartitemdetails {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-right: 15px;
+    position: relative;
+    bottom: 30px;
+}
+
+.cartindeximgcontainer {
+    height: 200px;
+    width: 200px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.cartindeximg {
+    right: 35px;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.cartitemdetails {
+    flex-grow: 1;
+}
+
+.cartitem p {
+    font-weight: bold;
+    background-color: white;
+    font-size: 12px;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+.cartcheckbox {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.cartcheckbox input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.cartcheckbox label {
+    font-size: 16px;
+}
+
+.cartitemname {
+    font-family: "AmazonEmber";
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+}
+
+.descriptioncontainer {
+    width: 600px;   
+    height: 100px;
+    text-overflow: ellipsis;
+}
+
+.emptycartmessage {
+    display: flex;
+    margin: 20px;
+    align-items: center;
+    background-color: white;
+    height: 100px;
+    width: 650px;
+    font-size: 24px;
+    color: #0F1111;
+    padding: 20px;
+}
+
+.empty-cart-message::before {
+    font-weight: bold;
+}
+
+.costofitem {
+    position: relative;
+    right: 20px;
+    color: black;
+    font-weight: bolder;
+    font-size: 20px;
+    margin-top: 8px;
+}
+
+.checkout {
+    position: relative;
+    background-color: white;
+    width: 300px;
+    height: 150px;
+    left: 1100px;
+    bottom: 280px;
+}
+
+.subtotal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; 
+}
+
+.cartitemdropdown {
+    position: relative;
+    top: 85px;
+    font-size: small;
+    width: 83px;
+}
+
+.cartdropdownbutton {
+    background-color: #F0F2F2;
+    color: black;
+    border-radius: 5px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    width: 50px;
+    position: relative;
+    top: -3px;
+  }
+
+.cartdropdowncontent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 82px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1005;
+    bottom: 2px;
+    overflow: visible;
+}
+
+.cartdropdowncontent label {
+    display: block;
+    padding: 12px 16px;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    height: 10px;
+}
+  
+.cartdropdowncontent label:hover {
+    background-color: #ddd;
+}
+  
+.cartitemdropdown.active .cartdropdowncontent {
+    display: block;
+}
+
+.checkoutbutton {
+    position: relative;
+    top: 30px;
+    right: 10px;
+    background-color: #FFD700;
+    border-radius: 10px;
+    height: 30px;
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+    line-height: 30px;
+}
+
+.deleteitem {
+    position: relative;
+    font-size: small;
+    left: 75px;
+    top: 20px;
+    cursor: pointer;
+    width: 40px;
+}

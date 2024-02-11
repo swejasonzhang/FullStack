@@ -1,0 +1,49 @@
+.displayitem {
+    font-family: 'Amazon Ember';
+    width: 250px;
+    height: 250px;
+    padding: 25px;
+    border: 1px solid #ddd; 
+    border-radius: 5px; 
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: cursor 0.3s;
+}
+
+.displayitem:hover {
+    cursor: pointer;
+}
+
+.itemName {
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 200px; 
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+.itemCost {
+    color: black;
+    font-size: 18px; 
+    font-weight: bold;
+    margin-right: auto; 
+}
+
+.imgContainer {
+    width: 200px; 
+    height: 200px; 
+    overflow: hidden;
+}
+
+.img {
+    max-width: 100%; 
+    max-height: 100%;
+    width: auto; 
+    height: auto; 
+}

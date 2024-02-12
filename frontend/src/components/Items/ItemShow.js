@@ -8,7 +8,6 @@ import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
 import { createCartItem, updateCartItem } from "../../store/cartitems.js"
-import StarRating from "../StarRating/ClickableStarRating.js";
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 
 const ItemShow = () => {
@@ -184,7 +183,15 @@ const ItemShow = () => {
   }, [cartItems]);
 
   const writeReview = () => {
-    
+    if (!session.user) {
+      history.push('/login');
+      return;
+    }
+
+    history.push({
+      pathname: '/review',
+      state: { item: item }
+    });
   }
 
   return (

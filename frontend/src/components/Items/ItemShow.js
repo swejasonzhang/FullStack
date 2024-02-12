@@ -8,6 +8,8 @@ import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
 import { createCartItem, updateCartItem } from "../../store/cartitems.js"
+import StarRating from "../StarRating/ClickableStarRating.js";
+import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -21,8 +23,11 @@ const ItemShow = () => {
   const [orderStatus, setOrderStatus] = useState("Place Your Order");
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const cartItems = useSelector(state => state.cartItems);
-  const [selectedQuantity, setSelectedQuantity] = useState(1); 
-
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+  const itemRatings = item && item.ratings ? item.ratings : [];
+  const totalRatings = itemRatings.length;
+  const sumRatings = itemRatings.reduce((total, rating) => total + rating, 0);
+  const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -178,6 +183,10 @@ const ItemShow = () => {
     setCartQuantity(totalQuantity);
   }, [cartItems]);
 
+  const writeReview = () => {
+    
+  }
+
   return (
     <>
       <div className="navbar">
@@ -239,6 +248,7 @@ const ItemShow = () => {
 
           <div className="itemspecs">
             <div className="showitemname">{item && item?.name ? item.name : " Unknown Name"}
+              <div className="ratings">{item && item.ratings ? averageRating : "No Ratings"}</div>
               <hr className="separator" />
               <div className="descriptioncontainer">About this item:
                 <div className="itemdescription">{item && item?.description ? item.description : "Unknown Description"}</div>
@@ -290,6 +300,24 @@ const ItemShow = () => {
           {isModalOpen && (
             <Modal closeModal={closeModal} />
           )}
+        </div>
+      </div>
+
+      <hr className="reviewsseperator" />
+
+      <div className="reviews"> What Others Are Saying About The Product
+        <div className="customerreviews"> Customer reviews
+          <ReadOnlyStarRating rating={averageRating}></ReadOnlyStarRating> 
+          <div className="totalratings">{totalRatings} global ratings</div>
+
+          <hr className="formseperator" />
+
+          <div className="reviewthisproduct">Review This Product
+            <div className="sharethoughts">Share your thoughts with other customers
+              <div className="writeareview" onClick={writeReview}>Write A Customer Review</div>
+            </div>
+            <hr className="formseperator" />
+          </div>
         </div>
       </div>
     </>

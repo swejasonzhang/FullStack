@@ -3,6 +3,7 @@ import HomePage from './components/HomePage/HomePage';
 import SignUp from './components/SignUpPage/SignUp';
 import ItemShow from "./components/Items/ItemShow";
 import Cart from "./components/CartItems/CartItems"
+import Review from './components/Review/Review';
 import {Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" component={HomePage}></Route>
         <Route exact path="/items/:itemId" component={ItemShow}></Route>
         <Route exact path="/cart" component={Cart}></Route>
+        <Route exact path="/review" component={Review}></Route>
       </Switch>
     </>
   );

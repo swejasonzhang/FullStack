@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_20_132111) do
     t.string "category", null: false
     t.integer "stock", null: false
     t.text "description", null: false
+    t.integer "ratings", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_items_on_name"

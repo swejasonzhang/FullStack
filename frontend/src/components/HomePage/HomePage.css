@@ -156,7 +156,7 @@ body {
 }
   
 .greeting {
-    margin-left: 27px;
+    margin-left: 100px;
     margin-top: 5px;
     font-size: 13px;
     font-weight: normal;
@@ -181,7 +181,7 @@ body {
 .amazeoncartsection {
     display: flex;
     align-items: center;
-    margin-left: 100px;
+    margin-left: 150px;
     position: relative;
     cursor: pointer;
     background-color: #131921;

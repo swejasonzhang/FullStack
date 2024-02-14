@@ -1,0 +1,12 @@
+.clearrating {
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    left: 750px;
+    bottom: 40px;
+    color: #007185;
+}
+
+.staricon {
+    color: gold;
+}

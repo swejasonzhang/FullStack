@@ -2,17 +2,23 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
+import "./ClickableStarRating.css"
 
 const StarRating = ({ initialRating = 0, onChange }) => {
   const [rating, setRating] = useState(initialRating);
 
-  const handleStarHover = (hoveredRating) => {
-    setRating(hoveredRating);
-  };
-
   const handleStarClick = (clickedRating) => {
     setRating(clickedRating);
-    onChange(clickedRating);
+    if (onChange) {
+      onChange(clickedRating);
+    }
+  };
+
+  const clearRating = () => {
+    setRating(0);
+    if (onChange) {
+      onChange(0);
+    }
   };
 
   return (
@@ -21,13 +27,14 @@ const StarRating = ({ initialRating = 0, onChange }) => {
         <FontAwesomeIcon
           key={index}
           icon={index <= rating ? solidStar : regularStar}
-          onMouseEnter={() => handleStarHover(index)}
           onClick={() => handleStarClick(index)}
+          className= "staricon"
         />
       ))}
-      out of 5
+      {rating > 0 && <div className="clearrating" onClick={clearRating}>Clear </div>}
     </div>
   );
 };
 
 export default StarRating;
+

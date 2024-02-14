@@ -192,7 +192,7 @@ const ItemShow = () => {
       pathname: '/review',
       state: { item: item }
     });
-  }
+  };
 
   return (
     <>
@@ -321,7 +321,7 @@ const ItemShow = () => {
 
           <div className="reviewthisproduct">Review This Product
             <div className="sharethoughts">Share your thoughts with other customers
-              <div className="writeareview" onClick={writeReview}>Write A Customer Review</div>
+              <div className="writeareview" onClick={() => writeReview()}>Write A Customer Review</div>
             </div>
             <hr className="formseperator" />
           </div>

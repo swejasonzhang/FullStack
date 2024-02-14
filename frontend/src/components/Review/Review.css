@@ -1,6 +1,7 @@
-.body {
-    width: 0;
-    height: 0;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .navbar {
@@ -49,7 +50,7 @@
 }
 
 .categoriescontainer {
-    position: relative;
+    position: absolute;
 }
 
 .categories, .searchbox, .searchbutton {
@@ -210,8 +211,79 @@
     color: white;
 }
 
+.creatingeareviewcontainer {
+    position: fixed;
+    width: 100%;
+    top: 60px;
+    height: calc(100% - 60px);
+    font-family: 'AmazonEmber';
+    left: 0;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
 .createreview {
-    top: 500px;
+    width: 800px;
+    height: 750px;
+    padding: 20px;
+    font-weight: bolder;
+    font-size: 25px;
+}
+
+.reviewimagecontainer {
+    width: 120px;
+    height: 160px;
+    margin-top: 10px;
+    padding: 10px;
+    display: inline-block;
     text-align: left;
-    right: 900px;
+}
+
+.reviewimage {
+    width: 100%; 
+    height: 100%; 
+}
+
+.itemreviewname {
+    position: relative;
+    width: 700px;
+    font-size: 14px;
+    bottom: 95px;
+    left: 135px;
+}
+
+.reviewseperator {
+    border: 1px solid gray;
+    width: 100%;
+}
+
+.overallrating {
+    font-size: 20px;
+}
+
+.writtenreview {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.reviewtextarea {
+    width: 780px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.submitbutton {
+    position: relative;
+    background-color: #FFD814;
+    border-radius: 10px;
+    left: 740px;
+    width: 50px;
+    height: 18px;
+    font-size: 12px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
 }

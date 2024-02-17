@@ -17,14 +17,13 @@ body {
 }
   
 .amazeoncartsection .number {
-    position: relative;
+    position: absolute;
     bottom: 20px;
-    right: 43px;
-    font-size: 16px;
+    right: 40px;
+    font-size: 18px;
     font-weight: bold;
     color: #f08804;
     padding: 5px;
-    
     border-radius: 50%;
     z-index: 2;
 }
@@ -299,6 +298,7 @@ body {
     position: relative;
     display: inline-block;
     margin-top: 20px;
+    width: 40px;
 }
 
 .showdropdownbutton {
@@ -312,10 +312,9 @@ body {
     position: absolute;
     margin-top: 5px;
     margin-left: 20px;
-    z-index: 1001;
     display: flex;
     align-items: center;
-    width: 40px;
+    width: 50px;
 }
 
 .showdropdowncontent {
@@ -323,7 +322,7 @@ body {
     position: absolute;
     background-color: #f9f9f9;
     margin-left: 20px;
-    min-width: 70px;
+    min-width: 72px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1005;
     top: 100%;
@@ -336,6 +335,7 @@ body {
     text-decoration: none;
     cursor: pointer;
     text-align: center;
+    width: 50px;
 }
   
 .showdropdowncontent label:hover {
@@ -490,16 +490,10 @@ body {
 }
 
 .cartcontainer .mediumcartnumber .number {
-    position: relative;
-    bottom: 25px;
-    right: 55px;
     font-size: 16px;
     font-weight: bold;
     color: #f08804;
-    padding: 5px;
-    border-radius: 50%;
     z-index: 2;
-    margin-left: 20px;
 }
 
 .ratings {

@@ -15,7 +15,7 @@ const Cart = () => {
   const cartItems = useSelector(state => state.cartItems);
   const [selectedItems, setSelectedItems] = useState([]);
   const [checkoutStatus, setCheckoutStatus] = useState("Proceed To Checkout");
-  const [selectedQuantity, setSelectedQuantity] = useState(1); 
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -150,7 +150,7 @@ const Cart = () => {
     <>
       <div className="navbar">
         <div className="amazeonhome">
-          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/amazeonhome.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
+          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+Home+Page.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
     
         <div className="searchcontainer">
@@ -189,7 +189,7 @@ const Cart = () => {
         </div>
     
             <button className="amazeoncartsection" onClick={redirectcart}>
-                <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/amazeoncart.jpeg"} alt="" />
+                <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/Cart.jpg"} alt="" />
 
                 <div className="cartcontainer">
                     <div className="number">{totalItemsInCart}</div>

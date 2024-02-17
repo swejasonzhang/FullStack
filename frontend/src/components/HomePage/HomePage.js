@@ -42,7 +42,7 @@ const HomePage = () => {
     <>
       <div className="navbar">
         <div className="amazeonhome">
-          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/amazeonhome.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
+          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+Home+Page.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
 
         <div className="searchcontainer">
@@ -78,7 +78,7 @@ const HomePage = () => {
         </div>
 
         <button className="amazeoncartsection" onClick={redirectcart}>
-          <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/amazeoncart.jpeg"} alt="" />
+          <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/Cart.jpg"} alt="" />
           <div className="cartcontainer">
             <div className="number">{totalItemsInCart}</div>
             <div className="cart">

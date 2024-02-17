@@ -6,7 +6,6 @@ class CreateItems < ActiveRecord::Migration[7.0]
       t.string :category, null: false
       t.integer :stock, null: false
       t.text :description, null: false
-      t.integer :ratings, null: false
       t.timestamps
     end
     add_index :items, :name

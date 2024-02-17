@@ -25,8 +25,7 @@ const ItemShow = () => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const itemRatings = item && item.ratings ? item.ratings : [];
   const totalRatings = itemRatings.length;
-  const sumRatings = itemRatings.reduce((total, rating) => total + rating, 0);
-  const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
+  const averageRating = calculateAverageRating(itemRatings);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -194,11 +193,17 @@ const ItemShow = () => {
     });
   };
 
+  function calculateAverageRating(reviews) {
+    if (reviews.length === 0) return 0;
+    const sumRatings = reviews.reduce((total, review) => total + review.rating, 0);
+    return sumRatings / reviews.length;
+  }
+
   return (
     <>
       <div className="navbar">
         <div className="amazeonhome">
-          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/amazeonhome.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
+          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+Home+Page.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
 
         <div className="searchcontainer">
@@ -234,7 +239,7 @@ const ItemShow = () => {
         </div>
 
         <button className="amazeoncartsection" onClick={redirectCart}>
-          <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/amazeoncart.jpeg"} alt="" />
+          <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/Cart.jpg"} alt="" />
           <div className={`cartcontainer ${cartNumberClass}`}>
             <div className="number">{renderCartQuantity()}</div>
             <div className="cart">

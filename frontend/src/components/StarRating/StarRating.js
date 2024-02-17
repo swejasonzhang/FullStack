@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-import "./ClickableStarRating.css"
+import "./StarRating.css"
 
 const StarRating = ({ initialRating = 0, onChange }) => {
   const [rating, setRating] = useState(initialRating);

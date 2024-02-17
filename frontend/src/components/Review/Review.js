@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as sessionActions from "../../store/session";
-import StarRating from "../StarRating/ClickableStarRating.js"
+import StarRating from "../StarRating/StarRating.js"
+import saveReviewAction from '../../store/review.js';
 import "./Review.css";
 
 const Review = (info) => {
@@ -14,15 +15,21 @@ const Review = (info) => {
     const dispatch = useDispatch();
     const [cartQuantity] = useState(0); 
     const cartItems = useSelector(state => state.cartItems);
-    const item = info.location.state.item
+    const item = info.location.state.item;
+    const [rating, setRating] = useState(0);
+    const [reviewText, setReviewText] = useState("");
+    const author = session.user ? session.user.username : "User";
+    const [showErrors, setShowErrors] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         if (session && session.user && session.user.username) {
           setUsername(session.user.username);
         } else {
           setUsername("User");
+          history.push('/login')
         }
-    }, [session]);
+    }, [session, history]);
 
     const renderCartQuantity = () => {
         const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
@@ -46,15 +53,43 @@ const Review = (info) => {
 
     const cartNumberClass = cartQuantity > 99 ? "bigcartnumber" : cartQuantity >= 10 ? "mediumcartnumber" : "smallcartnumber";
 
-    const submitReview = () => {
-        
-    }
+    const handleRatingChange = (newRating) => {
+        setRating(newRating);
+    };
+
+    const submitReview = async () => {
+        setShowErrors(true); 
+        setError(null);
+
+        if (rating === 0 && reviewText.length === 0) {
+            setError("Rating has to be greater than 0 stars! Please enter a written review!");
+            return;
+        }
+
+        if (rating === 0) {
+            setError("Rating has to be greater than 0 stars!");
+            return;
+        }
+    
+        if (reviewText.length === 0) {
+            setError("Please enter a review text!");
+            return;
+        } 
+    
+        try {
+            await dispatch(saveReviewAction(item.id, rating, reviewText, author));
+            history.push(`/items/${item.id}`);
+        } catch (error) {
+            console.error("Failed to submit review:", error);
+        }
+    };
+    
 
     return (
         <>
             <div className="navbar">
                 <div className="amazeonhome">
-                    <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/amazeonhome.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
+                    <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+Home+Page.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
                 </div>
 
                 <div className="searchcontainer">
@@ -90,7 +125,7 @@ const Review = (info) => {
                 </div>
 
                 <button className="amazeoncartsection" onClick={redirectCart}>
-                    <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/amazeoncart.jpeg"} alt="" />
+                    <img className="amazeoncartimg" src={"https://amazeon-seeds.s3.amazonaws.com/Cart.jpg"} alt="" />
                     <div className={`cartcontainer ${cartNumberClass}`}>
                         <div className="number">{renderCartQuantity()}</div>
                         <div className="cart">
@@ -111,21 +146,22 @@ const Review = (info) => {
                     <hr className="reviewseperator"></hr>
 
                     <div className="overallrating">Overall rating
-                        <StarRating></StarRating>
+                        <StarRating initialRating={rating} onChange={handleRatingChange} />
                     </div>
 
                     <hr className="reviewseperator"></hr>
 
                     <div className='writtenreview'>Add a written review
                         <br></br>
-                        <textarea className='reviewtextarea' placeholder='What did you like or dislike? What did you use the product for?'>
-
-                        </textarea>
+                        <textarea className='reviewtextarea' onChange={(e) => setReviewText(e.target.value)} placeholder='What did you like or dislike? What did you use the product for?'></textarea>
+                        {showErrors && 
+                            <div className="error">{error}</div>
+                        }
                     </div>
 
                     <hr className="reviewseperator"></hr>
 
-                    <div className='submitbutton' onClick={submitReview}>Submit</div>
+                    <div className='submitbutton' onClick={() => submitReview(item.id, rating, reviewText, author)}>Submit</div>
                 </div>
             </div>
         </>

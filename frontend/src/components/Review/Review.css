@@ -20,8 +20,8 @@ html, body {
 .amazeoncartsection .number {
     position: absolute;
     bottom: 20px;
-    right: 43px;
-    font-size: 16px;
+    right: 40px;
+    font-size: 18px;
     font-weight: bold;
     color: #f08804;
     padding: 5px;
@@ -286,4 +286,10 @@ html, body {
     padding: 5px;
     text-align: center;
     cursor: pointer;
+}
+
+.error {
+    color: red;
+    font-size: 20px;
+    font-weight: bolder;
 }

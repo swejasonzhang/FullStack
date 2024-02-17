@@ -37,9 +37,9 @@ class ApplicationController < ActionController::API
     end
 
     def require_logged_in
-        unless current_user
-            render json: { message: 'Unauthorized' }, status: :unauthorized 
-        end
+      unless current_user
+          render json: { message: 'Unauthorized' }, status: :unauthorized 
+      end
     end
     
     private

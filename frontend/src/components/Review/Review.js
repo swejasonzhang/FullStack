@@ -16,8 +16,8 @@ const Review = (info) => {
     const [cartQuantity] = useState(0); 
     const cartItems = useSelector(state => state.cartItems);
     const item = info.location.state.item;
-    const [rating, setRating] = useState(0);
-    const [reviewText, setReviewText] = useState("");
+    const [ratings, setRatings] = useState(0);
+    const [body, setBody] = useState("");
     const author = session.user ? session.user.username : "User";
     const [showErrors, setShowErrors] = useState(false);
     const [error, setError] = useState(null);
@@ -54,30 +54,30 @@ const Review = (info) => {
     const cartNumberClass = cartQuantity > 99 ? "bigcartnumber" : cartQuantity >= 10 ? "mediumcartnumber" : "smallcartnumber";
 
     const handleRatingChange = (newRating) => {
-        setRating(newRating);
+        setRatings(newRating);
     };
 
     const submitReview = async () => {
         setShowErrors(true); 
         setError(null);
 
-        if (rating === 0 && reviewText.length === 0) {
-            setError("Rating has to be greater than 0 stars! Please enter a written review!");
+        if (ratings === 0 && body.length === 0) {
+            setError("s has to be greater than 0 stars! Please enter a written review!");
             return;
         }
 
-        if (rating === 0) {
+        if (ratings === 0) {
             setError("Rating has to be greater than 0 stars!");
             return;
         }
     
-        if (reviewText.length === 0) {
+        if (body.length === 0) {
             setError("Please enter a review text!");
             return;
         } 
     
         try {
-            await dispatch(saveReviewAction(item.id, rating, reviewText, author));
+            await dispatch(saveReviewAction(item.id, ratings, body, author));
             history.push(`/items/${item.id}`);
         } catch (error) {
             console.error("Failed to submit review:", error);
@@ -146,14 +146,14 @@ const Review = (info) => {
                     <hr className="reviewseperator"></hr>
 
                     <div className="overallrating">Overall rating
-                        <StarRating initialRating={rating} onChange={handleRatingChange} />
+                        <StarRating initialRating={ratings} onChange={handleRatingChange} />
                     </div>
 
                     <hr className="reviewseperator"></hr>
 
                     <div className='writtenreview'>Add a written review
                         <br></br>
-                        <textarea className='reviewtextarea' onChange={(e) => setReviewText(e.target.value)} placeholder='What did you like or dislike? What did you use the product for?'></textarea>
+                        <textarea className='reviewtextarea' onChange={(e) => setBody(e.target.value)} placeholder='What did you like or dislike? What did you use the product for?'></textarea>
                         {showErrors && 
                             <div className="error">{error}</div>
                         }
@@ -161,7 +161,7 @@ const Review = (info) => {
 
                     <hr className="reviewseperator"></hr>
 
-                    <div className='submitbutton' onClick={() => submitReview(item.id, rating, reviewText, author)}>Submit</div>
+                    <div className='submitbutton' onClick={() => submitReview(item.id, ratings, body, author)}>Submit</div>
                 </div>
             </div>
         </>

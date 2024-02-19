@@ -1,5 +1,6 @@
 class Api::ReviewsController < ApplicationController
   def create
+
     item = Item.find(params[:item_id])
     review = Review.new(review_params)
 
@@ -10,8 +11,19 @@ class Api::ReviewsController < ApplicationController
     end
   end
 
-  private
+  def show
+    @reviews = Review.find(params[:id])
 
+    render :show
+  end
+  
+  def index
+    @reviews = Review.all 
+
+    render :index
+  end
+
+  private
   def review_params
     params.require(:review).permit(:item_id, :ratings, :body, :author)
   end

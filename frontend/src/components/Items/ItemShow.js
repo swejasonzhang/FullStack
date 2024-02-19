@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
 import { createCartItem, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
+import { fetchReviews } from "../../store/itemReviews.js";
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const ItemShow = () => {
   const itemRatings = item && item.ratings ? item.ratings : [];
   const totalRatings = itemRatings.length;
   const averageRating = calculateAverageRating(itemRatings);
+  const reviews = useSelector(state => state.reviews);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -34,6 +36,11 @@ const ItemShow = () => {
       setUsername("User");
     }
   }, [session]);
+
+  useEffect(() => {
+    dispatch(fetchItem(itemId)); 
+    dispatch(fetchReviews(itemId));
+  }, [dispatch, itemId]);
 
   const redirectToHomePage = async(e) => {
     history.push("/")
@@ -188,7 +195,7 @@ const ItemShow = () => {
     }
 
     history.push({
-      pathname: '/review',
+      pathname: '/items/:item_id/review',
       state: { item: item }
     });
   };

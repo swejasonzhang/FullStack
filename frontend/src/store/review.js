@@ -12,7 +12,7 @@ const saveReviewFailure = (error) => ({
   payload: error,
 });
 
-const saveReviewAction = (itemId, rating, reviewText, author) => {
+const saveReviewAction = (item_id, ratings, body, author) => {
   return async (dispatch) => {
     try {
       const response = await csrfFetch('/api/reviews', {
@@ -20,7 +20,7 @@ const saveReviewAction = (itemId, rating, reviewText, author) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ itemId, rating, reviewText, author }),
+        body: JSON.stringify({ item_id, ratings, body, author }),
       });
 
       if (!response.ok) {

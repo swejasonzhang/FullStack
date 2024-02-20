@@ -13,13 +13,14 @@ const fetchReviewsFailure = (error) => ({
   payload: error,
 });
 
-export const fetchReviews = (itemId) => async (dispatch) => {
+export const fetchReviews = () => async (dispatch) => {
   try {
-    const response = await csrfFetch(`/api/reviews/${itemId}`);
+    const response = await csrfFetch('/api/reviews');
     if (!response.ok) {
       throw new Error('Failed to fetch reviews');
     }
     const data = await response.json();
+    console.log(data)
     dispatch(fetchReviewsSuccess(data));
   } catch (error) {
     dispatch(fetchReviewsFailure(error.message));
@@ -31,7 +32,7 @@ const reviewsReducer = (state = { reviews: [] }, action) => {
     case FETCH_REVIEWS_SUCCESS:
       return {
         ...state,
-        reviews: [...state.reviews, action.payload],
+        reviews: action.payload,
       };
     case FETCH_REVIEWS_FAILURE:
       return {

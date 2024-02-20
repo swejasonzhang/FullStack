@@ -2,22 +2,22 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar as solidStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
-import "./ReadableStarRating.css"
+import "./ReviewStarRating.css"
 
-const ReadOnlyStarRating = ({ rating }) => {
+const ReviewStarRating = ({ rating, totalRatings }) => {
   return (
-    <div className='everythingreview'>
+    <div className='everythingreview'>{rating}
       {[1, 2, 3, 4, 5].map((index) => (
         <FontAwesomeIcon
-          className='readstarrating'
+          className='reviewstar'
           key={index}
           icon={index <= rating ? solidStar : regularStar}
         />
       ))}
       &nbsp;
-      {rating} out of 5
+      {totalRatings} ratings
     </div>
   );
 };
 
-export default ReadOnlyStarRating;
+export default ReviewStarRating;

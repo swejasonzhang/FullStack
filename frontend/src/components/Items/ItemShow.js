@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
 import { createCartItem, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
+import ReviewStarRating from "../StarRating/ReviewStarRating.js"
+import OnlyStars from "../StarRating/OnlyStars.js"
 import { fetchReviews } from "../../store/itemReviews.js";
 
 const ItemShow = () => {
@@ -24,11 +26,12 @@ const ItemShow = () => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const cartItems = useSelector(state => state.cartItems);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const itemRatings = item && item.ratings ? item.ratings : [];
-  const totalRatings = itemRatings.length;
-  const averageRating = calculateAverageRating(itemRatings);
-  const reviews = useSelector(state => state.reviews.reviews.filter(review => review.item_id !== item.id));
-
+  const allReviews = Object.values(useSelector(state => state.reviews.reviews));
+  const filteredReviews = Object.values(allReviews.filter(review => review.itemId === item.id));
+  const itemRatings = filteredReviews.reduce((total, review) => total + review.ratings, 0);
+  const totalRatings = filteredReviews.length;
+  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
+  
   useEffect(() => {
     if (session && session.user && session.user.username) {
       setUsername(session.user.username);
@@ -200,12 +203,6 @@ const ItemShow = () => {
     });
   };
 
-  function calculateAverageRating(reviews) {
-    if (reviews.length === 0) return 0;
-    const sumRatings = reviews.reduce((total, review) => total + review.rating, 0);
-    return sumRatings / reviews.length;
-  }
-
   return (
     <>
       <div className="navbar">
@@ -267,7 +264,7 @@ const ItemShow = () => {
 
           <div className="itemspecs">
             <div className="showitemname">{item && item?.name ? item.name : " Unknown Name"}
-              <div className="ratings">{reviews.length} Ratings</div>
+            <ReviewStarRating rating={averageRating} totalRatings={totalRatings}></ReviewStarRating>
               <hr className="separator" />
               <div className="descriptioncontainer">About this item:
                 <div className="itemdescription">{item && item?.description ? item.description : "Unknown Description"}</div>
@@ -324,7 +321,7 @@ const ItemShow = () => {
 
       <hr className="reviewsseperator" />
 
-      <div className="reviews"> What Others Are Saying About The Product
+      <div className="reviews"> Customers say
         <div className="customerreviews"> Customer reviews
           <ReadOnlyStarRating rating={averageRating}></ReadOnlyStarRating> 
           <div className="totalratings">{totalRatings} global ratings</div>
@@ -338,15 +335,18 @@ const ItemShow = () => {
               <div className="writeareview" onClick={() => writeReview()}>Write A Customer Review</div>
             </div>
             <hr className="formseperator" />
-
-            {reviews.map(review => (
-              <div key={review.id} className="individual-review">
-                <div>{review.author}</div>
-                <div>{review.body}</div>
-                <div>Rating: {review.ratings}</div>
-              </div>
-            ))}
           </div>
+        </div>
+
+        <div className="otherreviews">
+          {filteredReviews.map(review => (
+            <div key={review.id} className="individual-review">
+              <div className="author">{review.author}</div>
+              <OnlyStars rating={review.ratings}></OnlyStars> 
+              <div className="reviewbody">{review.body}</div>
+              <br></br>
+            </div>
+          ))}
         </div>
       </div>
     </>

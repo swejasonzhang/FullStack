@@ -27,7 +27,7 @@ const ItemShow = () => {
   const itemRatings = item && item.ratings ? item.ratings : [];
   const totalRatings = itemRatings.length;
   const averageRating = calculateAverageRating(itemRatings);
-  const reviews = useSelector(state => state.reviews);
+  const reviews = useSelector(state => state.reviews.reviews.filter(review => review.item_id !== item.id));
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -267,7 +267,7 @@ const ItemShow = () => {
 
           <div className="itemspecs">
             <div className="showitemname">{item && item?.name ? item.name : " Unknown Name"}
-              <div className="ratings">{item && item.ratings ? averageRating : "No Ratings"}</div>
+              <div className="ratings">{reviews.length} Ratings</div>
               <hr className="separator" />
               <div className="descriptioncontainer">About this item:
                 <div className="itemdescription">{item && item?.description ? item.description : "Unknown Description"}</div>
@@ -331,11 +331,21 @@ const ItemShow = () => {
 
           <hr className="formseperator" />
 
-          <div className="reviewthisproduct">Review This Product
-            <div className="sharethoughts">Share your thoughts with other customers
+          <div className="reviewthisproduct">
+            Review This Product
+            <div className="sharethoughts">
+              Share your thoughts with other customers
               <div className="writeareview" onClick={() => writeReview()}>Write A Customer Review</div>
             </div>
             <hr className="formseperator" />
+
+            {reviews.map(review => (
+              <div key={review.id} className="individual-review">
+                <div>{review.author}</div>
+                <div>{review.body}</div>
+                <div>Rating: {review.ratings}</div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

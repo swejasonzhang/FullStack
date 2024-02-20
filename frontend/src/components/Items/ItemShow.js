@@ -10,6 +10,7 @@ import { getItem, fetchItem } from '../../store/item.js';
 import { createCartItem, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
+import OnlyStars from "../StarRating/OnlyStars.js"
 import { fetchReviews } from "../../store/itemReviews.js";
 
 const ItemShow = () => {
@@ -29,7 +30,7 @@ const ItemShow = () => {
   const filteredReviews = Object.values(allReviews.filter(review => review.itemId === item.id));
   const itemRatings = filteredReviews.reduce((total, review) => total + review.ratings, 0);
   const totalRatings = filteredReviews.length;
-  const averageRating = totalRatings > 0 ? itemRatings / totalRatings : 0;
+  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
   
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -320,7 +321,7 @@ const ItemShow = () => {
 
       <hr className="reviewsseperator" />
 
-      <div className="reviews"> What Others Are Saying About The Product
+      <div className="reviews"> Customers say
         <div className="customerreviews"> Customer reviews
           <ReadOnlyStarRating rating={averageRating}></ReadOnlyStarRating> 
           <div className="totalratings">{totalRatings} global ratings</div>
@@ -341,8 +342,8 @@ const ItemShow = () => {
           {filteredReviews.map(review => (
             <div key={review.id} className="individual-review">
               <div className="author">{review.author}</div>
-              <div className="reviewratings">{review.ratings}</div>
-              <div className="reviewvody">{review.body}</div>
+              <OnlyStars rating={review.ratings}></OnlyStars> 
+              <div className="reviewbody">{review.body}</div>
               <br></br>
             </div>
           ))}

@@ -516,7 +516,7 @@ body {
     top: 750px; 
     width: 1450px;
     height: 1000px;
-    text-align: center;
+    text-align: left;
     font-size: 25px;
     font-weight: bold;
 }
@@ -579,7 +579,18 @@ body {
     float: left;
     width: 1050px;
     height: 1000px;
-    border: 1px solid black;
-    top: 50px;
+    top: 20px;
     text-align: left;
+    font-size: 12px;
+}
+
+.author {
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.reviewbody {
+    padding-left: 10px;
+    font-size: 16px;
+    padding-top: 10px;
 }

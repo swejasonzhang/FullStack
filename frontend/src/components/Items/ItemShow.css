@@ -512,11 +512,10 @@ body {
 
 .reviews {
     position: absolute;
-    right: 140px;
+    right: 120px;
     top: 750px; 
     width: 1450px;
     height: 1000px;
-    overflow-y: auto; 
     text-align: center;
     font-size: 25px;
     font-weight: bold;
@@ -532,6 +531,7 @@ body {
     font-size: 24px;
     bottom: 10px;
     margin-top: 40px;
+    float: left;
 }
 
 .customerreviews .averagecustomerreviews {
@@ -572,4 +572,14 @@ body {
     height: 15px;
     margin-bottom: 20px;
     cursor: pointer;
+}
+
+.otherreviews {
+    position: relative;
+    float: left;
+    width: 1050px;
+    height: 1000px;
+    border: 1px solid black;
+    top: 50px;
+    text-align: left;
 }

@@ -118,6 +118,7 @@ const Review = (info) => {
                         </div>
                         ) : (
                         <div className="homesigninlink">
+                            <a href="/signup">Sign Up</a>
                             <a href="/login">Sign In</a>
                         </div>
                         )}

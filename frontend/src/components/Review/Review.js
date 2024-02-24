@@ -95,8 +95,8 @@ const Review = (info) => {
                 <div className="searchcontainer">
                     <div className="categoriescontainer">
                         <select className="categories">
-                        <option value="AllDepartments">All Departments</option>
-                        <option value="AlexaSkills">Alexa Skills</option>
+                            <option value="AllDepartments">All Departments</option>
+                            <option value="AlexaSkills">Alexa Skills</option>
                         </select>
                     </div>
                     <input type="text" className="searchbox" placeholder="Search Amazeon" />

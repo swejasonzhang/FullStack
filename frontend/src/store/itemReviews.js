@@ -20,7 +20,6 @@ export const fetchReviews = () => async (dispatch) => {
       throw new Error('Failed to fetch reviews');
     }
     const data = await response.json();
-    console.log(data)
     dispatch(fetchReviewsSuccess(data));
   } catch (error) {
     dispatch(fetchReviewsFailure(error.message));

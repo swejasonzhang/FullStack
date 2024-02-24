@@ -5,6 +5,10 @@ import ItemShow from "./components/Items/ItemShow";
 import Cart from "./components/CartItems/CartItems"
 import Review from './components/Review/Review';
 import {Switch, Route} from 'react-router-dom';
+import ReactGA from 'react-ga';
+
+const TRACKING_ID = "428252056"; 
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
   return (

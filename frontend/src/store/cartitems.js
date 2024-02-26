@@ -72,6 +72,8 @@ export const createCartItem = (cartItem) => async (dispatch) => {
   if (res.ok) {
     const createdCartItem = await res.json();
     dispatch(receiveCartItem(createdCartItem));
+  } else {
+    console.error('Error creating cart item:', error);
   }
 };
 

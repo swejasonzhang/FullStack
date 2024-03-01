@@ -66,15 +66,15 @@ const HomePage = () => {
           <div className="accountdropdowncontent">
           <h3>Your Account</h3>
             {session.user ? (
-          <div className="homesignoutlink">
-            <a href="/login" onClick={homesignout}>Sign Out</a>
-          </div>
-          ) : (
-          <div className="homesigninlink">
-            <a href="/signup">Sign Up</a>
-            <a href="/login">Sign In</a>
-          </div>
-           )}
+              <div className="homesignoutlink">
+                <a href="/login" onClick={homesignout}>Sign Out</a>
+              </div>
+              ) : (
+              <div className="homesigninlink">
+                <a href="/signup">Sign Up</a>
+                <a href="/login">Sign In</a>
+              </div>
+            )}
           </div>  
         </div>
 

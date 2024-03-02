@@ -1,19 +1,17 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import React, { useState, } from 'react';
+import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session';
 import './SignUp.css';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function SignUp () {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
-
-    if (sessionUser) return <Redirect to="/" />;
+    const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,17 +19,22 @@ function SignUp () {
             
         setErrors([]);
         return dispatch(sessionActions.signup({ email, username, password }))
+            .then(() => {
+                if (errors.length === 0) {
+                    history.push("/");
+                }
+            })
             .catch(async (res) => {
-            let data;
-            try {
-                data = await res.clone().json();
-            } catch {
-                data = await res.text();
-            }
-            if (data?.errors) setErrors(data.errors);
-            else if (data) setErrors([data]);
-            else setErrors([res.statusText]);
-        });
+                let data;
+                try {
+                    data = await res.clone().json();
+                } catch {
+                    data = await res.text();
+                }
+                if (data?.errors) setErrors(data.errors);
+                else if (data) setErrors([data]);
+                else setErrors([res.statusText]);
+            });
         }
         return setErrors(['Re-enter password field must be the same as the password field']);
     };

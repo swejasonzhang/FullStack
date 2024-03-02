@@ -29,18 +29,22 @@ const HomePage = () => {
   };
 
   const homesignup = async(e) => {
+    e.preventDefault();
     history.push('/signup')
   }
 
   const homelogin = async(e) => {
+    e.preventDefault();
     history.push('/login')
   }
 
   const redirectcart = async(e) => {
+    e.preventDefault();
     history.push('/cart');
   }
 
   const redirectToHomePage = async(e) => {
+    e.preventDefault();
     history.push("/")
   }
 

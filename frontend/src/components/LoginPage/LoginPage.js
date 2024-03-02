@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { useDispatch} from "react-redux";
 import { useHistory } from 'react-router-dom';
 import './LoginPage.css';
 
 function LoginPage() {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
     const history = useHistory();
-
-    if (sessionUser) return <Redirect to="/" />;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -40,12 +36,17 @@ function LoginPage() {
         e.preventDefault();
         setErrors([]);
         return dispatch(sessionActions.login({ credential: "Demouser@gmail.com", password: "Password" }))
+        .then(() => {
+            if (errors.length === 0) {
+                history.push("/");
+            }
+        })
         .catch(async (res) => {
             let data;
             try {
-            data = await res.clone().json();
+                data = await res.clone().json();
             } catch {
-            data = await res.text(); 
+                data = await res.text();
             }
             if (data?.errors) setErrors(data.errors);
             else if (data) setErrors([data]);

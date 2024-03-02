@@ -11,7 +11,7 @@ function SignUp () {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
-    const history = useHistory();
+    const history = useHistory("");
 
     const handleSubmit = (e) => {
         e.preventDefault();

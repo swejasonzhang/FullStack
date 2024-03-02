@@ -73,7 +73,7 @@ function SignUp () {
                     </div>
 
                     <div className='haveaccount'>
-                        <p>Already have an account? <a href='http://localhost:3000/login'>Sign in</a></p>
+                        <p>Already have an account? <a href='/login'>Sign in</a></p>
                     </div>
                 </form>
             </div>

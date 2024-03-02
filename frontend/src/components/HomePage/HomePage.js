@@ -28,6 +28,14 @@ const HomePage = () => {
     history.push('/login');
   };
 
+  const homesignup = async(e) => {
+    history.push('/signup')
+  }
+
+  const homelogin = async(e) => {
+    history.push('/login')
+  }
+
   const redirectcart = async(e) => {
     history.push('/cart');
   }
@@ -71,8 +79,8 @@ const HomePage = () => {
               </div>
               ) : (
               <div className="homesigninlink">
-                <a href="/signup">Sign Up</a>
-                <a href="/login">Sign In</a>
+                <a href="/signup" onClick={homesignup}>Sign Up</a>
+                <a href="/login" onClick={homelogin}>Sign In</a>
               </div>
             )}
           </div>  

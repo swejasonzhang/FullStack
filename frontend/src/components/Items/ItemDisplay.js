@@ -6,7 +6,6 @@ const ItemDisplay = ({ item }) => {
     const history = useHistory();
 
     const navigateToItemPage = (itemId) => {
-        debugger
         history.push(`/items/${itemId}`);
     };
 

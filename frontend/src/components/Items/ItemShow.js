@@ -11,7 +11,7 @@ import { createCartItem, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
-import { fetchReviews } from "../../store/itemReviews.js";
+import { fetchReviews, deleteReview } from "../../store/itemReviews.js"
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const ItemShow = () => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const cartItems = useSelector(state => state.cartItems);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const allReviews = Object.values(useSelector(state => state.reviews.reviews));
+  const allReviews = Object.values(useSelector(state => state.reviews));
   const filteredReviews = Object.values(allReviews.filter(review => review.itemId === item.id));
   const itemRatings = filteredReviews.reduce((total, review) => total + review.ratings, 0);
   const totalRatings = filteredReviews.length;
@@ -203,6 +203,17 @@ const ItemShow = () => {
     });
   };
 
+  const editingReview = (index) => {
+    history.push({
+      pathname: '/items/:item_id/editreview',
+      state: {item: item, index: index}
+    });
+  };
+
+  const deletingReview = (index) => {
+    dispatch(deleteReview(index))
+  };
+
   return (
     <>
       <div className="navbar">
@@ -340,11 +351,21 @@ const ItemShow = () => {
         </div>
 
         <div className="otherreviews">
-          {filteredReviews.map(review => (
-            <div key={review.id} className="individual-review">
+          {filteredReviews.map((review, index) => (
+            <div className="individual-review" key={index}>
               <div className="author">{review.author}</div>
               <OnlyStars rating={review.ratings}></OnlyStars> 
               <div className="reviewbody">{review.body}</div>
+              {session.user && (session.user.username === review.author) && (
+                <div className="editanddelete">
+                  <div className="edit">
+                    <div onClick={() => editingReview(index)}>Edit</div>
+                  </div>
+                  <div className="delete"> 
+                    <div onClick={() => deletingReview(index)}>Delete</div>
+                  </div> 
+                </div>
+              )}
               <br></br>
             </div>
           ))}

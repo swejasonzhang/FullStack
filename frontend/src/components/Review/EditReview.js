@@ -5,22 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as sessionActions from "../../store/session";
 import StarRating from "../StarRating/StarRating.js"
-import { saveReviewAction } from '../../store/itemReviews.js';
-import "./Review.css";
+import { editReview } from '../../store/itemReviews.js';
+import "./EditReview.css";
 
-const Review = (info) => {
+const EditReview = (info) => {
     const history = useHistory();
     const [username, setUsername] = useState(""); 
     const session = useSelector(state => state.session);
     const dispatch = useDispatch();
     const [cartQuantity] = useState(0); 
     const cartItems = useSelector(state => state.cartItems);
-    const item = info.location.state.item;
+    const { item, index } = history.location.state;
     const [ratings, setRatings] = useState(0);
     const [body, setBody] = useState("");
     const author = session.user ? session.user.username : "User";
     const [showErrors, setShowErrors] = useState(false);
     const [error, setError] = useState(null);
+    const itemId = item.id
 
     useEffect(() => {
         if (session && session.user && session.user.username) {
@@ -57,7 +58,7 @@ const Review = (info) => {
         setRatings(newRating);
     };
 
-    const submitReview = async () => {
+    const editingReview = async () => {
         setShowErrors(true); 
         setError(null);
 
@@ -77,8 +78,9 @@ const Review = (info) => {
         } 
     
         try {
-            await dispatch(saveReviewAction(item.id, ratings, body, author));
-            history.push(`/items/${item.id}`);
+            const review = { itemId, ratings, body, author };
+            await dispatch(editReview(index, review));
+            history.push(`/items/${itemId}`);
         } catch (error) {
             console.error("Failed to submit review:", error);
         }
@@ -137,7 +139,7 @@ const Review = (info) => {
             </div>
 
             <div className="creatingeareviewcontainer">
-                <div className="createreview">Create Review
+                <div className="createreview">Edit Your Review
                     <br></br>
                     <div className='reviewimagecontainer'>
                         <img className="reviewimage" src={item.imageUrl} alt='reviewimagealt'></img>
@@ -162,7 +164,7 @@ const Review = (info) => {
 
                     <hr className="reviewseperator"></hr>
 
-                    <div className='submitbutton' onClick={() => submitReview(item.id, ratings, body, author)}>Submit</div>
+                    <div className='submitbutton' onClick={() => editingReview()}>Submit</div>
                 </div>
             </div>
         </>
@@ -170,4 +172,4 @@ const Review = (info) => {
 }
 
 
-export default Review;
+export default EditReview;

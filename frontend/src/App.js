@@ -6,6 +6,7 @@ import Cart from "./components/CartItems/CartItems"
 import Review from './components/Review/Review';
 import {Switch, Route} from 'react-router-dom';
 import ReactGA from 'react-ga';
+import EditReview from './components/Review/EditReview';
 
 const TRACKING_ID = "428252056"; 
 ReactGA.initialize(TRACKING_ID);
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/items/:itemId" component={ItemShow}></Route>
         <Route exact path="/cart" component={Cart}></Route>
         <Route exact path="/items/:itemId/review" component={Review}></Route>
+        <Route exact path="/items/:itemId/editreview" component={EditReview}></Route>
       </Switch>
     </>
   );

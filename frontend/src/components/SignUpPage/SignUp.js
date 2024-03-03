@@ -13,6 +13,11 @@ function SignUp () {
     const [errors, setErrors] = useState([]);
     const history = useHistory("");
 
+    const signuplogin = async(e) => {
+        e.preventDefault();
+        history.push('/login')
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
@@ -73,7 +78,7 @@ function SignUp () {
                     </div>
 
                     <div className='haveaccount'>
-                        <p>Already have an account? <a href='/login'>Sign in</a></p>
+                        <p>Already have an account? <a href="/login" onClick={signuplogin}>Sign in</a></p>
                     </div>
                 </form>
             </div>

@@ -594,3 +594,28 @@ body {
     font-size: 16px;
     padding-top: 10px;
 }
+
+.editanddelete {
+    margin-left: 10px;
+    width: 150px;
+    height: 25px;
+    margin-top: 5px;
+}
+
+.edit, .delete {
+    display: inline-block; 
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+.delete:hover {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.edit:hover {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

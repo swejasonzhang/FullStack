@@ -7,18 +7,19 @@ export const DELETE_REVIEW = 'DELETE_REVIEW';
 export const SAVE_REVIEW_SUCCESS = 'SAVE_REVIEW_SUCCESS';
 export const SAVE_REVIEW_FAILURE = 'SAVE_REVIEW_FAILURE';
 
+
 export const saveReviewSuccess = () => ({
   type: SAVE_REVIEW_SUCCESS,
 });
   
 export const saveReviewFailure = (error) => ({
   type: SAVE_REVIEW_FAILURE,
-  payload: error,
+  payload: error
 });
 
-export const editReview = (index, review) => ({
+export const editReview = (index, review, objectReviews) => ({
   type: EDIT_REVIEW,
-  payload: { index, review }
+  payload: { index, review, objectReviews }
 });
 
 export const deleteReview = (review) => ({
@@ -49,6 +50,21 @@ export const fetchReviews = () => async (dispatch) => {
   }
 };
 
+export const removeReview = (index) => async(dispatch) => {
+  try {
+    const res = await csrfFetch(`/api/reviews/${index}`, {
+      method: 'DELETE'
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to delete review');
+    }
+    dispatch(deleteReview(index));
+  } catch (error) {
+    console.error('Error removing review:', error);
+  }
+}
+
 export const saveReviewAction = (item_id, ratings, body, author) => {
   return async (dispatch) => {
     try {
@@ -77,19 +93,26 @@ const reviewsReducer = (state = {}, action) => {
     case FETCH_REVIEWS_FAILURE:
       return { ...state,  error: action.payload};
     case EDIT_REVIEW:
-      const { index, review } = action.payload;
-      return {...state, [Object.values(state.reviews)[index]]: review}
+      const { index, review, objectReviews } = action.payload;
+      const reviewsArray = Object.values(objectReviews);
+      const updatedReviews = { ...state };
+      if (index >= 0 && index < reviewsArray.length) {
+        updatedReviews[index] = review; 
+      } else {
+        console.error('Invalid index provided');
+      }
+      return updatedReviews;
     case DELETE_REVIEW:
-      const newState = { ...state };
-      const keys = Object.keys(newState);
+      const keys = Object.keys(state);
       const indexToDelete = action.payload;
 
       if (indexToDelete >= 0 && indexToDelete < keys.length) {
         const keyToDelete = keys[indexToDelete];
+        const newState = { ...state };
         delete newState[keyToDelete];
+        return newState;
       }
-
-      return newState;
+      return state;
     default:
       return state;
   }

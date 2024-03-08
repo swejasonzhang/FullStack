@@ -17,6 +17,7 @@ require "open-uri"
   puts "Resetting primary keys..."
   # For easy testing, so that after seeding, the first `User` has `id` of 1
   ApplicationRecord.connection.reset_pk_sequence!('users')
+  ActiveRecord::Base.connection.reset_pk_sequence!('reviews')
 
   puts "Creating users..."
   # Create one user with an easy to remember username, email, and password:
@@ -78,15 +79,6 @@ require "open-uri"
   })
 
   CorsairKeyboard.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Keyboard.jpg"), filename: "Keyboard.jpg")
-
-  # Monitor = Item.create!({
-  #   id: 5,
-  #   name: "HP 27-inch FHD IPS Gaming Monitor with Tilt/Height Adjustment with AMD FreeSync PremiumTechnology",
-  #   cost: 275.00,
-  #   category: "Monitor",
-  #   stock: 126,
-  #   description: 
-  # })
 
   puts "Done!"
 # end

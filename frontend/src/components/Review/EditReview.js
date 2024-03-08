@@ -8,7 +8,7 @@ import StarRating from "../StarRating/StarRating.js"
 import { editReview } from '../../store/itemReviews.js';
 import "./EditReview.css";
 
-const EditReview = (info) => {
+const EditReview = () => {
     const history = useHistory();
     const [username, setUsername] = useState(""); 
     const session = useSelector(state => state.session);
@@ -22,6 +22,7 @@ const EditReview = (info) => {
     const [showErrors, setShowErrors] = useState(false);
     const [error, setError] = useState(null);
     const itemId = item.id
+    const objectReviews = useSelector(state => state.reviews)
 
     useEffect(() => {
         if (session && session.user && session.user.username) {
@@ -79,13 +80,12 @@ const EditReview = (info) => {
     
         try {
             const review = { itemId, ratings, body, author };
-            await dispatch(editReview(index, review));
+            await dispatch(editReview(index, review, objectReviews));
             history.push(`/items/${itemId}`);
         } catch (error) {
             console.error("Failed to submit review:", error);
         }
     };
-    
 
     return (
         <>

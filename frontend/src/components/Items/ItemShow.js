@@ -11,7 +11,7 @@ import { createCartItem, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
-import { fetchReviews, deleteReview } from "../../store/itemReviews.js"
+import { fetchReviews, removeReview } from "../../store/itemReviews.js"
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const ItemShow = () => {
   const filteredReviews = Object.values(allReviews.filter(review => review.itemId === item.id));
   const itemRatings = filteredReviews.reduce((total, review) => total + review.ratings, 0);
   const totalRatings = filteredReviews.length;
-  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
+  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;    
   
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -43,7 +43,7 @@ const ItemShow = () => {
   useEffect(() => {
     dispatch(fetchItem(itemId)); 
     dispatch(fetchReviews(itemId));
-  }, [dispatch, itemId]);
+  }, [dispatch, itemId ]);
 
   const redirectToHomePage = async(e) => {
     history.push("/")
@@ -58,11 +58,6 @@ const ItemShow = () => {
   const redirectCart = () => {
     history.push('/cart');
   };
-
-  useEffect(() => {
-    dispatch(fetchItem(itemId));
-  }, [dispatch, itemId]);
-
   
   function toggleDropdown() {
     const dropdown = document.querySelector('.showitemdropdown');
@@ -205,13 +200,36 @@ const ItemShow = () => {
 
   const editingReview = (index) => {
     history.push({
-      pathname: '/items/:item_id/editreview',
-      state: {item: item, index: index}
+      pathname: `/items/${itemId}/editreview`,
+      state: { item: item, index: index }
     });
   };
 
-  const deletingReview = (index) => {
-    dispatch(deleteReview(index))
+  const deletingReview = async (index) => {
+    let newIndex = index;
+
+    if (allReviews.length - 1 === newIndex && allReviews.length > 1) {
+      newIndex = allReviews.length - 1;
+    } else {
+      newIndex += 1;
+    }
+
+    await reorderReviewKeys();
+    dispatch(removeReview(newIndex));
+    await reorderReviewKeys();
+  };
+  
+  const reorderReviewKeys = () => {
+    let newReviews = {};
+    let counter = 1;
+
+    for (const key in allReviews) {
+      if (allReviews.hasOwnProperty(key)) {
+        newReviews[counter++] = allReviews[key];
+      }
+    }
+
+    return newReviews
   };
 
   return (

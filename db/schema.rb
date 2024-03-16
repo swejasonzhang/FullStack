@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_15_214704) do
   end
 
   create_table "reviews", force: :cascade do |t|
+    t.integer "review_id", null: false
     t.integer "ratings", null: false
     t.text "body", null: false
     t.string "author", null: false

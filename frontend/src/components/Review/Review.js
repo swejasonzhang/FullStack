@@ -21,6 +21,7 @@ const Review = (info) => {
     const author = session.user ? session.user.username : "User";
     const [showErrors, setShowErrors] = useState(false);
     const [error, setError] = useState(null);
+    const review_id = useState(1);
 
     useEffect(() => {
         if (session && session.user && session.user.username) {
@@ -77,7 +78,7 @@ const Review = (info) => {
         } 
     
         try {
-            await dispatch(saveReviewAction(item.id, ratings, body, author));
+            await dispatch(saveReviewAction(item.id, ratings, body, author, review_id));
             history.push(`/items/${item.id}`);
         } catch (error) {
             console.error("Failed to submit review:", error);
@@ -162,7 +163,7 @@ const Review = (info) => {
 
                     <hr className="reviewseperator"></hr>
 
-                    <div className='submitbutton' onClick={() => submitReview(item.id, ratings, body, author)}>Submit</div>
+                    <div className='submitbutton' onClick={() => submitReview(item.id, ratings, body, author, review_id)}>Submit</div>
                 </div>
             </div>
         </>

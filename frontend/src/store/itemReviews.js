@@ -65,7 +65,7 @@ export const removeReview = (index) => async(dispatch) => {
   }
 }
 
-export const saveReviewAction = (item_id, ratings, body, author) => {
+export const saveReviewAction = (item_id, ratings, body, author, review_id) => {
   return async (dispatch) => {
     try {
       const response = await csrfFetch('/api/reviews', {
@@ -73,7 +73,7 @@ export const saveReviewAction = (item_id, ratings, body, author) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ item_id, ratings, body, author }),
+        body: JSON.stringify({ item_id, ratings, body, author, review_id }),
       });
 
       if (!response.ok) {

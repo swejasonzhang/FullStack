@@ -50,16 +50,16 @@ export const fetchReviews = () => async (dispatch) => {
   }
 };
 
-export const removeReview = (index) => async(dispatch) => {
+export const removeReview = (reviewId) => async(dispatch) => {
   try {
-    const res = await csrfFetch(`/api/reviews/${index}`, {
+    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
       method: 'DELETE'
     });
 
     if (!res.ok) {
       throw new Error('Failed to delete review');
     }
-    dispatch(deleteReview(index));
+    dispatch(deleteReview(reviewId));
   } catch (error) {
     console.error('Error removing review:', error);
   }
@@ -92,7 +92,12 @@ export const saveReviewAction = (item_id, ratings, body, author) => {
 const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_REVIEWS_SUCCESS:
-      return {...action.payload};
+      const reviewsData = action.payload;
+      const updateReviews = Object.values(reviewsData).reduce((acc, review) => {
+        acc[review.reviewId] = review;
+        return acc;
+      }, {});
+      return { ...updateReviews };
     case FETCH_REVIEWS_FAILURE:
       return { ...state,  error: action.payload};
     case EDIT_REVIEW:
@@ -106,16 +111,22 @@ const reviewsReducer = (state = {}, action) => {
       }
       return updatedReviews;
     case DELETE_REVIEW:
-      const keys = Object.keys(state);
-      const indexToDelete = action.payload;
+      const reviewIdToDelete = action.payload;
+      const newState = { ...state };
 
-      if (indexToDelete >= 0 && indexToDelete < keys.length) {
-        const keyToDelete = keys[indexToDelete];
-        const newState = { ...state };
-        delete newState[keyToDelete];
-        return newState;
+      delete newState.reviews[reviewIdToDelete];
+    
+      let newReviews = {};
+      let newKey = 1;
+  
+      for (const key in newState.reviews) {
+        if (newState.reviews.hasOwnProperty(key)) {
+          newReviews[newKey] = newState.reviews[key];
+          newKey++;
+        }
       }
-      return state;
+      
+      return { ...state, reviews: newReviews };
     default:
       return state;
   }

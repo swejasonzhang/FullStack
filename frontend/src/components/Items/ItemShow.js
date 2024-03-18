@@ -369,18 +369,18 @@ const ItemShow = () => {
         </div>
 
         <div className="otherreviews">
-          {filteredReviews.map((review, index) => (
-            <div className="individual-review" key={index}>
+          {filteredReviews.map((review) => (
+            <div className="individual-review" key={review.review_id}>
               <div className="author">{review.author}</div>
               <OnlyStars rating={review.ratings}></OnlyStars> 
               <div className="reviewbody">{review.body}</div>
               {session.user && (session.user.username === review.author) && (
                 <div className="editanddelete">
                   <div className="edit">
-                    <div onClick={() => editingReview(index)}>Edit</div>
+                    <div onClick={() => editingReview(Object.key(review))}>Edit</div>
                   </div>
                   <div className="delete"> 
-                    <div onClick={() => deletingReview(index)}>Delete</div>
+                    <div onClick={() => deletingReview(Object.key(review))}>Delete</div>
                   </div> 
                 </div>
               )}

@@ -3,6 +3,8 @@ class Api::ReviewsController < ApplicationController
     item = Item.find(params[:item_id])
     review = Review.new(review_params)
 
+    debugger
+
     if review.save
       render json: review, status: :created
     else
@@ -17,7 +19,6 @@ class Api::ReviewsController < ApplicationController
   
   def index
     @reviews = Review.all
-    @reviews = reorder(@reviews)
     render :index
   end
 
@@ -41,17 +42,7 @@ class Api::ReviewsController < ApplicationController
     end
   end
 
-  def reorder 
-    reordered_reviews = reorder_review_keys(@reviews)
-    render json: reordered_reviews
-  end
-
-  private
-  def reorder_review_keys(reviews)
-    reviews.order(created_at: :asc).each_with_index.map { |review, index| [index + 1, review] }.to_h
-  end
-
   def review_params
-    params.require(:review).permit(:item_id, :ratings, :body, :author)
+    params.require(:review).permit(:item_id, :ratings, :body, :author, :review_id)
   end
 end

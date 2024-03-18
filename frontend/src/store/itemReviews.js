@@ -65,7 +65,7 @@ export const removeReview = (index) => async(dispatch) => {
   }
 }
 
-export const saveReviewAction = (item_id, ratings, body, author, review_id) => {
+export const saveReviewAction = (item_id, ratings, body, author) => {
   return async (dispatch) => {
     try {
       const response = await csrfFetch('/api/reviews', {
@@ -73,13 +73,16 @@ export const saveReviewAction = (item_id, ratings, body, author, review_id) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ item_id, ratings, body, author, review_id }),
+        body: JSON.stringify({ item_id, ratings, body, author }),
       });
 
       if (!response.ok) {
         throw new Error('Failed to save review');
       }
-      dispatch(saveReviewSuccess());
+
+      const data = await response.json();
+      const { reviewId } = data;
+      dispatch(saveReviewSuccess({ ...data, reviewId }));
     } catch (error) {
       dispatch(saveReviewFailure(error.message));
     }
@@ -89,30 +92,30 @@ export const saveReviewAction = (item_id, ratings, body, author, review_id) => {
 const reviewsReducer = (state = {}, action) => {
   switch (action.type) {
     case FETCH_REVIEWS_SUCCESS:
-      return { ...action.payload };
+      return {...action.payload};
     case FETCH_REVIEWS_FAILURE:
-      return { ...state, error: action.payload };
+      return { ...state,  error: action.payload};
     case EDIT_REVIEW:
       const { index, review, objectReviews } = action.payload;
       const reviewsArray = Object.values(objectReviews);
       const updatedReviews = { ...state };
-
       if (index >= 0 && index < reviewsArray.length) {
-        updatedReviews[index] = { ...review };
+        updatedReviews[index] = review; 
       } else {
         console.error('Invalid index provided');
       }
       return updatedReviews;
     case DELETE_REVIEW:
-      const newState = { ...state };
-      delete newState[action.payload];
-      return newState;
-    case SAVE_REVIEW_SUCCESS:
-      const newReview = action.payload;
-      return {
-        ...state,
-        [newReview.review_id]: { ...newReview },
-      };
+      const keys = Object.keys(state);
+      const indexToDelete = action.payload;
+
+      if (indexToDelete >= 0 && indexToDelete < keys.length) {
+        const keyToDelete = keys[indexToDelete];
+        const newState = { ...state };
+        delete newState[keyToDelete];
+        return newState;
+      }
+      return state;
     default:
       return state;
   }

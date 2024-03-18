@@ -198,38 +198,15 @@ const ItemShow = () => {
     });
   };
 
-  const editingReview = (index) => {
+  const editingReview = (reviewId) => {
     history.push({
       pathname: `/items/${itemId}/editreview`,
-      state: { item: item, index: index }
+      state: { item: item, reviewId: reviewId }
     });
   };
 
-  const deletingReview = async (index) => {
-    let newIndex = index;
-
-    if (allReviews.length - 1 === newIndex && allReviews.length > 1) {
-      newIndex = allReviews.length - 1;
-    } else {
-      newIndex += 1;
-    }
-
-    await reorderReviewKeys();
-    dispatch(removeReview(newIndex));
-    await reorderReviewKeys();
-  };
-  
-  const reorderReviewKeys = () => {
-    let newReviews = {};
-    let counter = 1;
-
-    for (const key in allReviews) {
-      if (allReviews.hasOwnProperty(key)) {
-        newReviews[counter++] = allReviews[key];
-      }
-    }
-
-    return newReviews
+  const deletingReview = async (reviewId) => {
+    dispatch(removeReview(reviewId));
   };
 
   return (
@@ -377,10 +354,10 @@ const ItemShow = () => {
               {session.user && (session.user.username === review.author) && (
                 <div className="editanddelete">
                   <div className="edit">
-                    <div onClick={() => editingReview(Object.key(review))}>Edit</div>
+                    <div onClick={() => editingReview(review.review_id)}>Edit</div>
                   </div>
                   <div className="delete"> 
-                    <div onClick={() => deletingReview(Object.key(review))}>Delete</div>
+                    <div onClick={() => deletingReview(review.review_id)}>Delete</div>
                   </div> 
                 </div>
               )}

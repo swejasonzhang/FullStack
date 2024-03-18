@@ -2,9 +2,7 @@ class Api::ReviewsController < ApplicationController
   def create
     item = Item.find(params[:item_id])
     review = Review.new(review_params)
-
-    debugger
-
+    
     if review.save
       render json: review, status: :created
     else
@@ -43,6 +41,6 @@ class Api::ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:item_id, :ratings, :body, :author, :review_id)
-  end
+    params.require(:review).permit(:ratings, :body, :author, :item_id, :review_id)
+  end  
 end

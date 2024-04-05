@@ -84,6 +84,7 @@ const Review = (info) => {
         }
     };
     
+    console.log("My github user isn't the same as my github profile name.")
 
     return (
         <>

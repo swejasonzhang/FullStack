@@ -11,7 +11,7 @@ import { createCartItem, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
-import { fetchReviews, removeReview } from "../../store/itemReviews.js"
+import { fetchReviews, removeReview, editReview } from "../../store/itemReviews.js"
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -27,10 +27,10 @@ const ItemShow = () => {
   const cartItems = useSelector(state => state.cartItems);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const allReviews = Object.values(useSelector(state => state.reviews));
-  const filteredReviews = Object.values(allReviews.filter(review => review.itemId === item.id));
+  const filteredReviews = allReviews.filter(review => review.itemId === item.id);
   const itemRatings = filteredReviews.reduce((total, review) => total + review.ratings, 0);
   const totalRatings = filteredReviews.length;
-  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;    
+  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;  
   
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -186,6 +186,8 @@ const ItemShow = () => {
     setCartQuantity(totalQuantity);
   }, [cartItems]);
 
+  if (!filteredReviews || !item || !session.user) return null;
+
   const writeReview = () => {
     if (!session.user) {
       history.push('/login');
@@ -198,15 +200,12 @@ const ItemShow = () => {
     });
   };
 
-  const editingReview = (reviewId) => {
-    history.push({
-      pathname: `/items/${itemId}/editreview`,
-      state: { item: item, reviewId: reviewId }
-    });
+  const editingReview = (id) => {
+    dispatch(editReview(id))
   };
 
-  const deletingReview = async (reviewId) => {
-    dispatch(removeReview(reviewId));
+  const deletingReview = (id) => {
+    dispatch(removeReview(id));
   };
 
   return (
@@ -347,17 +346,17 @@ const ItemShow = () => {
 
         <div className="otherreviews">
           {filteredReviews.map((review) => (
-            <div className="individual-review" key={review.reviewId}>
+            <div className="individual-review" key={review.id}>
               <div className="author">{review.author}</div>
               <OnlyStars rating={review.ratings}></OnlyStars> 
               <div className="reviewbody">{review.body}</div>
               {session.user && (session.user.username === review.author) && (
                 <div className="editanddelete">
                   <div className="edit">
-                    <div onClick={() => editingReview(review.reviewId)}>Edit</div>
+                    <div onClick={() => editingReview(review.id)}>Edit</div>
                   </div>
                   <div className="delete"> 
-                    <div onClick={() => deletingReview(review.reviewId)}>Delete</div>
+                    <div onClick={() => deletingReview(review.id)}>Delete</div>
                   </div> 
                 </div>
               )}

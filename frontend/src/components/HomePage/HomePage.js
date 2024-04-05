@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './HomePage.css';
 import ItemsIndex from "../Items/ItemsIndex";
+// import fetchCartItems from "../../store/cartitems.js"
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,10 @@ const HomePage = () => {
       setUsername("User");
     }
   }, [session]);
+
+  // useEffect(() => {
+  //   dispatch(fetchCartItems());
+  // }, [dispatch]);
 
   const homesignout = async (e) => {
     e.preventDefault();
@@ -49,6 +54,8 @@ const HomePage = () => {
   }
 
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+
+  if (!session || !cartItems) return null;
 
   return (
     <>

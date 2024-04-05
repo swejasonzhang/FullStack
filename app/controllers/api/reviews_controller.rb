@@ -1,7 +1,7 @@
 class Api::ReviewsController < ApplicationController
   def create
     review = Review.new(review_params)
-    review.review_id = Review.maximum(:review_id).to_i + 1
+    
     if review.save
       render json: review, status: :created
     else
@@ -40,6 +40,6 @@ class Api::ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:ratings, :body, :author, :item_id, :review_id)
+    params.require(:review).permit(:ratings, :body, :author, :item_id)
   end  
 end

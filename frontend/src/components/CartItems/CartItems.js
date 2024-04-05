@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './CartItems.css';
-import { removeCartItem, removeCartItems, updateCartItem } from "../../store/cartitems";
+import { removeCartItem, removeCartItems, updateCartItem, fetchCartItems } from "../../store/cartitems";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -24,6 +24,10 @@ const Cart = () => {
       setUsername("User");
     }
   }, [session]);
+
+  useEffect(() => {
+    dispatch(fetchCartItems());
+  }, [dispatch]);
 
   const homesignout = async (e) => {
     e.preventDefault();
@@ -132,7 +136,7 @@ const Cart = () => {
   };
       
 
-  const calculateTotalQuantity = (items) => {
+  const calculateTotalQuantity = () => {
     const allCartItems = Object.values(cartItems); 
     const selectedObjects = allCartItems.filter(item => selectedItems.includes(item.id));
     return selectedObjects.reduce((total, item) => total + item.quantity, 0);
@@ -145,6 +149,8 @@ const Cart = () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
+
+  if (!cartItems || !session) return null;
   
   return (
     <>

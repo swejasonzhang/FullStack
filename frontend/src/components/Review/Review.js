@@ -83,8 +83,6 @@ const Review = (info) => {
             console.error("Failed to submit review:", error);
         }
     };
-    
-    console.log("My github user isn't the same as my github profile name.")
 
     return (
         <>

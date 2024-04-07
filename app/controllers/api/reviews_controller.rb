@@ -1,6 +1,8 @@
 class Api::ReviewsController < ApplicationController
   def create
     review = Review.new(review_params)
+
+    review.id = Review.count
     
     if review.save
       render json: review, status: :created
@@ -38,6 +40,8 @@ class Api::ReviewsController < ApplicationController
       render json: { error: "Failed to delete review" }, status: :unprocessable_entity
     end
   end
+
+  private
 
   def review_params
     params.require(:review).permit(:ratings, :body, :author, :item_id)

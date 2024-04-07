@@ -50,16 +50,16 @@ export const fetchReviews = () => async (dispatch) => {
   }
 };
 
-export const removeReview = (id) => async(dispatch) => {
+export const removeReview = (key) => async(dispatch) => {
   try {
-    const res = await csrfFetch(`/api/reviews/${id}`, {
+    const res = await csrfFetch(`/api/reviews/${key}`, {
       method: 'DELETE'
     });
 
     if (!res.ok) {
       throw new Error('Failed to delete review');
     }
-    dispatch(deleteReview(id));
+    dispatch(deleteReview(key));
   } catch (error) {
     console.error('Error removing review:', error);
   }
@@ -68,7 +68,7 @@ export const removeReview = (id) => async(dispatch) => {
 export const updateReview = (key, updatedReview) => async(dispatch) => {
   try {
     const res = await csrfFetch(`/api/reviews/${key}`, {
-      method: 'PUT',
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -122,7 +122,7 @@ const reviewsReducer = (state = {}, action) => {
     case DELETE_REVIEW:
       const deleteState = {...state};
       const deleteKey = action.payload;
-      delete deleteState.reviews[deleteKey];
+      delete deleteState[deleteKey];
       return deleteState;
     default:
       return state;

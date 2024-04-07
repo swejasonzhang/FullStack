@@ -202,7 +202,9 @@ const ItemShow = () => {
 
   const editingReview = (key, review) => {
     const parseKey = parseInt(key)
-    const newKey = parseKey + 1
+    const newKey = parseKey
+
+    console.log("Clicked on review with key:", key);
 
     history.push ({
       pathname: `/items/${itemId}/editreview`,
@@ -211,7 +213,12 @@ const ItemShow = () => {
   };
 
   const deletingReview = (key) => {
-    dispatch(removeReview(key));
+    const deleteKey = parseInt(key)
+    const newKey = deleteKey
+
+    
+
+    dispatch(removeReview(newKey));
   };
 
   return (
@@ -351,15 +358,15 @@ const ItemShow = () => {
         </div>
 
         <div className="otherreviews">
-          {Object.entries(filteredReviews).map(([key, review]) => (
-            <div className="individual-review" key={review.id}>
-              <div className="author">{review.author}</div>
-              <OnlyStars rating={review.ratings}></OnlyStars> 
-              <div className="reviewbody">{review.body}</div>
-              {session.user && (session.user.username === review.author) && (
+          {Object.keys(filteredReviews).map((key) => (
+            <div className="individual-review" key={key}>
+              <div className="author">{filteredReviews[key].author}</div>
+              <OnlyStars rating={filteredReviews[key].ratings}></OnlyStars> 
+              <div className="reviewbody">{filteredReviews[key].body}</div>
+              {session.user && (session.user.username === filteredReviews[key].author) && (
                 <div className="editanddelete">
                   <div className="edit">
-                    <div onClick={() => editingReview(key, review)}>Edit</div>
+                    <div onClick={() => editingReview(key, filteredReviews[key])}>Edit</div>
                   </div>
                   <div className="delete"> 
                     <div onClick={() => deletingReview(key)}>Delete</div>

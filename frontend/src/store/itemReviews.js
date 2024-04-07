@@ -17,14 +17,14 @@ export const saveReviewFailure = (error) => ({
   payload: error
 });
 
-export const editReview = (id) => ({
+export const editReview = (key, review) => ({
   type: EDIT_REVIEW,
-  payload: id
+  payload: { key, review }
 });
 
-export const deleteReview = (id) => ({
+export const deleteReview = (key) => ({
   type: DELETE_REVIEW,
-  payload: id
+  payload: key
 });
 
 export const fetchReviewsSuccess = (reviews) => ({
@@ -65,6 +65,26 @@ export const removeReview = (id) => async(dispatch) => {
   }
 }
 
+export const updateReview = (key, updatedReview) => async(dispatch) => {
+  try {
+    const res = await csrfFetch(`/api/reviews/${key}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedReview),
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to update review');
+    }
+
+    dispatch(editReview(key, updatedReview));
+  } catch(error) {
+    console.error('Error updating review:', error);
+  }
+}
+
 export const saveReviewAction = (item_id, ratings, body, author) => {
   return async (dispatch) => {
     try {
@@ -95,16 +115,15 @@ const reviewsReducer = (state = {}, action) => {
     case FETCH_REVIEWS_FAILURE:
       return { ...state,  error: action.payload};
     case EDIT_REVIEW:
-      const editState = {...state}
-      const { editId } = action.payload
-      const { updatedReview } = action.payload
-      editState[editId] = updatedReview
-      return editState
+      const { key } = action.payload;
+      const { review } = action.payload;
+      state[key] = review;
+      return state;
     case DELETE_REVIEW:
-      const deleteState = {...state}
-      const deleteId = action.payload
-      delete deleteState.reviews[deleteId]
-      return deleteState
+      const deleteState = {...state};
+      const deleteKey = action.payload;
+      delete deleteState.reviews[deleteKey];
+      return deleteState;
     default:
       return state;
   }

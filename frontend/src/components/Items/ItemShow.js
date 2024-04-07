@@ -11,7 +11,7 @@ import { createCartItem, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
-import { fetchReviews, removeReview, editReview } from "../../store/itemReviews.js"
+import { fetchReviews, removeReview } from "../../store/itemReviews.js"
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -186,7 +186,7 @@ const ItemShow = () => {
     setCartQuantity(totalQuantity);
   }, [cartItems]);
 
-  if (!filteredReviews || !item || !session.user) return null;
+  if (!filteredReviews || !item) return null;
 
   const writeReview = () => {
     if (!session.user) {
@@ -195,17 +195,23 @@ const ItemShow = () => {
     }
 
     history.push({
-      pathname: '/items/:item_id/review',
+      pathname: `/items/${itemId}/review`,
       state: { item: item }
     });
   };
 
-  const editingReview = (id) => {
-    dispatch(editReview(id))
+  const editingReview = (key, review) => {
+    const parseKey = parseInt(key)
+    const newKey = parseKey + 1
+
+    history.push ({
+      pathname: `/items/${itemId}/editreview`,
+      state: {key: newKey, review: review, item: item }
+    });
   };
 
-  const deletingReview = (id) => {
-    dispatch(removeReview(id));
+  const deletingReview = (key) => {
+    dispatch(removeReview(key));
   };
 
   return (
@@ -345,7 +351,7 @@ const ItemShow = () => {
         </div>
 
         <div className="otherreviews">
-          {filteredReviews.map((review) => (
+          {Object.entries(filteredReviews).map(([key, review]) => (
             <div className="individual-review" key={review.id}>
               <div className="author">{review.author}</div>
               <OnlyStars rating={review.ratings}></OnlyStars> 
@@ -353,10 +359,10 @@ const ItemShow = () => {
               {session.user && (session.user.username === review.author) && (
                 <div className="editanddelete">
                   <div className="edit">
-                    <div onClick={() => editingReview(review.id)}>Edit</div>
+                    <div onClick={() => editingReview(key, review)}>Edit</div>
                   </div>
                   <div className="delete"> 
-                    <div onClick={() => deletingReview(review.id)}>Delete</div>
+                    <div onClick={() => deletingReview(key)}>Delete</div>
                   </div> 
                 </div>
               )}

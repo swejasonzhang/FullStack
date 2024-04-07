@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import * as sessionActions from "../../store/session";
 import StarRating from "../StarRating/StarRating.js"
-import { editReview } from '../../store/itemReviews.js';
+import { updateReview } from '../../store/itemReviews.js';
 import "./EditReview.css";
 
 const EditReview = () => {
@@ -15,14 +15,14 @@ const EditReview = () => {
     const dispatch = useDispatch();
     const [cartQuantity] = useState(0); 
     const cartItems = useSelector(state => state.cartItems);
-    const { item, index } = history.location.state;
+    const { item } = history.location.state;
+    const { key } = history.location.state;
     const [ratings, setRatings] = useState(0);
     const [body, setBody] = useState("");
-    const author = session.user ? session.user.username : "User";
     const [showErrors, setShowErrors] = useState(false);
     const [error, setError] = useState(null);
+    const author = session.user.username;
     const itemId = item.id
-    const objectReviews = useSelector(state => state.reviews)
 
     useEffect(() => {
         if (session && session.user && session.user.username) {
@@ -79,9 +79,9 @@ const EditReview = () => {
         } 
     
         try {
-            const review = { itemId, ratings, body, author };
-            await dispatch(editReview(index, review, objectReviews));
-            history.push(`/items/${itemId}`);
+            const newReview = { itemId, ratings, body, author }
+            await dispatch(updateReview(key, newReview));
+            history.push(`/items/${item.id}`);
         } catch (error) {
             console.error("Failed to submit review:", error);
         }

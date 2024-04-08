@@ -1,8 +1,6 @@
 class Api::ReviewsController < ApplicationController
   def create
     review = Review.new(review_params)
-
-    review.id = Review.count
     
     if review.save
       render json: review, status: :created

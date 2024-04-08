@@ -68,7 +68,7 @@ export const removeReview = (key) => async(dispatch) => {
 export const updateReview = (key, updatedReview) => async(dispatch) => {
   try {
     const res = await csrfFetch(`/api/reviews/${key}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },

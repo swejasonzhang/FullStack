@@ -26,11 +26,12 @@ const ItemShow = () => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const cartItems = useSelector(state => state.cartItems);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
-  const allReviews = Object.values(useSelector(state => state.reviews));
-  const filteredReviews = allReviews.filter(review => review.itemId === item.id);
-  const itemRatings = filteredReviews.reduce((total, review) => total + review.ratings, 0);
-  const totalRatings = filteredReviews.length;
-  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;  
+  const allReviews = useSelector(state => state.reviews);
+  const filteredReviews = Object.entries(allReviews).filter(([key, review]) => review.itemId === item.id).reduce((obj, [key, review]) => { obj[key] = review; return obj;}, {});
+  const filteredReviewsArray = Object.values(filteredReviews);
+  const itemRatings = filteredReviewsArray.reduce((total, review) => total + review.ratings, 0);
+  const totalRatings = filteredReviewsArray.length;
+  const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
   
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -201,10 +202,9 @@ const ItemShow = () => {
   };
 
   const editingReview = (key, review) => {
+    debugger
     const parseKey = parseInt(key)
-    const newKey = parseKey
-
-    console.log("Clicked on review with key:", key);
+    let newKey = parseKey
 
     history.push ({
       pathname: `/items/${itemId}/editreview`,
@@ -214,10 +214,7 @@ const ItemShow = () => {
 
   const deletingReview = (key) => {
     const deleteKey = parseInt(key)
-    const newKey = deleteKey
-
-    
-
+    let newKey = deleteKey
     dispatch(removeReview(newKey));
   };
 

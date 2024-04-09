@@ -7,7 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
-import { createCartItem, updateCartItem } from "../../store/cartitems.js"
+import { createCartItem, fetchCartItems, updateCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
@@ -44,6 +44,7 @@ const ItemShow = () => {
   useEffect(() => {
     dispatch(fetchItem(itemId)); 
     dispatch(fetchReviews(itemId));
+    dispatch(fetchCartItems())
   }, [dispatch, itemId ]);
 
   const redirectToHomePage = async(e) => {
@@ -90,7 +91,7 @@ const ItemShow = () => {
       history.push('/login');
       return;
     }
-  
+
     const itemDetails = item;
   
     if (itemDetails) {
@@ -101,25 +102,26 @@ const ItemShow = () => {
       if (existingCartItem) {
         const updatedQuantity = existingCartItem.quantity + selectedQuantity;
         dispatch(updateCartItem({ 
-          id: existingCartItem.id,
+          cost: itemDetails.cost,
+          description: itemDetails.description,
           quantity: updatedQuantity,
           user_id: session.user.id,
           item_id: itemDetails.id,
           name: itemDetails.name,
-          description: itemDetails.description,
-          cost: itemDetails.cost,
           image_url: itemDetails.imageUrl,
         }));
       } else {
         const cartItem = {
+          quantity: selectedQuantity,
           user_id: session.user.id,
           item_id: itemDetails.id,
-          quantity: selectedQuantity,
           name: itemDetails.name,
           description: itemDetails.description,
           cost: itemDetails.cost,
           image_url: itemDetails.imageUrl,
         };
+
+        console.log(cartItem)
   
         dispatch(createCartItem(cartItem));
       }

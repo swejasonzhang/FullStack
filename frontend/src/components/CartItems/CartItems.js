@@ -149,8 +149,6 @@ const Cart = () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
-
-  if (!cartItems || !session) return null;
   
   return (
     <>

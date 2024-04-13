@@ -7,7 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
-import { createCartItem, fetchCartItems, updateCartItem } from "../../store/cartitems.js"
+import { createCartItem, fetchCartItems, updatingCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
@@ -93,39 +93,31 @@ const ItemShow = () => {
     }
 
     const itemDetails = item;
-  
+
     if (itemDetails) {
-      const existingCartItem = Object.values(cartItems).find(
+      const existingCartItemIndex = cartItems.findIndex(
         cartItem => cartItem.item_id === itemDetails.id
       );
-  
-      if (existingCartItem) {
-        const updatedQuantity = existingCartItem.quantity + selectedQuantity;
-        dispatch(updateCartItem({ 
-          id: item.id,
-          quantity: updatedQuantity,
-          description: itemDetails.description,
-          user_id: session.user.id,
-          item_id: itemDetails.id,
-          name: itemDetails.name,
-          cost: itemDetails.cost,
-          image_url: itemDetails.imageUrl,
-        }));
+
+      if (existingCartItemIndex !== -1) {
+        const updatedCartItems = [...cartItems];
+        updatedCartItems[existingCartItemIndex].quantity += selectedQuantity;
+        dispatch(updatingCartItem(updatedCartItems[existingCartItemIndex]));
       } else {
         const cartItem = {
-          id: item.id,
+          id: itemDetails.id,
           quantity: selectedQuantity,
-          user_id: session.user.id,
-          item_id: itemDetails.id,
-          name: itemDetails.name,
           description: itemDetails.description,
+          item_id: itemDetails.id,
+          user_id: session.user.id,
+          name: itemDetails.name,
           cost: itemDetails.cost,
           image_url: itemDetails.imageUrl,
         };
         dispatch(createCartItem(cartItem));
       }
     }
-  };  
+  };
   
   const openModal = () => {
     setIsModalOpen(true);
@@ -184,7 +176,7 @@ const ItemShow = () => {
   const cartNumberClass = cartQuantity > 99 ? "bigcartnumber" : cartQuantity >= 10 ? "mediumcartnumber" : "smallcartnumber";
 
   useEffect(() => {
-    const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
     setCartQuantity(totalQuantity);
   }, [cartItems]);
 

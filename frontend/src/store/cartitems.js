@@ -71,6 +71,7 @@ export const createCartItem = (cartItem) => async (dispatch) => {
 
   if (res.ok) {
     const createdCartItem = await res.json();
+    console.log(createdCartItem)
     dispatch(receiveCartItem(createdCartItem));
   }
 };
@@ -95,37 +96,43 @@ export const deleteCartItems = (itemIds) => async (dispatch) => {
   }
 };
 
+export const updatingCartItem = (updatedCartItem) => async(dispatch) => {
+  const res = await csrfFetch(`/api/cart_item/${updatedCartItem.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updatedCartItem)
+  })
+
+  if (res.ok) {
+    dispatch(updateCartItem(updatedCartItem));
+  }
+}
+
 export const selectCartQuantity = (state) => {
   return state?.reduce((total, item) => total + item.quantity, 0) || 0;
 };
 
-const cartItemsReducer = (state = {}, action) => {
+const cartItemsReducer = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEMS:
-      const freshState = action.payload.reduce((acc, item) => {
-        return {
-          ...acc,
-          [item.id]: item
-        }
-      }, {...state});
-
-      return freshState
+      return action.payload;
     case RECEIVE_CART_ITEM:
-      return { ...state, [action.payload.id]: action.payload };
-    case REMOVE_CART_ITEMS:
-      const updatedState = { ...state };
-      action.payload.forEach((id) => { delete updatedState[id];});
-      return updatedState;
+      return [...state, action.payload];
     case UPDATE_CART_ITEM:
-      const { id } = action.payload;
-      return { ...state, [id]: action.payload };
+      return state.map(item => {
+        if (item.id === action.payload.id) {
+          return action.payload;
+        }
+        return item;
+      });
     case REMOVE_CART_ITEM:
-      const newState = {...state}
-      delete newState[action.payload]
-      return newState
+      return state.filter(item => item.id !== action.payload);
     default:
       return state;
   }
 };
+
 
 export default cartItemsReducer;

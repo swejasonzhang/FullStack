@@ -102,7 +102,14 @@ export const selectCartQuantity = (state) => {
 const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEMS:
-      return Object.values(action.payload).map(({item, quantity = 1 }) => ({item, quantity}));
+      const freshState = action.payload.reduce((acc, item) => {
+        return {
+          ...acc,
+          [item.id]: item
+        }
+      }, {...state});
+
+      return freshState
     case RECEIVE_CART_ITEM:
       return { ...state, [action.payload.id]: action.payload };
     case REMOVE_CART_ITEMS:

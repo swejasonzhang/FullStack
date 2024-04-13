@@ -102,16 +102,18 @@ const ItemShow = () => {
       if (existingCartItem) {
         const updatedQuantity = existingCartItem.quantity + selectedQuantity;
         dispatch(updateCartItem({ 
-          cost: itemDetails.cost,
-          description: itemDetails.description,
+          id: item.id,
           quantity: updatedQuantity,
+          description: itemDetails.description,
           user_id: session.user.id,
           item_id: itemDetails.id,
           name: itemDetails.name,
+          cost: itemDetails.cost,
           image_url: itemDetails.imageUrl,
         }));
       } else {
         const cartItem = {
+          id: item.id,
           quantity: selectedQuantity,
           user_id: session.user.id,
           item_id: itemDetails.id,
@@ -120,9 +122,6 @@ const ItemShow = () => {
           cost: itemDetails.cost,
           image_url: itemDetails.imageUrl,
         };
-
-        console.log(cartItem)
-  
         dispatch(createCartItem(cartItem));
       }
     }

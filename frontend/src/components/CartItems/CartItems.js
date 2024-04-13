@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './CartItems.css';
-import { removeCartItem, removeCartItems, updateCartItem, fetchCartItems } from "../../store/cartitems";
+import { deleteCartItem, removeCartItems, updateCartItem, fetchCartItems } from "../../store/cartitems";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -87,9 +87,9 @@ const Cart = () => {
     }, 2500);
   };
 
-  const deleteCartItem = (itemId) => {
+  const deletingCartItem = (itemId) => {
     setSelectedItems((prevSelectedItems) => prevSelectedItems.filter((id) => id !== itemId));
-    dispatch(removeCartItem(itemId));
+    dispatch(deleteCartItem(itemId));
   };
   
 
@@ -234,7 +234,7 @@ const Cart = () => {
                         <img className="cartindeximg" src={item.image_url} alt={item.imageUrl} />
                       </div>
 
-                      <div className="deleteitem" onClick={() => deleteCartItem(item.id)}>Delete</div>
+                      <div className="deleteitem" onClick={() => deletingCartItem(item.id)}>Delete</div>
                     </div>
 
                     <div className="cartitemdetails">

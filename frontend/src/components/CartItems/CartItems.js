@@ -149,6 +149,8 @@ const Cart = () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
+
+  console.log(cartItems.length)
   
   return (
     <>

@@ -105,7 +105,6 @@ const ItemShow = () => {
         dispatch(updatingCartItem(updatedCartItems[existingCartItemIndex]));
       } else {
         const cartItem = {
-          id: itemDetails.id,
           quantity: selectedQuantity,
           description: itemDetails.description,
           item_id: itemDetails.id,

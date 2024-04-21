@@ -1,6 +1,5 @@
 import csrfFetch from "./csrf";
 
-export const RECEIVE_CART_ITEMS = 'cart_items/RECEIVE_CART_ITEMS';
 export const RECEIVE_CART_ITEM = 'cart_items/RECEIVE_CART_ITEM';
 export const REMOVE_CART_ITEMS = 'cart_items/REMOVE_CART_ITEMS';
 export const REMOVE_CART_ITEM = 'cart_items/REMOVE_CART_ITEM';
@@ -14,11 +13,6 @@ export const updateCartItem = (updatedItem) => ({
 export const receiveCartItem = (item) => ({
   type: RECEIVE_CART_ITEM,
   payload: item
-});
-
-export const receiveCartItems = (items) => ({
-  type: RECEIVE_CART_ITEMS,
-  payload: items
 });
 
 export const removeCartItem = (itemId) => ({
@@ -47,7 +41,7 @@ export const fetchCartItems = () => async (dispatch) => {
 
   if (res.ok) {
     const cartItems = await res.json();
-    dispatch(receiveCartItems(cartItems));
+    dispatch(receiveCartItem(cartItems));
   }
 };
 
@@ -71,7 +65,6 @@ export const createCartItem = (cartItem) => async (dispatch) => {
 
   if (res.ok) {
     const createdCartItem = await res.json();
-    console.log(createdCartItem)
     dispatch(receiveCartItem(createdCartItem));
   }
 };
@@ -116,8 +109,6 @@ export const selectCartQuantity = (state) => {
 
 const cartItemsReducer = (state = [], action) => {
   switch (action.type) {
-    case RECEIVE_CART_ITEMS:
-      return action.payload;
     case RECEIVE_CART_ITEM:
       return [...state, action.payload];
     case UPDATE_CART_ITEM:
@@ -127,7 +118,11 @@ const cartItemsReducer = (state = [], action) => {
         }
         return item;
       });
-    case REMOVE_CART_ITEM:
+    case RECEIVE_CART_ITEM:
+      const { deleteId } = action.payload;
+      delete state.cartItems[deleteId]
+      return state
+    case REMOVE_CART_ITEMS:
       return state.filter(item => item.id !== action.payload);
     default:
       return state;

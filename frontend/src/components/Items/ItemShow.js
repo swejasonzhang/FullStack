@@ -100,21 +100,21 @@ const ItemShow = () => {
       );
 
       if (existingCartItemIndex !== -1) {
-        const updatedCartItems = [...cartItems];
-        updatedCartItems[existingCartItemIndex].quantity += selectedQuantity;
-        dispatch(updatingCartItem(updatedCartItems[existingCartItemIndex]));
-      } else {
-        const cartItem = {
-          quantity: selectedQuantity,
-          description: itemDetails.description,
-          item_id: itemDetails.id,
-          user_id: session.user.id,
-          name: itemDetails.name,
-          cost: itemDetails.cost,
-          image_url: itemDetails.imageUrl,
-        };
-        dispatch(createCartItem(cartItem));
+        const updatedCartItems = [...Object.values(cartItems)];
+        const updatedCartItem = updatedCartItems[existingCartItemIndex].quantity += selectedQuantity;
+        dispatch(updatingCartItem(existingCartItemIndex, updatedCartItem));
       }
+    } else {
+      const cartItem = {
+        quantity: selectedQuantity,
+        description: itemDetails.description,
+        item_id: itemDetails.id,
+        user_id: session.user.id,
+        name: itemDetails.name,
+        cost: itemDetails.cost,
+        image_url: itemDetails.imageUrl,
+      };
+      dispatch(createCartItem(cartItem));
     }
   };
   

@@ -29,6 +29,7 @@ const Cart = () => {
     dispatch(fetchCartItems());
   }, [dispatch]);
 
+
   const homesignout = async (e) => {
     e.preventDefault();
     await dispatch(sessionActions.logout());
@@ -149,6 +150,8 @@ const Cart = () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
+
+
   
   return (
     <>
@@ -206,7 +209,7 @@ const Cart = () => {
         </div>
 
         <div className="cartindex"> 
-            {cartItems.length === 0 ? (<div className="emptycartmessage">Your Amazeon Cart is empty. Please add items to cart.</div>) :             
+            {Object.values(cartItems).length === 0 ? (<div className="emptycartmessage"> Your Amazeon Cart is empty. Please add items to cart.</div>) :             
             (<div className="shoppingcart">Shopping Cart
 
             <div className="itemsselected">
@@ -270,20 +273,22 @@ const Cart = () => {
             </div>
         )}
 
-        <div className="checkout">
+        {Object.values(cartItems).length > 0 && (
+          <div className="checkout">
             <div className="subtotal">
-                {selectedItems.length > 0 ? (
+              {selectedItems.length > 0 ? (
                 <>
-                    <div className="proceedingcheckout">
-                        Subtotal ({calculateTotalQuantity()} Items): ${calculateSelectedItemsCost()}
-                        <div className="checkoutbutton" onClick={proceedingCheckout}> {checkoutStatus}</div>
-                    </div>
+                  <div className="proceedingcheckout">
+                    Subtotal ({calculateTotalQuantity()} Items): ${calculateSelectedItemsCost()}
+                    <div className="checkoutbutton" onClick={proceedingCheckout}>{checkoutStatus}</div>
+                  </div>
                 </>
-                ) : (
-                    "No items selected."
-                )}
+              ) : (
+                "No items selected."
+              )}
             </div>
-        </div>
+          </div>
+        )}
       </div>
     </>
   )

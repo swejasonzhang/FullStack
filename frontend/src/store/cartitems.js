@@ -5,9 +5,9 @@ export const REMOVE_CART_ITEMS = 'cart_items/REMOVE_CART_ITEMS';
 export const REMOVE_CART_ITEM = 'cart_items/REMOVE_CART_ITEM';
 export const UPDATE_CART_ITEM = 'cart_items/UPDATE_CART_ITEM';
 
-export const updateCartItem = (updatedItem) => ({
+export const updateCartItem = (existingCartItemIndex, updatedItem) => ({
   type: UPDATE_CART_ITEM,
-  payload: updatedItem,
+  payload: {existingCartItemIndex, updatedItem }
 });
 
 export const receiveCartItem = (item) => ({
@@ -55,6 +55,8 @@ export const fetchCartItem = (itemId) => async (dispatch) => {
 };
 
 export const createCartItem = (cartItem) => async (dispatch) => {
+  console.log(cartItem)
+
   const res = await csrfFetch(`/api/cart_items`, {
     method: 'POST',
     headers: {
@@ -89,8 +91,8 @@ export const deleteCartItems = (itemIds) => async (dispatch) => {
   }
 };
 
-export const updatingCartItem = (updatedCartItem) => async(dispatch) => {
-  const res = await csrfFetch(`/api/cart_item/${updatedCartItem.id}`, {
+export const updatingCartItem = (existingCartItemIndex, updatedCartItem) => async(dispatch) => {
+  const res = await csrfFetch(`/api/cart_item/${existingCartItemIndex}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -99,7 +101,7 @@ export const updatingCartItem = (updatedCartItem) => async(dispatch) => {
   })
 
   if (res.ok) {
-    dispatch(updateCartItem(updatedCartItem));
+    dispatch(updateCartItem(existingCartItemIndex, updatedCartItem));
   }
 }
 
@@ -110,20 +112,18 @@ export const selectCartQuantity = (state) => {
 const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
-      console.log(action.payload)
-      const { cost, image_url, item_id, user_id, name, quantity, description } = action.payload[0];
-      const cartItem = { cost, image_url, item_id, user_id, name, quantity, description };
-      return {...state, [cartItem.item_id]: cartItem};
-    case UPDATE_CART_ITEM:
-      return state.map(item => {
-        if (item.id === action.payload.id) {
-          return action.payload;
-        }
-        return item;
+      Object.values(action.payload).forEach((item) => {
+        const { cost, image_url, item_id, user_id, name, quantity, description } = item;
+        const cartItem = { cost, image_url, item_id, user_id, name, quantity, description };
+        state[item_id] = cartItem;
       });
+
+      return state;
+    case UPDATE_CART_ITEM:
+      const { existingCartItemIndex, updatedCartItem} = action.payload;
+      return {...state, [existingCartItemIndex]: updatedCartItem}
     case REMOVE_CART_ITEM:
       const { deleteId } = action.payload;
-      console.log(deleteId)
       delete state.cartItems[deleteId]
       return state
     case REMOVE_CART_ITEMS:

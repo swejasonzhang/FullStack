@@ -27,6 +27,8 @@ const HomePage = () => {
     dispatch(fetchCartItems());
   }, [dispatch]);
 
+  if (!session || !cartItems) return null;
+
   const homesignout = async (e) => {
     e.preventDefault();
     await dispatch(sessionActions.logout());
@@ -53,9 +55,9 @@ const HomePage = () => {
     history.push("/")
   }
 
-  const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+  console.log(cartItems)
 
-  if (!session || !cartItems) return null;
+  const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
   return (
     <>

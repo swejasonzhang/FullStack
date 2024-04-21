@@ -112,12 +112,17 @@ export const selectCartQuantity = (state) => {
 const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
-      Object.values(action.payload).forEach((item) => {
-        const { cost, image_url, item_id, user_id, name, quantity, description } = item;
+      if (Array.isArray(action.payload)) {
+        action.payload.forEach((item) => {
+          const { cost, image_url, item_id, user_id, name, quantity, description } = item;
+          const cartItem = { cost, image_url, item_id, user_id, name, quantity, description };
+          state[item_id] = cartItem;
+        });
+      } else {
+        const { cost, image_url, item_id, user_id, name, quantity, description } = action.payload;
         const cartItem = { cost, image_url, item_id, user_id, name, quantity, description };
         state[item_id] = cartItem;
-      });
-
+      }
       return state;
     case UPDATE_CART_ITEM:
       const { existingCartItemIndex, updatedCartItem} = action.payload;

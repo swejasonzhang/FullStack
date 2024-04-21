@@ -95,7 +95,7 @@ const ItemShow = () => {
     const itemDetails = item;
 
     if (itemDetails) {
-      const existingCartItemIndex = cartItems.findIndex(
+      const existingCartItemIndex = Object.values(cartItems).findIndex(
         cartItem => cartItem.item_id === itemDetails.id
       );
 
@@ -175,7 +175,7 @@ const ItemShow = () => {
   const cartNumberClass = cartQuantity > 99 ? "bigcartnumber" : cartQuantity >= 10 ? "mediumcartnumber" : "smallcartnumber";
 
   useEffect(() => {
-    const totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+    const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
     setCartQuantity(totalQuantity);
   }, [cartItems]);
 

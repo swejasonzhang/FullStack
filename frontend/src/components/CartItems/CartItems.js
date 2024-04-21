@@ -149,8 +149,6 @@ const Cart = () => {
       document.removeEventListener('click', handleDocumentClick);
     };
   }, []);
-
-  console.log(cartItems.length)
   
   return (
     <>
@@ -236,7 +234,7 @@ const Cart = () => {
                         <img className="cartindeximg" src={item.image_url} alt={item.imageUrl} />
                       </div>
 
-                      <div className="deleteitem" onClick={() => deletingCartItem(item.id)}>Delete</div>
+                      <div className="deleteitem" onClick={() => deletingCartItem(item.item_id)}>Delete</div>
                     </div>
 
                     <div className="cartitemdetails">

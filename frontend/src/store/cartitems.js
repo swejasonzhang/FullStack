@@ -107,10 +107,13 @@ export const selectCartQuantity = (state) => {
   return state?.reduce((total, item) => total + item.quantity, 0) || 0;
 };
 
-const cartItemsReducer = (state = [], action) => {
+const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
-      return [...state, action.payload];
+      console.log(action.payload)
+      const { cost, image_url, item_id, user_id, name, quantity, description } = action.payload[0];
+      const cartItem = { cost, image_url, item_id, user_id, name, quantity, description };
+      return {...state, [cartItem.item_id]: cartItem};
     case UPDATE_CART_ITEM:
       return state.map(item => {
         if (item.id === action.payload.id) {
@@ -118,8 +121,9 @@ const cartItemsReducer = (state = [], action) => {
         }
         return item;
       });
-    case RECEIVE_CART_ITEM:
+    case REMOVE_CART_ITEM:
       const { deleteId } = action.payload;
+      console.log(deleteId)
       delete state.cartItems[deleteId]
       return state
     case REMOVE_CART_ITEMS:

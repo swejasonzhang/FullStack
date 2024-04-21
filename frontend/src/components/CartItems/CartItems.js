@@ -29,7 +29,6 @@ const Cart = () => {
     dispatch(fetchCartItems());
   }, [dispatch]);
 
-
   const homesignout = async (e) => {
     e.preventDefault();
     await dispatch(sessionActions.logout());
@@ -151,7 +150,7 @@ const Cart = () => {
     };
   }, []);
 
-
+  console.log(cartItems)
   
   return (
     <>
@@ -209,7 +208,7 @@ const Cart = () => {
         </div>
 
         <div className="cartindex"> 
-            {Object.values(cartItems).length === 0 ? (<div className="emptycartmessage"> Your Amazeon Cart is empty. Please add items to cart.</div>) :             
+            {Object.values(cartItems).length < 1 ? (<div className="emptycartmessage"> Your Amazeon Cart is empty. Please add items to cart.</div>) :             
             (<div className="shoppingcart">Shopping Cart
 
             <div className="itemsselected">

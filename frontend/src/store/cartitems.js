@@ -42,6 +42,8 @@ export const fetchCartItems = () => async (dispatch) => {
   if (res.ok) {
     const cartItems = await res.json();
     dispatch(receiveCartItem(cartItems));
+  } else {
+    console.error('Failed to fetch cart items:', res.statusText);
   }
 };
 
@@ -55,8 +57,6 @@ export const fetchCartItem = (itemId) => async (dispatch) => {
 };
 
 export const createCartItem = (cartItem) => async (dispatch) => {
-  console.log(cartItem)
-
   const res = await csrfFetch(`/api/cart_items`, {
     method: 'POST',
     headers: {
@@ -113,17 +113,16 @@ const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
       if (Array.isArray(action.payload)) {
-        action.payload.forEach((item) => {
-          const { cost, image_url, item_id, user_id, name, quantity, description } = item;
-          const cartItem = { cost, image_url, item_id, user_id, name, quantity, description };
-          state[item_id] = cartItem;
-        });
+        const updatedState = action.payload.reduce((acc, item) => {
+          const { item_id } = item;
+          acc[item_id] = { ...item };
+          return acc;
+        }, {});
+        return { ...state, ...updatedState };
       } else {
-        const { cost, image_url, item_id, user_id, name, quantity, description } = action.payload;
-        const cartItem = { cost, image_url, item_id, user_id, name, quantity, description };
-        state[item_id] = cartItem;
+        const { item_id } = action.payload;
+        return { ...state, [item_id]: { ...action.payload } };
       }
-      return state;
     case UPDATE_CART_ITEM:
       const { existingCartItemIndex, updatedCartItem} = action.payload;
       return {...state, [existingCartItemIndex]: updatedCartItem}

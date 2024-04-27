@@ -55,8 +55,6 @@ const HomePage = () => {
     history.push("/")
   }
 
-  console.log(cartItems)
-
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
   return (

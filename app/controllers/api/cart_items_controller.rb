@@ -3,7 +3,7 @@ class Api::CartItemsController < ApplicationController
   before_action :set_items, only: [:destroy_multiple]
 
   def index
-    @items = CartItem.all
+    @items = CartItem.all.index_by(&:id)
     render json: @items
   end
 

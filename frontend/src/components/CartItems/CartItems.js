@@ -150,8 +150,6 @@ const Cart = () => {
     };
   }, []);
 
-  console.log(cartItems)
-  
   return (
     <>
       <div className="navbar">

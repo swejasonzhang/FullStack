@@ -112,6 +112,8 @@ export const selectCartQuantity = (state) => {
 const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
+      if (Object.keys(action.payload).length === 0) return {}; 
+
       if (Array.isArray(action.payload)) {
         const updatedState = action.payload.reduce((acc, item) => {
           const { item_id } = item;
@@ -121,15 +123,16 @@ const cartItemsReducer = (state = {}, action) => {
         return { ...state, ...updatedState };
       } else {
         const { item_id } = action.payload;
-        return { ...state, [item_id]: { ...action.payload } };
+        return { [item_id]: action.payload };
       }
     case UPDATE_CART_ITEM:
       const { existingCartItemIndex, updatedCartItem} = action.payload;
       return {...state, [existingCartItemIndex]: updatedCartItem}
     case REMOVE_CART_ITEM:
       const { deleteId } = action.payload;
-      delete state.cartItems[deleteId]
-      return state
+      const newState = { ...state };
+      delete newState[deleteId];
+      return newState;
     case REMOVE_CART_ITEMS:
       return state.filter(item => item.id !== action.payload);
     default:

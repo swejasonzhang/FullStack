@@ -91,32 +91,44 @@ const ItemShow = () => {
       history.push('/login');
       return;
     }
-
+  
     const itemDetails = item;
-
-    if (itemDetails) {
-      const existingCartItemIndex = Object.values(cartItems).findIndex(
-        cartItem => cartItem.item_id === itemDetails.id
-      );
-
-      if (existingCartItemIndex !== -1) {
-        const updatedCartItems = [...Object.values(cartItems)];
-        const updatedCartItem = updatedCartItems[existingCartItemIndex].quantity += selectedQuantity;
-        dispatch(updatingCartItem(existingCartItemIndex, updatedCartItem));
-      } else {
-        const cartItem = {
-          quantity: selectedQuantity,
-          description: itemDetails.description,
-          item_id: itemDetails.id,
-          user_id: session.user.id,
-          name: itemDetails.name,
-          cost: itemDetails.cost,
-          image_url: itemDetails.imageUrl,
-        };
-        dispatch(createCartItem(cartItem));
-      }
+  
+    if (!itemDetails) {
+      console.error('Item details are missing.');
+      return;
     }
-  };
+
+    const findKeyByItemId = (cartItems, itemId) => {
+      for (const key in cartItems) {
+        if (cartItems[key].item_id === itemId) {
+          return key;
+        }
+      }
+      return null;
+    };
+  
+    const existingCartItemKey = findKeyByItemId(cartItems, itemDetails.id);
+
+    console.log(itemDetails)
+  
+    if (existingCartItemKey !== null) {
+      const updatedCartItems = { ...cartItems };
+      updatedCartItems[existingCartItemKey].quantity += selectedQuantity;
+      dispatch(updatingCartItem(existingCartItemKey, updatedCartItems[existingCartItemKey]));
+    } else {
+      const cartItem = {
+        quantity: selectedQuantity,
+        description: itemDetails.description,
+        item_id: itemDetails.id,
+        user_id: session.user.id,
+        name: itemDetails.name,
+        cost: itemDetails.cost,
+        image_url: itemDetails.imageUrl,
+      };
+      dispatch(createCartItem(cartItem));
+    }
+  };  
   
   const openModal = () => {
     setIsModalOpen(true);

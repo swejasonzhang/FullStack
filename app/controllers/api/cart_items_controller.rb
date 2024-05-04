@@ -3,9 +3,13 @@ class Api::CartItemsController < ApplicationController
   before_action :set_items, only: [:destroy_multiple]
 
   def index
-    @items = CartItem.all.index_by(&:item_id)
-    render json: @items.as_json(root: false)
-  end
+    @items = CartItem.all
+    transformed_items = {}
+    @items.each do |item|
+      transformed_items[item.item_id.to_i] = item
+    end
+    render json: transformed_items
+  end  
 
   def show
     render json: @item

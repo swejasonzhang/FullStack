@@ -122,8 +122,8 @@ const cartItemsReducer = (state = {}, action) => {
         }, {});
         return { ...state, ...updatedState };
       } else {
-        const { name, cost, description, user_id, item_id, image_url } = Object.values(action.payload)[0];
-        const item = { name, cost, description, user_id, item_id, image_url };
+        const { name, cost, description, user_id, item_id, image_url, quantity } = Object.values(action.payload)[0];
+        const item = { name, cost, description, user_id, item_id, image_url, quantity };
         return {...state, [item_id]: item};
       }
     case UPDATE_CART_ITEM:

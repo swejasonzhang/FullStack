@@ -4,7 +4,7 @@ class Api::CartItemsController < ApplicationController
 
   def index
     @items = CartItem.all.index_by(&:item_id)
-    render json: @items
+    render json: @items.as_json(root: false)
   end
 
   def show

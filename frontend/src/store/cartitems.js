@@ -130,7 +130,7 @@ const cartItemsReducer = (state = {}, action) => {
       const { existingCartItemIndex, updatedCartItem} = action.payload;
       return {...state, [existingCartItemIndex]: updatedCartItem}
     case REMOVE_CART_ITEM:
-      const { deleteId } = action.payload;
+      const deleteId = action.payload;
       const newState = { ...state };
       delete newState[deleteId];
       return newState;

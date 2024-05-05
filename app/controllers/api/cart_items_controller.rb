@@ -14,6 +14,8 @@ class Api::CartItemsController < ApplicationController
   def create
     @item = CartItem.new(cart_item_params)
   
+    @item.id = @item.item_id
+  
     if current_user.present?
       @item.user_id = current_user.id
     else
@@ -27,6 +29,7 @@ class Api::CartItemsController < ApplicationController
       render json: { errors: @item.errors.full_messages }, status: :unprocessable_entity
     end
   end
+  
   
 
   def update

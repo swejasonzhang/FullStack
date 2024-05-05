@@ -112,20 +112,13 @@ export const selectCartQuantity = (state) => {
 const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
-      if (Object.keys(action.payload).length === 0) return {}; 
-
-      if (Array.isArray(action.payload)) {
-        const updatedState = action.payload.reduce((acc, item) => {
-          const { item_id } = item;
-          acc[item_id] = { ...item };
-          return acc;
-        }, {});
-        return { ...state, ...updatedState };
-      } else {
-        const { name, cost, description, user_id, item_id, image_url, quantity } = Object.values(action.payload)[0];
-        const item = { name, cost, description, user_id, item_id, image_url, quantity };
-        return {...state, [item_id]: item};
-      }
+      debugger
+      if (Object.keys(action.payload).length === 0) return {};      
+      const item = action.payload;
+      const middleMan = (Object.values(item)[0])
+      const { name, cost, description, user_id, item_id, image_url, quantity } = middleMan
+      const newItem = { name , cost , description, user_id, item_id, image_url, quantity}
+      return {...state, [item_id]: newItem};
     case UPDATE_CART_ITEM:
       const { existingCartItemIndex, updatedCartItem} = action.payload;
       return {...state, [existingCartItemIndex]: updatedCartItem}

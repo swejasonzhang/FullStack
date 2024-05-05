@@ -109,8 +109,6 @@ const ItemShow = () => {
     };
   
     const existingCartItemKey = findKeyByItemId(cartItems, itemDetails.id);
-
-    console.log(itemDetails)
   
     if (existingCartItemKey !== null) {
       const updatedCartItems = { ...cartItems };
@@ -206,7 +204,6 @@ const ItemShow = () => {
   };
 
   const editingReview = (key, review) => {
-    debugger
     const parseKey = parseInt(key)
     let newKey = parseKey
 

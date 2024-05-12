@@ -113,11 +113,15 @@ const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
       if (Object.keys(action.payload).length === 0) return {};     
-      const item = action.payload;
-      const newItem = Object.values(item)[0]
-      const { item_id } = newItem
 
-      return {...state, [item_id]: newItem};
+      const item = action.payload;
+      const itemId = Object.values(item)[0].item_id
+
+      console.log(item)
+      console.log(Object.values(item)[0])
+      console.log(itemId)
+
+      return {...state, [itemId]: Object.values(item)[0]};
     case UPDATE_CART_ITEM:
       const { existingCartItemIndex, updatedItem } = action.payload;
       return {...state, [existingCartItemIndex]: updatedItem}

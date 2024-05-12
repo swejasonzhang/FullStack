@@ -104,8 +104,6 @@ const ItemShow = () => {
     };
   
     const existingCartItemKey = findKeyByItemId(cartItems, itemDetails.id);
-
-    console.log(existingCartItemKey)
   
     if (existingCartItemKey !== null) {
       const updatedCartItems = { ...cartItems };

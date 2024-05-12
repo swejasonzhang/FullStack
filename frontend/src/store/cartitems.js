@@ -7,7 +7,7 @@ export const UPDATE_CART_ITEM = 'cart_items/UPDATE_CART_ITEM';
 
 export const updateCartItem = (existingCartItemIndex, updatedItem) => ({
   type: UPDATE_CART_ITEM,
-  payload: {existingCartItemIndex, updatedItem }
+  payload: { existingCartItemIndex, updatedItem }
 });
 
 export const receiveCartItem = (item) => ({
@@ -91,17 +91,17 @@ export const deleteCartItems = (itemIds) => async (dispatch) => {
   }
 };
 
-export const updatingCartItem = (existingCartItemIndex, updatedCartItem) => async(dispatch) => {
+export const updatingCartItem = (existingCartItemIndex, updatedItem) => async(dispatch) => {
   const res = await csrfFetch(`/api/cart_items/${existingCartItemIndex}`, {
-    method: 'PUT',
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(updatedCartItem)
+    body: JSON.stringify(updatedItem)
   })
 
   if (res.ok) {
-    dispatch(updateCartItem(existingCartItemIndex, updatedCartItem));
+    dispatch(updateCartItem(existingCartItemIndex, updatedItem));
   }
 }
 
@@ -119,8 +119,8 @@ const cartItemsReducer = (state = {}, action) => {
 
       return {...state, [item_id]: newItem};
     case UPDATE_CART_ITEM:
-      const { existingCartItemIndex, updatedCartItem} = action.payload;
-      return {...state, [existingCartItemIndex]: updatedCartItem}
+      const { existingCartItemIndex, updatedItem } = action.payload;
+      return {...state, [existingCartItemIndex]: updatedItem}
     case REMOVE_CART_ITEM:
       const deleteId = action.payload;
       const newState = { ...state };

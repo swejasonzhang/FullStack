@@ -117,6 +117,7 @@ const Cart = () => {
     setSelectedQuantity(quantity);
   
     const item = Object.values(cartItems)[index];
+
     const updatedItem = {
       id: item.id,
       quantity,
@@ -127,8 +128,10 @@ const Cart = () => {
       item_id: item.item_id,
       user_id: item.user_id
     };
+
+    console.log(updatedItem)
   
-    dispatch(updateCartItem(updatedItem));
+    dispatch(updateCartItem(item.id, updatedItem));
   
     const dropdownId = `cartitemdropdown${index}`;
     const dropdown = document.getElementById(dropdownId);

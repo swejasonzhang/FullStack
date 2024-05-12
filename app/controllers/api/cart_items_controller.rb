@@ -30,8 +30,6 @@ class Api::CartItemsController < ApplicationController
     end
   end
   
-  
-
   def update
     if @item.update(cart_item_params)
       render json: @item

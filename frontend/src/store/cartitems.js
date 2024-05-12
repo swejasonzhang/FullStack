@@ -92,7 +92,7 @@ export const deleteCartItems = (itemIds) => async (dispatch) => {
 };
 
 export const updatingCartItem = (existingCartItemIndex, updatedCartItem) => async(dispatch) => {
-  const res = await csrfFetch(`/api/cart_item/${existingCartItemIndex}`, {
+  const res = await csrfFetch(`/api/cart_items/${existingCartItemIndex}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -113,7 +113,6 @@ const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
       if (Object.keys(action.payload).length === 0) return {};     
-      
       const item = action.payload;
       const newItem = Object.values(item)[0]
       const { item_id } = newItem

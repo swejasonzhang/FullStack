@@ -45,6 +45,8 @@ const Cart = () => {
 
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
+  console.log(Object.values(cartItems).reduce((total, item) => total + item.quantity, 0))
+
   const handleCheckboxChange = (itemId) => {
     setSelectedItems((prevSelectedItems) => {
       const updatedItems = prevSelectedItems.includes(itemId) ? prevSelectedItems.filter((id) => id !== itemId) : [...prevSelectedItems, itemId];

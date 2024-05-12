@@ -94,11 +94,6 @@ const ItemShow = () => {
   
     const itemDetails = item;
   
-    if (!itemDetails) {
-      console.error('Item details are missing.');
-      return;
-    }
-
     const findKeyByItemId = (cartItems, itemId) => {
       for (const key in cartItems) {
         if (cartItems[key].item_id === itemId) {

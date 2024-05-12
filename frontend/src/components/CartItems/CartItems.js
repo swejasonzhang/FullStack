@@ -5,7 +5,7 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './CartItems.css';
-import { deleteCartItem, removeCartItems, updateCartItem, fetchCartItems } from "../../store/cartitems";
+import { deleteCartItem, removeCartItems, updatingCartItem, fetchCartItems } from "../../store/cartitems";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -131,7 +131,7 @@ const Cart = () => {
 
     console.log(updatedItem)
   
-    dispatch(updateCartItem(item.id, updatedItem));
+    dispatch(updatingCartItem(item.id, updatedItem));
   
     const dropdownId = `cartitemdropdown${index}`;
     const dropdown = document.getElementById(dropdownId);

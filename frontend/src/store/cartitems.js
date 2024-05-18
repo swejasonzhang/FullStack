@@ -4,6 +4,7 @@ export const RECEIVE_CART_ITEM = 'cart_items/RECEIVE_CART_ITEM';
 export const REMOVE_CART_ITEMS = 'cart_items/REMOVE_CART_ITEMS';
 export const REMOVE_CART_ITEM = 'cart_items/REMOVE_CART_ITEM';
 export const UPDATE_CART_ITEM = 'cart_items/UPDATE_CART_ITEM';
+export const ADDED_CART_ITEM = 'cart_items/ADDED_CART_ITEM';
 
 export const updateCartItem = (existingCartItemIndex, updatedItem) => ({
   type: UPDATE_CART_ITEM,
@@ -28,13 +29,20 @@ export const removeCartItems = (itemIds) => ({
 export const addToCart = (cartItem) => {
   return {
     type: RECEIVE_CART_ITEM,
-    payload: { cartItem }
+    payload: cartItem
   };
 };
 
-export const getCartItem = (itemId) => (state) => state?.find((item) => item.item.id === itemId) || null;
+export const addedCartItem = (itemId, createdCartItem) => {
+  return {
+    type: ADDED_CART_ITEM,
+    payload: { itemId, createdCartItem }
+  };
+};
 
-export const getCartItems = (state) => state || [];
+export const getCartItem = (itemId) => (state) => state?.[itemId] || null;
+
+export const getCartItems = (state) => Object.values(state) || [];
 
 export const fetchCartItems = () => async (dispatch) => {
   const res = await csrfFetch('/api/cart_items');
@@ -71,6 +79,21 @@ export const createCartItem = (cartItem) => async (dispatch) => {
   }
 };
 
+export const addingCartItem = (itemId, cartItem) => async (dispatch) => {
+  const res = await csrfFetch(`/api/cart_items`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(cartItem),
+  });
+
+  if (res.ok) {
+    const createdCartItem = await res.json();
+    dispatch(addedCartItem(itemId, createdCartItem));
+  }
+};
+
 export const deleteCartItem = (itemId) => async (dispatch) => {
   const res = await csrfFetch(`/api/cart_items/${itemId}`, {
     method: 'DELETE'
@@ -91,51 +114,55 @@ export const deleteCartItems = (itemIds) => async (dispatch) => {
   }
 };
 
-export const updatingCartItem = (existingCartItemIndex, updatedItem) => async(dispatch) => {
+export const updatingCartItem = (existingCartItemIndex, updatedItem) => async (dispatch) => {
   const res = await csrfFetch(`/api/cart_items/${existingCartItemIndex}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(updatedItem)
-  })
+  });
 
   if (res.ok) {
     dispatch(updateCartItem(existingCartItemIndex, updatedItem));
   }
-}
+};
 
 export const selectCartQuantity = (state) => {
-  return state?.reduce((total, item) => total + item.quantity, 0) || 0;
+  return Object.values(state)?.reduce((total, item) => total + item.quantity, 0) || 0;
 };
 
 const cartItemsReducer = (state = {}, action) => {
   switch (action.type) {
     case RECEIVE_CART_ITEM:
-      if (Object.keys(action.payload).length === 0) return {};     
+      if (Object.keys(action.payload).length === 0) return state;
+      const receivedItem = action.payload;
+      const receivedItemId = Object.keys(receivedItem)[0];
+      return { ...state, [receivedItemId]: receivedItem[receivedItemId] };
+    
+    case ADDED_CART_ITEM:
+      const { itemId, createdCartItem } = action.payload;
+      return { ...state, [itemId]: createdCartItem };
 
-      const item = action.payload;
-      const itemId = Object.values(item)[0].item_id
-
-      console.log(item)
-      console.log(Object.values(item)[0])
-      console.log(itemId)
-
-      return {...state, [itemId]: Object.values(item)[0]};
     case UPDATE_CART_ITEM:
       const { existingCartItemIndex, updatedItem } = action.payload;
-      return {...state, [existingCartItemIndex]: updatedItem}
+      return { ...state, [existingCartItemIndex]: updatedItem };
+
     case REMOVE_CART_ITEM:
       const deleteId = action.payload;
       const newState = { ...state };
       delete newState[deleteId];
       return newState;
+
     case REMOVE_CART_ITEMS:
-      return state.filter(item => item.id !== action.payload);
+      const itemIdsToRemove = action.payload;
+      const updatedState = { ...state };
+      itemIdsToRemove.forEach(id => delete updatedState[id]);
+      return updatedState;
+
     default:
       return state;
   }
 };
-
 
 export default cartItemsReducer;

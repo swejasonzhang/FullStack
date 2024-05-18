@@ -7,7 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import { getItem, fetchItem } from '../../store/item.js';
-import { createCartItem, fetchCartItems, updatingCartItem } from "../../store/cartitems.js"
+import { addingCartItem, fetchCartItems, updatingCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
@@ -119,7 +119,7 @@ const ItemShow = () => {
         cost: itemDetails.cost,
         image_url: itemDetails.imageUrl,
       };
-      dispatch(createCartItem(cartItem));
+      dispatch(addingCartItem(itemDetails.id, cartItem));
     }
   };  
   

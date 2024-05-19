@@ -225,9 +225,23 @@ const ItemShow = () => {
           <div className="categoriescontainer">
             <select className="categories">
               <option value="AllDepartments">All Departments</option>
-              <option value="AlexaSkills">Alexa Skills</option>
-            </select>
-          </div>
+              <option value="Video Games">Video Games</option>
+              <option value="Headset">Headset</option>
+              <option value="Mouse">Mouse</option>
+              <option value="Keyboard">Keyboard</option>
+              <option value="Headset">Headset</option>
+              <option value="Moniter">Moniter</option>
+              <option value="Mousepad">Mousepad</option>
+              <option value="Virtual Reality">Virtual Reality</option>
+              <option value="Moniter Stand">Moniter Stand</option>
+              <option value="Mic">Mic</option>
+              <option value="Power Strip">Power Strip</option>
+              <option value="PlayStation">PlayStation</option>
+              <option value="Handheld">Handheld</option>
+              <option value="Headphones">Headphones</option>
+              <option value="Webcam">Webcam</option>
+              </select>
+            </div>
           <input type="text" className="searchbox" placeholder="Search Amazeon" />
           <button className="searchbutton">
             <div className="searchbuttonicon">

@@ -147,6 +147,50 @@ require "open-uri"
 
   PowerStrip.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/PowerStrip.jpg"), filename: "PowerStrip.jpg")
 
+  PS5 = Item.create!({
+    id: 11,
+    name: "Sony Interactive Entertainment - PlayStation 5 Slim Console - White",
+    cost: 499.99,
+    category: "PlayStation",
+    stock: 17,
+    description: "The Sony PlayStation 5 Slim Console offers a sleek, compact design and powerful gaming technology, including a 1TB ultra-high speed SSD, ray tracing, 4K-TV gaming, and up to 120fps with HDR support. It features the innovative DualSense controller with haptic feedback and adaptive triggers, Tempest 3D AudioTech, and backward compatibility with over 4,000 PS4 games. Priced at $499.99, it’s a substantial upgrade for gamers seeking immersive experiences and quick load times."
+  })
+
+  PS5.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/PlayStation.jpg"), filename: "PlayStation.jpg")
+
+  Handheld = Item.create!({
+    id: 12,
+    name: "ASUS - ROG Ally 7 120Hz FHD 1080p Gaming Handheld - AMD Ryzen Z1 Processor - 512GB - White",
+    cost: 499.99,
+    category: "Handheld",
+    stock: 57,
+    description: "The ASUS ROG Ally is a 7-inch, 120Hz FHD gaming handheld equipped with an AMD Ryzen Z1 processor and 512GB storage, offering seamless gaming across various platforms, including Steam, Xbox Game Pass, and more. It features a Windows 11 OS, a 1080p touchscreen with AMD FreeSync, and robust cooling, making it a versatile and powerful option for portable gaming. Available at Best Buy for $499.99, it includes a 3-month Game Pass Ultimate trial."
+  })
+
+  Handheld.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Handheld.jpg"), filename: "Handheld.jpg")
+
+  AirPodMax = Item.create!({
+    id: 13,
+    name: "Apple - AirPods Max - Space Gray",
+    cost: 549.99,
+    category: "Headphones",
+    stock: 75,
+    description: "The Apple AirPods Max offer a premium over-ear headphone experience with high-fidelity audio, effective noise cancellation, and seamless integration with Apple devices. Features include spatial audio, a comfortable fit, and up to 20 hours of battery life, making them a compelling choice despite their high price tag."
+  })
+
+  AirPodMax.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/AirPodMax.jpg"), filename: "AirPodMax.jpg")
+
+  Webcam = Item.create!({
+    id: 14,
+    name: "Logitech - MX Brio Ultra HD 4K Video Conference, Gaming and Streaming Webcam - Black",
+    cost: 199.99,
+    category: "Webcam",
+    stock: 132,
+    description: "The Logitech MX Brio Ultra HD 4K Webcam offers high-quality video conferencing and streaming with its advanced 8.5MP sensor, AI-enhanced image quality, and dual noise-reducing microphones. It's compatible with multiple platforms and features customizable settings through Logi Options+ software, ensuring superior video and audio performance for professional use. Priced at $199.99, it also includes a built-in privacy cover and flexible mounting options."
+  })
+
+  Webcam.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Webcam.jpg"), filename: "Webcam.jpg")
+
   puts "Done!"
 # end
 

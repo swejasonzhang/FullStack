@@ -4,7 +4,7 @@ import { fetchItems, getItems } from '../../store/item.js';
 import ItemDisplay from './ItemDisplay.js';
 import './ItemsIndex.css';
 
-const ItemsIndex = () => {
+const ItemsIndex = ({ selectedCategory }) => {
     const dispatch = useDispatch();
     const allItems = useSelector(getItems);
 
@@ -12,9 +12,11 @@ const ItemsIndex = () => {
         dispatch(fetchItems());
     }, [dispatch]);
 
+    const filteredItems = selectedCategory === "AllDepartments" ? allItems : Object.values(allItems).filter(item => item.category === selectedCategory);
+
     return (
         <div className="itemindex">
-            {Object.values(allItems).map((item) => (
+            {Object.values(filteredItems).map((item) => (
                 <ItemDisplay key={item.id} item={item} />
             ))}
         </div>

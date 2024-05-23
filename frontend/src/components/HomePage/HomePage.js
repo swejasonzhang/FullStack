@@ -14,6 +14,7 @@ const HomePage = () => {
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
+  const [selectedCategory, setSelectedCategory] = useState("AllDepartments");
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -57,6 +58,10 @@ const HomePage = () => {
 
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
   return (
     <>
       <div className="navbar">
@@ -66,13 +71,12 @@ const HomePage = () => {
 
         <div className="searchcontainer">
           <div className="categoriescontainer">
-            <select className="categories">
+            <select className="categories" onChange={handleCategoryChange}>
               <option value="AllDepartments">All Departments</option>
               <option value="Video Games">Video Games</option>
               <option value="Headset">Headset</option>
               <option value="Mouse">Mouse</option>
               <option value="Keyboard">Keyboard</option>
-              <option value="Headset">Headset</option>
               <option value="Moniter">Moniter</option>
               <option value="Mousepad">Mousepad</option>
               <option value="Virtual Reality">Virtual Reality</option>
@@ -123,7 +127,7 @@ const HomePage = () => {
       </div>
 
       <div className="pagecontent">
-        <ItemsIndex />
+        <ItemsIndex selectedCategory={selectedCategory} />
       </div>
     </>
   );

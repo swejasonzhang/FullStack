@@ -32,6 +32,7 @@ const ItemShow = () => {
   const itemRatings = filteredReviewsArray.reduce((total, review) => total + review.ratings, 0);
   const totalRatings = filteredReviewsArray.length;
   const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
+  let updatedStock = item.stock
   
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -150,7 +151,12 @@ const ItemShow = () => {
     }, 2000);
   };
 
-  const Modal = ({ closeModal }) => {
+  const Modal = ({ closeModal, item, selectedQuantity, handlePlaceOrder }) => {
+    const handleOrder = () => {
+      updatedStock = updatedStock - selectedQuantity;
+      handlePlaceOrder();
+    };
+
     return (
       <div className="amazeonmodal">
         <div className="amazeonmodalcontent">
@@ -164,7 +170,9 @@ const ItemShow = () => {
             <p>Total: ${item.cost * selectedQuantity}</p>
           </div>
           <div className="amazeonmodalfooter">
-            <button className="amazeonmodalorderbutton" onClick={handlePlaceOrder}>{orderStatus}</button>
+            <button className="amazeonmodalorderbutton" onClick={handleOrder}>
+              {orderStatus}
+            </button>
           </div>
         </div>
       </div>
@@ -304,7 +312,7 @@ const ItemShow = () => {
             Cost: ${item && item?.cost ? item.cost : " Unknown Cost"}
           </div>
           <div className={`instock ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-            {item && item.stock > 0 ? "In Stock" : "Out Of Stock"}
+            { item && item.stock > 0 ? `In Stock ${updatedStock} Left` : "Out Of Stock" }
           </div>
           
           <div className={`showitemdropdown ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
@@ -340,7 +348,7 @@ const ItemShow = () => {
           )}
 
           {isModalOpen && (
-            <Modal closeModal={closeModal} />
+            <Modal closeModal={closeModal} item={item} selectedQuantity={selectedQuantity} handlePlaceOrder={handlePlaceOrder} />
           )}
         </div>
       </div>

@@ -15,6 +15,7 @@ const HomePage = () => {
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
   const [selectedCategory, setSelectedCategory] = useState("AllDepartments");
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -62,6 +63,10 @@ const HomePage = () => {
     setSelectedCategory(e.target.value);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   return (
     <>
       <div className="navbar">
@@ -89,7 +94,7 @@ const HomePage = () => {
               <option value="Webcam">Webcam</option>
             </select>
           </div>
-          <input type="text" className="searchbox" placeholder="Search Amazeon" />
+          <input type="text" className="searchbox" placeholder="Search Amazeon" value={searchTerm} onChange={handleSearchChange} />
           <button className="searchbutton">
             <div className="searchbuttonicon">
               <FontAwesomeIcon icon={faSearch} />
@@ -127,7 +132,7 @@ const HomePage = () => {
       </div>
 
       <div className="pagecontent">
-        <ItemsIndex selectedCategory={selectedCategory} />
+        <ItemsIndex selectedCategory={selectedCategory} searchTerm={searchTerm} />
       </div>
     </>
   );

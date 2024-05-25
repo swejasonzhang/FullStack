@@ -191,6 +191,39 @@ require "open-uri"
 
   Webcam.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Webcam.jpg"), filename: "Webcam.jpg")
 
+  StreamDeck = Item.create!({
+    id: 15,
+    name: "Elgato - Stream Deck MK.2 Full-size Wired USB Keypad with 15 Customizable LCD keys and Interchangeable Faceplate - Black",
+    cost: 129.99,
+    category: "Stream Deck",
+    stock: 327,
+    description: "The Elgato Stream Deck MK.2, now on sale for $129.99, features 15 customizable LCD keys for seamless control of apps, tools, and platforms. It's perfect for streamlining tasks, launching programs, and enhancing your content creation workflow."
+  })
+
+  StreamDeck.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/StreamDeck.jpg"), filename: "StreamDeck.jpg")
+
+  LogitechMouse = Item.create!({ 
+    id: 16,
+    name: "Logitech - PRO X SUPERLIGHT Lightweight Wireless Optical Gaming Mouse with HERO 25K Sensor - White",
+    cost: 159.99,
+    category: "Mouse",
+    stock: 7,
+    description: "Introducing the Logitech PRO X SUPERLIGHT, one of the lightest and fastest PRO gaming mice ever, designed in collaboration with top esports pros. Powered by LIGHTSPEED wireless technology and the HERO 25K sensor, it offers precise control and smooth glide with zero-additive PTFE feet, all in an ultra-lightweight design. Available in black and white, this carbon-neutral mouse ensures top performance with a pro-grade 1 ms report rate connection."
+  })
+
+  LogitechMouse.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/LogitechMouse.jpg"), filename: "LogictechMouse.jpg")
+
+  RazerKeyboard = Item.create!({
+    id: 17,
+    name: "Razer - BlackWidow V4 Full Size Wired Mechanical Green Switch Gaming Keyboard with Chroma RGB - Black",
+    cost: 169.99,
+    category: "Keybaord",
+    stock: 0,
+    description: "Elevate your PC setup with a highly evolved mechanical keyboard featuring Razer Chroma RGB for ultimate immersion. Enjoy precise, tactile feedback with Razer Green Mechanical Switches, customize commands with six dedicated macro keys, and experience long-lasting comfort with a magnetic plush leatherette wrist rest. Control your media effortlessly with a multi-function roller and four media keys."
+  })
+
+  RazerKeyboard.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/RazerKeyboard.jpg"), filename: "RazerKeyboard.jpg")
+
   puts "Done!"
 # end
 

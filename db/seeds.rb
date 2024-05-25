@@ -217,7 +217,7 @@ require "open-uri"
     id: 17,
     name: "Razer - BlackWidow V4 Full Size Wired Mechanical Green Switch Gaming Keyboard with Chroma RGB - Black",
     cost: 169.99,
-    category: "Keybaord",
+    category: "Keyboard",
     stock: 0,
     description: "Elevate your PC setup with a highly evolved mechanical keyboard featuring Razer Chroma RGB for ultimate immersion. Enjoy precise, tactile feedback with Razer Green Mechanical Switches, customize commands with six dedicated macro keys, and experience long-lasting comfort with a magnetic plush leatherette wrist rest. Control your media effortlessly with a multi-function roller and four media keys."
   })
@@ -226,5 +226,3 @@ require "open-uri"
 
   puts "Done!"
 # end
-
-  

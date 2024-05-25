@@ -238,10 +238,10 @@ const ItemShow = () => {
               <option value="Mouse">Mouse</option>
               <option value="Keyboard">Keyboard</option>
               <option value="Headset">Headset</option>
-              <option value="Moniter">Moniter</option>
+              <option value="Monitor">Monitor</option>
               <option value="Mousepad">Mousepad</option>
               <option value="Virtual Reality">Virtual Reality</option>
-              <option value="Moniter Stand">Moniter Stand</option>
+              <option value="Monitor Stand">Monitor Stand</option>
               <option value="Mic">Mic</option>
               <option value="Power Strip">Power Strip</option>
               <option value="PlayStation">PlayStation</option>

@@ -312,7 +312,7 @@ const ItemShow = () => {
             Cost: ${item && item?.cost ? item.cost : " Unknown Cost"}
           </div>
           <div className={`instock ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-            { item && item.stock > 0 ? `In Stock ${updatedStock} Left` : "Out Of Stock" }
+            {item && item.stock > 0 ? ( `In Stock ${updatedStock} Left` ) : ( <span style={{ color: 'red' }}>Out Of Stock</span> )}
           </div>
           
           <div className={`showitemdropdown ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>

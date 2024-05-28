@@ -6,12 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './ItemShow.css';
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { getItem, fetchItem } from '../../store/item.js';
+import { getItem, fetchItem, receiveItem } from '../../store/item.js';
 import { addingCartItem, fetchCartItems, updatingCartItem } from "../../store/cartitems.js"
 import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
 import ReviewStarRating from "../StarRating/ReviewStarRating.js"
 import OnlyStars from "../StarRating/OnlyStars.js"
 import { fetchReviews, removeReview } from "../../store/itemReviews.js"
+import { removeQuantity } from "../../store/item.js";
 
 const ItemShow = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,6 @@ const ItemShow = () => {
   const itemRatings = filteredReviewsArray.reduce((total, review) => total + review.ratings, 0);
   const totalRatings = filteredReviewsArray.length;
   const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
-  let updatedStock = item.stock
   
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -134,10 +134,12 @@ const ItemShow = () => {
     document.body.classList.remove("amazeonmodalopen");
   };
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = (item, selectedQuantity) => {
     if (isOrderPlaced) {
       return; 
     }
+
+    dispatch(removeQuantity(item, selectedQuantity))
 
     setOrderStatus("Processing");
 
@@ -146,15 +148,19 @@ const ItemShow = () => {
 
       setTimeout(() => {
         setOrderStatus("Order Placed!");
-        setIsOrderPlaced(true);
       }, 2000);
+
+      setTimeout(() => {
+        setOrderStatus("Place Your Order");
+      }, 4000);
     }, 2000);
+
+    dispatch(fetchItem(item.id))
   };
 
   const Modal = ({ closeModal, item, selectedQuantity, handlePlaceOrder }) => {
     const handleOrder = () => {
-      updatedStock = updatedStock - selectedQuantity;
-      handlePlaceOrder();
+      handlePlaceOrder(item, selectedQuantity);
     };
 
     return (
@@ -312,7 +318,7 @@ const ItemShow = () => {
             Cost: ${item && item?.cost ? item.cost : " Unknown Cost"}
           </div>
           <div className={`instock ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-            {item && item.stock > 0 ? ( `In Stock ${updatedStock} Left` ) : ( <span style={{ color: 'red' }}>Out Of Stock</span> )}
+            {item && item.stock > 0 ? ( `In Stock ${item.stock} Left` ) : ( <span style={{ color: 'red' }}>Out Of Stock</span> )}
           </div>
           
           <div className={`showitemdropdown ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>

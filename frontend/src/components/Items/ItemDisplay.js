@@ -6,6 +6,7 @@ const ItemDisplay = ({ item }) => {
     const history = useHistory();
 
     const navigateToItemPage = (itemId) => {
+        window.scrollTo(0, 0);
         history.push(`/items/${itemId}`);
     };
 

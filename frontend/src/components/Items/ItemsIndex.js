@@ -13,7 +13,7 @@ const ItemsIndex = ({ selectedCategory, searchTerm }) => {
     }, [dispatch]);
 
     const filteredItems = Object.values(allItems).filter(item => {
-        const matchesCategory = selectedCategory === "AllDepartments" || item.category === selectedCategory;
+        const matchesCategory = selectedCategory === "All Departments" || item.category === selectedCategory;
         const matchesSearchTerm = item.name.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesFirstLetter = searchTerm === "" || item.name[0].toLowerCase() === searchTerm[0].toLowerCase();
         return matchesCategory && matchesSearchTerm && matchesFirstLetter;

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './HomePage.css';
 import ItemsIndex from "../Items/ItemsIndex";
-import { fetchCartItems } from "../../store/cartitems.js"
+import { fetchCartItems } from "../../store/cartitems.js";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const HomePage = () => {
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
-  const [selectedCategory, setSelectedCategory] = useState("AllDepartments");
+  const [selectedCategory, setSelectedCategory] = useState("All Departments");
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -39,12 +39,12 @@ const HomePage = () => {
 
   const homesignup = async(e) => {
     e.preventDefault();
-    history.push('/signup')
+    history.push('/signup');
   }
 
   const homelogin = async(e) => {
     e.preventDefault();
-    history.push('/login')
+    history.push('/login');
   }
 
   const redirectcart = async(e) => {
@@ -54,7 +54,8 @@ const HomePage = () => {
 
   const redirectToHomePage = async(e) => {
     e.preventDefault();
-    history.push("/")
+    setSelectedCategory("All Departments");
+    history.push("/");
   }
 
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
@@ -76,7 +77,7 @@ const HomePage = () => {
 
         <div className="searchcontainer">
           <div className="categoriescontainer">
-            <select className="categories" onChange={handleCategoryChange}>
+            <select className="categories" value={selectedCategory} onChange={handleCategoryChange}>
               <option value="All Departments">All Departments</option>
               <option value="Video Games">Video Games</option>
               <option value="Headset">Headset</option>
@@ -106,18 +107,18 @@ const HomePage = () => {
           <div className="greeting">Hello, {username}</div>
           <button className="dropdownbutton">Account & Lists</button>
           <div className="accountdropdowncontent">
-          <h3>Your Account</h3>
+            <h3>Your Account</h3>
             {session.user ? (
               <div className="homesignoutlink">
                 <a href="/login" onClick={homesignout}>Sign Out</a>
               </div>
-              ) : (
+            ) : (
               <div className="homesigninlink">
                 <a href="/signup" onClick={homesignup}>Sign Up</a>
                 <a href="/login" onClick={homelogin}>Sign In</a>
               </div>
             )}
-          </div>  
+          </div>
         </div>
 
         <button className="amazeoncartsection" onClick={redirectcart}>

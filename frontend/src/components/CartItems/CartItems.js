@@ -69,6 +69,7 @@ const Cart = () => {
     const deleteCartIds = allCartItems.filter(item => selectedItems.includes(item.id));
     const deleteIds = deleteCartIds.map((item) => item.id);
     dispatch(removeCartItems(deleteIds));
+    // dispatch(removeQuantities())
 
     setTimeout(() => {
       setCheckoutStatus("Proceed To Checkout");
@@ -162,7 +163,6 @@ const Cart = () => {
             <div className="categoriescontainer">
                 <select className="categories">
                     <option value="AllDepartments">All Departments</option>
-                    <option value="AlexaSkills">Alexa Skills</option>
                 </select>
             </div>
 

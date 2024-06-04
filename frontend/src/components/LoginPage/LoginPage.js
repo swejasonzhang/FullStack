@@ -57,35 +57,47 @@ function LoginPage() {
     return (
         <>
             <div className="amazeonlogincontainer">
-                <img className="amazeonlogin" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+SignUp+And+Login.jpeg"} alt='amazeonloginmain'></img>
+                <img className="amazeonlogin" src="https://amazeon-seeds.s3.amazonaws.com/Logo+For+SignUp+And+Login.jpeg" alt='amazeonloginmain'></img>
             </div>
 
             <div className="login-container">
-                <h1 className="loginheader">Sign In</h1>
+                <h1 className="loginheader">Sign in</h1>
                 <form onSubmit={handleSubmit}>
                     <ul>
                         {errors.map(error => <li key={error}>{error}</li>)}
                     </ul>
+
                     <div className="loginform">
                         <label className="loginemail">Email</label>
                         <input type="text" onChange={(e) => setEmail(e.target.value)} required />
                     </div>
+
                     <div className="loginform">
                         <label className="loginpassword">Password</label>
                         <input type="password" onChange={(e) => setPassword(e.target.value)} required />
                     </div>
+
                     <div className="loginform">
                         <button type="submit">Continue</button>
                     </div>
-                    <div className="demologin">
+
+                    <div className="loginform">
                         <button type="button" onClick={demoSubmit}>Demo Login</button>
                     </div>
                 </form>
             </div>
 
-            <div className="createaccount">
-                <button type="button" onClick={createSubmit}>Create your amazeon account</button>
+            <div className="divider">
+                <h5 className="divider-text">New to Amazeon?</h5>
             </div>
+
+            <div className="createaccount">
+                <button type="button" onClick={createSubmit}>Create your Amazeon account</button>
+            </div>
+
+            <div className="end-divider"></div>
+
+            <div className="ending">2023-2024, By Jason Zhang</div>
         </>
     );
 }

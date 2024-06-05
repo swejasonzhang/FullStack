@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch} from "react-redux";
 import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 import './LoginPage.css';
 
 function LoginPage() {
@@ -81,10 +83,24 @@ function LoginPage() {
                         <button type="submit">Continue</button>
                     </div>
 
-                    <div className="loginform">
+                    <div className="demologin">
                         <button type="button" onClick={demoSubmit}>Demo Login</button>
                     </div>
                 </form>
+
+                <div className="signin-lastlinebreak"></div>
+
+                <div className="signin-socials">Learn More About Me!
+                    <div>
+                        <a className="icon-link linkedin" href="https://www.linkedin.com/in/swejasonzhang">
+                            <FontAwesomeIcon icon={faLinkedin} size="lg"/>
+                        </a>
+
+                        <a className="icon-link github" href="https://github.com/swejasonzhang">
+                            <FontAwesomeIcon icon={faGithub} size="lg"/>
+                        </a>
+                    </div>
+                </div>
             </div>
 
             <div className="divider">

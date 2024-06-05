@@ -39,13 +39,17 @@ class Api::CartItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-  end
-
-  def destroy_multiple
-    @items.destroy_all
-    head :no_content
-  end
+    @itemId = params[:item_id]
+    cart_item = CartItem.find_by(id: @itemId)
+    return if cart_item&.destroy
+  
+    @itemIds = params[:item_ids]
+  
+    @itemIds.each do |id|
+      cart_item = CartItem.find_by(id: id)
+      cart_item&.destroy
+    end
+  end  
 
   private
 

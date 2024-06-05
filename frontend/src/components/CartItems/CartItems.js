@@ -5,7 +5,8 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './CartItems.css';
-import { deleteCartItem, removeCartItems, updatingCartItem, fetchCartItems } from "../../store/cartitems";
+import { deleteCartItem, updatingCartItem, fetchCartItems, updateQuantities } from "../../store/cartitems";
+import { fetchItems } from "../../store/item";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Cart = () => {
   const [username, setUsername] = useState(""); 
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
+  const items = useSelector(state => state.items)
   const [selectedItems, setSelectedItems] = useState([]);
   const [checkoutStatus, setCheckoutStatus] = useState("Proceed To Checkout");
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -27,6 +29,7 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(fetchCartItems());
+    dispatch(fetchItems());
   }, [dispatch]);
 
   const homesignout = async (e) => {
@@ -66,10 +69,13 @@ const Cart = () => {
 
   const proceedingCheckout = () => {
     const allCartItems = Object.values(cartItems); 
-    const deleteCartIds = allCartItems.filter(item => selectedItems.includes(item.id));
-    const deleteIds = deleteCartIds.map((item) => item.id);
-    dispatch(removeCartItems(deleteIds));
-    // dispatch(removeQuantities())
+    const deleteCartId = allCartItems.filter(item => selectedItems.includes(item.id));
+    const deleteId = deleteCartId.map((item) => item.id);
+    const quantity = allCartItems[deleteId]
+
+
+    const deleteIdArray = deleteId.map(id => items[id])
+    dispatch(updateQuantities(deleteIdArray));
 
     setTimeout(() => {
       setCheckoutStatus("Proceed To Checkout");
@@ -92,8 +98,18 @@ const Cart = () => {
     setSelectedItems((prevSelectedItems) => prevSelectedItems.filter((id) => id !== itemId));
     dispatch(deleteCartItem(itemId));
   };
-  
 
+  const checkoutQuantities = () => {
+    const array = selectedItems.map(id => {
+      const item = cartItems[id];
+      if (item) {
+        return { item, selectedQuantity: item.quantity };
+      }
+    });
+  
+    dispatch(updateQuantities(array));
+  };
+  
   const toggleDropdown = (index) => {
     const dropdown = document.getElementById(`cartitemdropdown${index}`);
     
@@ -275,12 +291,21 @@ const Cart = () => {
           <div className="checkout">
             <div className="subtotal">
               {selectedItems.length > 0 ? (
-                <>
-                  <div className="proceedingcheckout">
-                    Subtotal ({calculateTotalQuantity()} Items): ${calculateSelectedItemsCost()}
-                    <div className="checkoutbutton" onClick={proceedingCheckout}>{checkoutStatus}</div>
-                  </div>
-                </>
+                selectedItems.length === 1 ? (
+                  <>
+                    <div className="proceedingcheckout">
+                      Subtotal ({calculateTotalQuantity()} Item): ${calculateSelectedItemsCost()}
+                      <div className="checkoutbutton" onClick={proceedingCheckout}>{checkoutStatus}</div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="proceedingcheckout">
+                      Subtotal ({calculateTotalQuantity()} Items): ${calculateSelectedItemsCost()}
+                      <div className="checkoutbutton" onClick={checkoutQuantities}>{checkoutStatus}</div>
+                    </div>
+                  </>
+                )
               ) : (
                 "No items selected."
               )}

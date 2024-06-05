@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
     post '/items/reviews/reorder_keys', to: 'reviews#reorder_keys'
     delete '/reviews/:id', to: 'reviews#destroy', as: 'delete_review'
-    delete '/cart_items/delete', to: 'cart_items#destroy_multiple'
   end
 
   get '*path', to: "static_pages#frontend_index"

@@ -142,7 +142,7 @@ export const updatingCartItem = (existingCartItemIndex, updatedItem) => async (d
   }
 };
 
-export const updateQuantities = (itemsArray) => async (dispatch) => {
+export const updateQuantities = (itemsArray, quantity) => async (dispatch) => {
   if (itemsArray.length === 1) {
     const onlyItem = Object.values(itemsArray)[0]
     const itemId = onlyItem.id
@@ -156,14 +156,12 @@ export const updateQuantities = (itemsArray) => async (dispatch) => {
       stock: onlyItem.stock
     };
 
-    const selectedQuantity = onlyItem.quantity;
-
     await csrfFetch(`/api/items/${itemId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ item: updatedItem, quantity: selectedQuantity })
+      body: JSON.stringify({ item: updatedItem, quantity })
     });
 
     return dispatch(deleteCartItem(itemId))

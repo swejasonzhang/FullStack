@@ -71,11 +71,9 @@ const Cart = () => {
     const allCartItems = Object.values(cartItems); 
     const deleteCartId = allCartItems.filter(item => selectedItems.includes(item.id));
     const deleteId = deleteCartId.map((item) => item.id);
-    const quantity = allCartItems[deleteId]
-
-
+    const quantity = allCartItems[0].quantity
     const deleteIdArray = deleteId.map(id => items[id])
-    dispatch(updateQuantities(deleteIdArray));
+    dispatch(updateQuantities(deleteIdArray, quantity));
 
     setTimeout(() => {
       setCheckoutStatus("Proceed To Checkout");

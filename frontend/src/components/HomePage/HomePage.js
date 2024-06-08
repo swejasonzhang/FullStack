@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import './HomePage.css';
 import ItemsIndex from "../Items/ItemsIndex";
@@ -75,10 +76,16 @@ const HomePage = () => {
           <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+Home+Page.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
 
+        <div className="delivertoname">Deliver to {username}
+          <div className="address">
+            <FontAwesomeIcon icon={faLocationDot} /> Narnia... 98765
+          </div>
+        </div>
+
         <div className="searchcontainer">
           <div className="categoriescontainer">
             <select className="categories" value={selectedCategory} onChange={handleCategoryChange}>
-              <option value="All Departments">All Departments</option>
+              <option value="All Departments">All</option>
               <option value="Video Games">Video Games</option>
               <option value="Headset">Headset</option>
               <option value="Mouse">Mouse</option>
@@ -95,6 +102,7 @@ const HomePage = () => {
               <option value="Webcam">Webcam</option>
             </select>
           </div>
+
           <input type="text" className="searchbox" placeholder="Search Amazeon" value={searchTerm} onChange={handleSearchChange} />
           <button className="searchbutton">
             <div className="searchbuttonicon">

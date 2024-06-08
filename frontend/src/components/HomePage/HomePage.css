@@ -19,8 +19,31 @@ body {
 .amazeonhome {
     display: flex;
     align-items: center;
+    transform: scale(1.2);
+    position: relative;
+    left: 6px;
 }
-  
+
+.delivertoname {
+    position: relative;
+    left: 47px;
+    font-size: 12px;
+    line-height: 14px;
+    height: 14px;
+    font-weight: 400;
+    color: #ccc;
+    bottom: 8px;
+}
+
+.address {
+    color: #fff;
+    font-size: 14px;
+    line-height: 15px;
+    font-weight: 700;
+    position: relative;
+    right: 15px;
+}
+
 .amazeonhomepage {
     height: 30px; 
     width: auto;
@@ -28,31 +51,27 @@ body {
 }
   
 .searchcontainer {
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    margin-left: 165px;
+    height: 60px;
+    width: 983.14px;
+    border: 1px solid white;
+    position: relative;
+    left: 85px;
 }
 
 .categoriescontainer {
     position: relative;
 }
-  
-.categories, .searchbox, .searchbutton {
-    height: 40px;
-}
 
 .categories {
-    display: flex;
-    padding: 10px 16px;
-    font-size: 0.9em;
-    cursor: pointer;
-    border: none;
-    color: #0F1111;
+    justify-content: center;
+    text-align: center;
     background-color: #e6e6e6;
-    text-align: left;
-    padding-top: 13px;
+    background-image: none;
+    border-left: 1px solid #e6e6e6;
+    border-top: 1px solid #e6e6e6;
     position: relative;
+    height: 30px;
+    width: 55px;
 }
   
 .categories .arrowdown {
@@ -74,10 +93,6 @@ body {
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
-}
-  
-.categories:hover .dropdowncontent {
-    display: block;
 }
 
 input.searchbox {

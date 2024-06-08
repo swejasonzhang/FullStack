@@ -1,4 +1,4 @@
-html, body {
+/* html, body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -67,7 +67,7 @@ html, body {
     color: #0F1111;
     background-color: #e6e6e6;
     text-align: left;
-    padding-top: 13px;
+    padding-top: 13px; 
 }
 
 .categories .arrowdown {
@@ -293,4 +293,4 @@ html, body {
     color: red;
     font-size: 20px;
     font-weight: bolder;
-}
+} */

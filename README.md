@@ -1,4 +1,4 @@
-
+![plot](./AmazeonHome.png)
 
 # Description
 Amazeon, a clone of Amazon, is an e-commerce company that allows users to purchase a wide range of products from life necessities to items of passion. 

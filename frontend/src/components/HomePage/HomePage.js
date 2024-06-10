@@ -5,6 +5,8 @@ import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faFlagUsa } from "@fortawesome/free-solid-svg-icons";
 import './HomePage.css';
 import ItemsIndex from "../Items/ItemsIndex";
 import { fetchCartItems } from "../../store/cartitems.js";
@@ -76,9 +78,11 @@ const HomePage = () => {
           <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+Home+Page.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
         </div>
 
-        <div className="delivertoname">Deliver to {username}
-          <div className="address">
-            <FontAwesomeIcon icon={faLocationDot} /> Narnia... 98765
+        <div className="delivery">
+          <div className="delivertoname">Deliver to {username}
+            <div className="address">
+              <FontAwesomeIcon icon={faLocationDot} /> Narnia... 98765
+            </div>
           </div>
         </div>
 
@@ -103,6 +107,8 @@ const HomePage = () => {
             </select>
           </div>
 
+          <FontAwesomeIcon className="triangledown" icon={faCaretDown} />
+
           <input type="text" className="searchbox" placeholder="Search Amazeon" value={searchTerm} onChange={handleSearchChange} />
           <button className="searchbutton">
             <div className="searchbuttonicon">
@@ -111,22 +117,31 @@ const HomePage = () => {
           </button>
         </div>
 
+        <div className="language">EN</div>
+
         <div className="dropdown">
-          <div className="greeting">Hello, {username}</div>
-          <button className="dropdownbutton">Account & Lists</button>
-          <div className="accountdropdowncontent">
-            <h3>Your Account</h3>
-            {session.user ? (
-              <div className="homesignoutlink">
-                <a href="/login" onClick={homesignout}>Sign Out</a>
-              </div>
-            ) : (
-              <div className="homesigninlink">
-                <a href="/signup" onClick={homesignup}>Sign Up</a>
-                <a href="/login" onClick={homelogin}>Sign In</a>
-              </div>
-            )}
+          <div className="greetingdiv">
+            <div className="greeting">Hello, {username}</div> 
+            <button className="dropdownbutton">Account & Lists</button>
+            <div className="accountdropdowncontent">
+              <h3>Your Account</h3>
+              {session.user ? (
+                <div className="homesignoutlink">
+                  <a href="/login" onClick={homesignout}>Sign Out</a>
+                </div>
+              ) : (
+                <div className="homesigninlink">
+                  <a href="/signup" onClick={homesignup}>Sign Up</a>
+                  <a href="/login" onClick={homelogin}>Sign In</a>
+                </div>
+              )}
+            </div>
           </div>
+        </div>
+
+        <div className="returnsdiv"> 
+          <div className="returns">Returns</div>
+          <div className="orders">& Orders</div>
         </div>
 
         <button className="amazeoncartsection" onClick={redirectcart}>

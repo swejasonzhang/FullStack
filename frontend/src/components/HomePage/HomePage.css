@@ -44,7 +44,7 @@ body {
     display: flex;
     position: relative;
     justify-content: center; 
-    right: 10px;
+    left: 10px;
     height: 45px;
     width: 120px;
     margin: 0 auto; 
@@ -86,7 +86,7 @@ body {
     height: 60px;
     width: 981px;
     position: relative;
-    right: 35px;
+    left: 20px;
 }
 
 .categoriescontainer {
@@ -224,6 +224,7 @@ input.searchbox {
 } */
 
 .language {
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -231,6 +232,11 @@ input.searchbox {
     height: 45px;
     width: 70px;
     border-radius: 2px;
+    left: 40px;
+    border: 1px solid #131921;
+}
+
+.language:hover {
     border: 1px solid white;
 }
   

@@ -4,20 +4,34 @@ import { fetchItems, getItems } from '../../store/item.js';
 import ItemDisplay from './ItemDisplay.js';
 import './ItemsIndex.css';
 
-const ItemsIndex = ({ selectedCategory, searchTerm }) => {
+const ItemsIndex = () => {
     const dispatch = useDispatch();
     const allItems = useSelector(getItems);
+    const searchTerm = useSelector(state => state.term)
+    const selectedCategory = useSelector(state => state.category)
+    const finalSearchTerm = Object.keys(searchTerm).length === 0 ? '""' : searchTerm.receivedTerm;
+    const finalSelectedCategory = Object.keys(selectedCategory).length === 0 ? "All Departments" : selectedCategory.receivedCategory;
 
     useEffect(() => {
         dispatch(fetchItems());
     }, [dispatch]);
 
-    const filteredItems = Object.values(allItems).filter(item => {
-        const matchesCategory = selectedCategory === "All Departments" || item.category === selectedCategory;
-        const matchesSearchTerm = item.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesFirstLetter = searchTerm === "" || item.name[0].toLowerCase() === searchTerm[0].toLowerCase();
-        return matchesCategory && matchesSearchTerm && matchesFirstLetter;
-    });
+    let filteredItems = Object.values(allItems);
+
+    if (finalSelectedCategory !== "All Departments" || finalSearchTerm!== '""') {
+        console.log(finalSearchTerm)
+
+        filteredItems = filteredItems.filter(item => {
+            const matchesCategory = finalSelectedCategory === "All Departments" || item.category === finalSelectedCategory;
+            const matchesSearchTerm = item.name.toLowerCase().startsWith(finalSearchTerm.toLowerCase());
+            return matchesCategory || matchesSearchTerm;
+        });
+
+
+        console.log(filteredItems)
+    } else {
+        filteredItems = allItems;
+    }
 
     return (
         <div className="itemindex">

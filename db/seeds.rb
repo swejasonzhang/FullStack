@@ -81,7 +81,7 @@ require "open-uri"
 
   CorsairKeyboard.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Keyboard.jpg"), filename: "Keyboard.jpg")
 
-  Moniter = Item.create!({
+  Monitor = Item.create!({
     id: 5,
     name: "HP 27-inch FHD IPS Gaming Monitor with Tilt/Height Adjustment with AMD FreeSync PremiumTechnology (X27, 2021 model)",
     cost: 275.00,
@@ -90,7 +90,7 @@ require "open-uri"
     description: "The Eyesafe Certified Display meets TÜV low blue light requirements and Eyesafe standards, protecting your eyes without distorting colors. It features adjustable height, pivot, and tilt for comfortable viewing. The packaging is sustainably sourced, using fewer materials and more recycled content. With AMD FreeSync Premium technology, enjoy a high refresh rate, low framerate compensation, and low latency for confident gaming. A 1-millisecond response time with Overdrive ensures fluid, crisp visuals without motion blur in fast-paced games."
   })
 
-  Moniter.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Moniter.jpg"), filename: "Moniter.jpg")
+  Monitor.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/Monitor.jpg"), filename: "Monitor.jpg")
 
   Mousepad = Item.create!({
     id: 6,
@@ -114,16 +114,16 @@ require "open-uri"
 
   VirtualReality.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/VirtualReality.jpg"), filename: "VirtualReality.jpg")
 
-  MoniterStand = Item.create!({
+  MonitorStand = Item.create!({
     id: 8,
     name: "RGB Gaming Computer Monitor Stand Riser with Drawer,Storage and Phone Holder - 1 USB 3.0 and 3 USB 2.0 Hub, 3 Length Adjustable",
     cost: 32.99,
-    category: "Moniter Stand",
+    category: "Monitor Stand",
     stock: 89,
     description: "The computer stand features 1 USB 3.0 port, 3 USB 2.0 ports, and RGB lights with a memory function, offering 10 lighting effects. Its foldable, adjustable design supports up to 66 lbs and provides ergonomic height options to relieve neck and back fatigue. Suitable for monitors, printers, and laptops, it comes with a 3-year warranty for quality assurance."
   })
 
-  MoniterStand.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/MoniterStand.jpg"), filename: "MoniterStand.jpg")
+  MonitorStand.photo.attach(io: URI.open("https://amazeon-seeds.s3.amazonaws.com/MonitorStand.jpg"), filename: "MonitorStand.jpg")
 
   Mic = Item.create!({
     id: 9,

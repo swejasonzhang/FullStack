@@ -4,6 +4,8 @@ import sessionReducer from "./session";
 import itemsReducer from "./item";
 import cartItemsReducer from "./cartitems";
 import reviewsReducer from "./itemReviews";
+import categoryReducer from "./category";
+import termReducer from "./searchterm";
 
 
 const rootReducer = combineReducers({
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   items: itemsReducer,
   cartItems: cartItemsReducer,
   reviews: reviewsReducer,
+  category: categoryReducer,
+  term: termReducer,
 });
 
 let enhancer;

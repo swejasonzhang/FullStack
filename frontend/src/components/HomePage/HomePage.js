@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './HomePage.css';
 import ItemsIndex from "../Items/ItemsIndex";
@@ -9,8 +9,8 @@ const HomePage = () => {
   const dispatch = useDispatch();
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
-  const [selectedCategory, setSelectedCategory] = useState("All Departments");
-  const [searchTerm, setSearchTerm] = useState("");
+  const searchTerm = useSelector(state => state.term)
+  const selectedCategory = useSelector(state => state.category)
 
   useEffect(() => {
     dispatch(fetchCartItems());

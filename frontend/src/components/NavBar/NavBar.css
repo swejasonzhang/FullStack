@@ -1,6 +1,11 @@
-body {
+body, html {
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "AmazonEmber", Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }
   
 .navbar {
@@ -94,47 +99,58 @@ body {
 }
 
 .categoriescontainer {
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 52px;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    bottom: 30px;
+    left: 1px;
 }
 
 .categories {
     text-align: center;
     background-color: #e6e6e6;
-    background-image: none;
-    border-left: 1px solid #e6e6e6;
-    border-top: 1px solid #e6e6e6;
-    border-bottom: 1px solid #e6e6e6;
-    border-right: 1px solid #e6e6e6;
+    border: 1px solid #cdcdcd;
+    border-right: 1px solid #cdcdcd;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
     height: 40px;
     width: 54px;
-    border-top-left-radius: 5px; 
-    border-bottom-left-radius: 5px;
     position: relative;
     right: 3px;
-    top: 1px;
     margin-bottom: 2px;
     display: block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: #555;
+    color: black;
     font-size: 12px;
     line-height: 33px;
     min-width: 19px;
+    text-align: center;
+    padding-right: 15px;
     appearance: none;
-    padding-right: 13px;
-    padding-top: 2px;
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+  
+.categories:focus {
+    box-shadow: 0 0 0 2px #f90, 0 0 0 3px rgba(255, 153, 0, 0.5);
+    z-index: 1000;
 }
 
+.categories option {
+    width: 200px;
+    height: 30px;
+    padding: 5px 10px;
+}
+  
 .triangledown {
     position: relative;
-    bottom: 50px;
-    left: 34px;
+    bottom: 72px;
+    left: 32px;
     pointer-events: none;
     color: #555;
     height: 15px;
@@ -142,24 +158,40 @@ body {
     transform: scale(0.78);
     padding-right: 4px;
     padding-bottom: 2px;
+    z-index: 1001;
 }
 
 input.searchbox {
     position: relative;
     height: 38px;
     width: 870px;
-    left: 39px;
-    bottom: 52.5px;
-    border: #e6e6e6;
-    border-left: 1px solid #888c8c;
-    padding-left: 10px;
+    left: 36px;
+    bottom: 73.5px;
+    border: transparent;
+    border-left: 1px solid #cdcdcd;
     font-size: 14px;
+    outline: none;  
+    padding-left: 10px;
 }
+
+.closingdiv {
+    position: relative;
+    top: 10px;
+    width: 979px;
+    height: 42px;
+    right: 4px;
+    border-radius: 5px;
+}
+
+.searchbox:focus ~ .closingdiv {
+  box-shadow: 0 0 0 2px #f90, 0 0 0 3px rgba(255, 153, 0, 0.5);
+}
+ 
   
 .searchbutton {
     position: relative;
-    bottom: 50px;
-    left: 37px;
+    bottom: 71px;
+    left: 35px;
     background-color: #febd69;
     color: #111; 
     width: 45px;
@@ -175,6 +207,10 @@ input.searchbox {
 
 .searchbutton:hover {
   background-color: #ddb347; 
+}
+
+.searchbutton:focus {
+    box-shadow: 0 0 0 2px #f90, 0 0 0 3px rgba(255, 153, 0, 0.5);
 }
 
 .searchbuttonicon {
@@ -198,20 +234,13 @@ input.searchbox {
     font-weight: bold; 
 }
   
-.accountdropdowncontent {
-    display: none;
+/* .accountdropdowncontent {
+    display: flex;
     position: relative;
-    top: 300px;
-    background-color: white;
-    min-width: 200px;
-    min-height: 200px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    right: -40px;
-    box-sizing: border-box;
-    border-radius: 5px;
+    background-color: black;
 }
   
-/* .accountdropdowncontent a {
+.accountdropdowncontent a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;

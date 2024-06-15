@@ -16,7 +16,7 @@ const NavBar = () => {
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
   const searchTerm = useSelector(state => state.searchTerm)
-  const selectedCategory = useSelector(state => state.selectedCategory)
+  const selectedCategory = useSelector(state => state.category.receivedCategory)
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -28,6 +28,7 @@ const NavBar = () => {
 
   useEffect(() => {
     dispatch(fetchCartItems());
+    dispatch(receiveCategory("All Departments"));
   }, [dispatch]);
 
   if (!session || !cartItems) return null;
@@ -89,8 +90,10 @@ const NavBar = () => {
       </div>
 
       <div className="searchcontainer">
+        <div className="closingdiv"></div>
+
         <div className="categoriescontainer">
-          <select className="categories" value={selectedCategory} onChange={handleCategoryChange}>
+          <select className="categories" value={selectedCategory} onChange={handleCategoryChange}>{selectedCategory}
             <option value="All Departments">All</option>
             <option value="Video Games">Video Games</option>
             <option value="Headset">Headset</option>
@@ -121,7 +124,7 @@ const NavBar = () => {
 
       <div className="languagediv">
         <div className="flagdiv">
-          <img className="flag" src={"https://amazeon-seeds.s3.amazonaws.com/Flag.png"}></img>
+          <img className="flag" src={"https://amazeon-seeds.s3.amazonaws.com/Flag.png"} alt="navbarflag"></img>
         </div>
 
         <div className="language">EN</div>
@@ -134,7 +137,7 @@ const NavBar = () => {
             <FontAwesomeIcon className="accounttriangle" icon={faCaretDown} />
           </button>
           <div className="accountdropdowncontent">
-            <h3>Your Account</h3>
+            {/* <h3>Your Account</h3>
             {session.user ? (
               <div className="homesignoutlink">
                 <a href="/login" onClick={signout}>Sign Out</a>
@@ -144,7 +147,7 @@ const NavBar = () => {
                 <a href="/signup" onClick={signup}>Sign Up</a>
                 <a href="/login" onClick={login}>Sign In</a>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

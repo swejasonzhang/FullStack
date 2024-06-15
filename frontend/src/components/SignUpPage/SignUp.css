@@ -16,16 +16,6 @@
     transform: scale(1.2);
 }
 
-html {
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'AmazonEmber';
-}
-
 .signupheader {
     position: relative;
     bottom: 19px;

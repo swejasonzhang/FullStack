@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems, getItems } from '../../store/item.js';
-import ItemDisplay from './ItemDisplay.js';
 import './ItemsIndex.css';
 
 const ItemsIndex = () => {
@@ -24,20 +23,17 @@ const ItemsIndex = () => {
             const matchesSearchTerm = item.name.toLowerCase().startsWith(finalSearchTerm.toLowerCase());
             return matchesCategory && matchesSearchTerm;
         });
-
-
-        console.log(filteredItems)
     } else {
         filteredItems = allItems;
     }
 
-    return (
-        <div className="itemindex">
-            {filteredItems.map((item) => (
-                <ItemDisplay key={item.id} item={item} />
-            ))}
-        </div>
-    );
+    // return (
+    //     // <div className="itemindex">
+    //     //     {filteredItems.map((item) => (
+    //     //         <ItemDisplay key={item.id} item={item} />
+    //     //     ))}
+    //     // </div>
+    // );
 }
 
 export default ItemsIndex;

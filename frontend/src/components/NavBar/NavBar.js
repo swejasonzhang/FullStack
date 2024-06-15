@@ -13,6 +13,7 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [username, setUsername] = useState(""); 
+  const [isSearchBoxFocused, setIsSearchBoxFocused] = useState(false);
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
   const searchTerm = useSelector(state => state.searchTerm)
@@ -75,6 +76,14 @@ const NavBar = () => {
     dispatch(receiveTerm(newSearchTerm))
   };
 
+  const handleSearchFocus = () => {
+    setIsSearchBoxFocused(true);
+  };
+
+  const handleSearchBlur = () => {
+    setIsSearchBoxFocused(false);
+  };
+
   return (
     <div className="navbar">
       <div className="amazeonhome">
@@ -90,7 +99,7 @@ const NavBar = () => {
       </div>
 
       <div className="searchcontainer">
-        <div className="closingdiv"></div>
+        <div className={`closingdiv ${isSearchBoxFocused ? 'focused' : ''}`}></div>
 
         <div className="categoriescontainer">
           <select className="categories" value={selectedCategory} onChange={handleCategoryChange}>{selectedCategory}
@@ -114,7 +123,15 @@ const NavBar = () => {
 
         <FontAwesomeIcon className="triangledown" icon={faCaretDown} />
 
-        <input type="text" className="searchbox" placeholder="Search Amazeon" value={searchTerm} onChange={handleSearchChange} />
+        <input 
+          type="text" 
+          className="searchbox" 
+          placeholder="Search Amazeon" 
+          value={searchTerm} 
+          onChange={handleSearchChange} 
+          onFocus={handleSearchFocus} 
+          onBlur={handleSearchBlur}
+        />
         <button className="searchbutton" onClick={redirectToHomePage}>
           <div className="searchbuttonicon">
             <FontAwesomeIcon icon={faSearch} />

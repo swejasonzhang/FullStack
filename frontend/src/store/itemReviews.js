@@ -7,10 +7,6 @@ export const DELETE_REVIEW = 'DELETE_REVIEW';
 export const SAVE_REVIEW_SUCCESS = 'SAVE_REVIEW_SUCCESS';
 export const SAVE_REVIEW_FAILURE = 'SAVE_REVIEW_FAILURE';
 
-
-export const saveReviewSuccess = () => ({
-  type: SAVE_REVIEW_SUCCESS,
-});
   
 export const saveReviewFailure = (error) => ({
   type: SAVE_REVIEW_FAILURE,
@@ -95,13 +91,6 @@ export const saveReviewAction = (item_id, ratings, body, author) => {
         },
         body: JSON.stringify({ item_id, ratings, body, author }),
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to save review');
-      }
-
-      const data = await response.json();
-      dispatch(saveReviewSuccess(data));
     } catch (error) {
       dispatch(saveReviewFailure(error.message));
     }
@@ -113,6 +102,8 @@ const reviewsReducer = (state = {}, action) => {
     case FETCH_REVIEWS_SUCCESS:
       return {...action.payload}
     case FETCH_REVIEWS_FAILURE:
+      return { ...state,  error: action.payload};
+    case SAVE_REVIEW_FAILURE: 
       return { ...state,  error: action.payload};
     case EDIT_REVIEW:
       const { key } = action.payload;

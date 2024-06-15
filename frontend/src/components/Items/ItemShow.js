@@ -1,84 +1,92 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import './ItemShow.css';
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
-import { getItem, fetchItem} from '../../store/item.js';
-import { addingCartItem, updatingCartItem } from "../../store/cartitems.js"
-import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js"
-import ReviewStarRating from "../StarRating/ReviewStarRating.js"
-import OnlyStars from "../StarRating/OnlyStars.js"
-import { removeReview } from "../../store/itemReviews.js"
-import { removeQuantity } from "../../store/item.js"; 
-import NavBar from '../NavBar/NavBar.js'
+import { fetchReviews } from "../../store/itemReviews.js";
+import { getItem, fetchItem } from '../../store/item.js';
+import { addingCartItem, updatingCartItem } from "../../store/cartitems.js";
+import ReadOnlyStarRating from "../StarRating/ReadableStarRating.js";
+import ReviewStarRating from "../StarRating/ReviewStarRating.js";
+import OnlyStars from "../StarRating/OnlyStars.js";
+import { removeReview } from "../../store/itemReviews.js";
+import { removeQuantity } from "../../store/item.js";
+import NavBar from '../NavBar/NavBar.js';
 
 const ItemShow = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const session = useSelector(state => state.session);
-  const [cartQuantity, setCartQuantity] = useState(0); 
   const { itemId } = useParams();
-  const item = useSelector(getItem(itemId)) || {};
+  const [cartQuantity, setCartQuantity] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [orderStatus, setOrderStatus] = useState("Place Your Order");
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
-  const cartItems = useSelector(state => state.cartItems);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+  useEffect(() => {
+    dispatch(fetchItem(itemId));
+    dispatch(fetchReviews())
+  }, [dispatch, itemId]);
+
+  const item = useSelector((state) => state.items[itemId]);
+  const cartItems = useSelector(state => state.cartItems);
   const allReviews = useSelector(state => state.reviews);
-  const filteredReviews = Object.entries(allReviews).filter(([key, review]) => review.itemId === item.id).reduce((obj, [key, review]) => { obj[key] = review; return obj;}, {});
+
+  useEffect(() => {
+    const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
+    setCartQuantity(totalQuantity);
+  }, [cartItems]);
+
+  if (!item) return null;
+
+  const filteredReviews = Object.entries(allReviews).length > 0
+  ? Object.entries(allReviews)
+      .filter(([key, review]) => review && review.itemId === item.id)
+      .reduce((obj, [key, review]) => {
+        obj[key] = review;
+        return obj;
+      }, {})
+  : {};
+
   const filteredReviewsArray = Object.values(filteredReviews);
   const itemRatings = filteredReviewsArray.reduce((total, review) => total + review.ratings, 0);
   const totalRatings = filteredReviewsArray.length;
   const averageRating = totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
-  
-  function toggleDropdown() {
+
+  const toggleDropdown = () => {
     const dropdown = document.querySelector('.showitemdropdown');
     if (dropdown) {
       dropdown.classList.toggle('active');
     }
-  }
-  
-  document.addEventListener('click', function (event) {
-    const dropdown = document.querySelector('.showitemdropdown');
-    if (dropdown && !dropdown.contains(event.target)) {
-      dropdown.classList.remove('active');
-    }
-  });
+  };
 
-  function updateQuantity(quantity) {
+  const updateQuantity = (quantity) => {
     setSelectedQuantity(quantity);
     const dropdown = document.querySelector('.showitemdropdown');
-    dropdown.classList.remove('active');
-
+    if (dropdown) {
+      dropdown.classList.remove('active');
+    }
     const qtyTextElement = document.getElementById('selectedQuantity');
     if (qtyTextElement) {
       qtyTextElement.textContent = quantity;
     }
-  }
+  };
 
   const addToCart = () => {
     if (!session.user) {
       history.push('/login');
       return;
     }
-  
+
     const itemDetails = item;
-  
-    const findKeyByItemId = (cartItems, itemId) => {
-      for (const key in cartItems) {
-        if (cartItems[key].item_id === itemId) {
-          return key;
-        }
-      }
-      return null;
-    };
-  
-    const existingCartItemKey = findKeyByItemId(cartItems, itemDetails.id);
-  
-    if (existingCartItemKey !== null) {
-      const updatedCartItems = { ...cartItems };
-      updatedCartItems[existingCartItemKey].quantity += selectedQuantity;
-      dispatch(updatingCartItem(existingCartItemKey, updatedCartItems[existingCartItemKey]));
+    const existingCartItemKey = Object.keys(cartItems).find(key => cartItems[key].item_id === itemDetails.id);
+
+    if (existingCartItemKey !== undefined) {
+      const updatedCartItem = {
+        ...cartItems[existingCartItemKey],
+        quantity: cartItems[existingCartItemKey].quantity + selectedQuantity
+      };
+      dispatch(updatingCartItem(existingCartItemKey, updatedCartItem));
     } else {
       const cartItem = {
         quantity: selectedQuantity,
@@ -91,47 +99,38 @@ const ItemShow = () => {
       };
       dispatch(addingCartItem(itemDetails.id, cartItem));
     }
-  };  
-  
+  };
+
   const openModal = () => {
     setIsModalOpen(true);
     document.body.classList.add("amazeonmodalopen");
   };
-  
+
   const closeModal = () => {
     setIsModalOpen(false);
     document.body.classList.remove("amazeonmodalopen");
   };
 
   const handlePlaceOrder = (item, selectedQuantity) => {
-    if (isOrderPlaced) {
-      return; 
-    }
+    if (isOrderPlaced) return;
 
-    dispatch(removeQuantity(item, selectedQuantity))
-
+    dispatch(removeQuantity(item, selectedQuantity));
     setOrderStatus("Processing");
 
     setTimeout(() => {
       setOrderStatus("On its way!");
-
       setTimeout(() => {
         setOrderStatus("Order Placed!");
       }, 2000);
-
       setTimeout(() => {
         setOrderStatus("Place Your Order");
       }, 4000);
     }, 2000);
 
-    dispatch(fetchItem(item.id))
+    dispatch(fetchItem(item.id));
   };
 
   const Modal = ({ closeModal, item, selectedQuantity, handlePlaceOrder }) => {
-    const handleOrder = () => {
-      handlePlaceOrder(item, selectedQuantity);
-    };
-
     return (
       <div className="amazeonmodal">
         <div className="amazeonmodalcontent">
@@ -145,7 +144,7 @@ const ItemShow = () => {
             <p>Total: ${item.cost * selectedQuantity}</p>
           </div>
           <div className="amazeonmodalfooter">
-            <button className="amazeonmodalorderbutton" onClick={handleOrder}>
+            <button className="amazeonmodalorderbutton" onClick={() => handlePlaceOrder(item, selectedQuantity)}>
               {orderStatus}
             </button>
           </div>
@@ -154,46 +153,27 @@ const ItemShow = () => {
     );
   };
 
-  const renderCartQuantity = () => {
-    const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
-    const cartQuantityText = totalQuantity > 99 ? "99+" : totalQuantity;
-    return cartQuantityText;
-  };
-
-  const cartNumberClass = cartQuantity > 99 ? "bigcartnumber" : cartQuantity >= 10 ? "mediumcartnumber" : "smallcartnumber";
-
-  useEffect(() => {
-    const totalQuantity = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
-    setCartQuantity(totalQuantity);
-  }, [cartItems]);
-
-  if (!filteredReviews || !item) return null;
-
   const writeReview = () => {
     if (!session.user) {
       history.push('/login');
       return;
     }
-
     history.push({
       pathname: `/items/${itemId}/review`,
-      state: { item: item }
+      state: { item }
     });
   };
 
   const editingReview = (key, review) => {
-    const parseKey = parseInt(key)
-    let newKey = parseKey
-
-    history.push ({
+    const newKey = parseInt(key);
+    history.push({
       pathname: `/items/${itemId}/editreview`,
-      state: {key: newKey, review: review, item: item }
+      state: { key: newKey, review, item }
     });
   };
 
   const deletingReview = (key) => {
-    const deleteKey = parseInt(key)
-    let newKey = deleteKey
+    const newKey = parseInt(key);
     dispatch(removeReview(newKey));
   };
 
@@ -202,59 +182,48 @@ const ItemShow = () => {
       <NavBar />
 
       <div className="itemcontent">
-        <div className="showitemcategory">{item && item?.category ? item.category : "Unknown Category"}</div>
+        <div className="showitemcategory">{item.category || "Unknown Category"}</div>
         <div className="itemdetails">
-        <div className="itemshowcontainer">
-            {item && (
-              <img className="itemshowimg" src={item.imageUrl} alt={item.name} />
-            )}
+          <div className="itemshowcontainer">
+            {item.imageUrl && <img className="itemshowimg" src={item.imageUrl} alt={item.name} />}
           </div>
-
           <div className="itemspecs">
-            <div className="showitemname">{item && item?.name ? item.name : " Unknown Name"}
-            <ReviewStarRating rating={averageRating} totalRatings={totalRatings}></ReviewStarRating>
+            <div className="showitemname">{item.name || "Unknown Name"}
+              <ReviewStarRating rating={averageRating} totalRatings={totalRatings}></ReviewStarRating>
               <hr className="separator" />
               <div className="descriptioncontainer">About this item:
-                <div className="itemdescription">{item && item?.description ? item.description : "Unknown Description"}</div>
+                <div className="itemdescription">{item.description || "Unknown Description"}</div>
               </div>
             </div>
           </div>
         </div>
-        
+
         <div className="showitemdiv">
-          <div className={`showitemcost ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-            Cost: ${item && item?.cost ? item.cost : " Unknown Cost"}
+          <div className={`showitemcost ${item.stock <= 0 ? 'out-of-stock' : ''}`}>
+            Cost: ${item.cost || "Unknown Cost"}
           </div>
-          <div className={`instock ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-            {item && item.stock > 0 ? ( `In Stock ${item.stock} Left` ) : ( <span style={{ color: 'red' }}>Out Of Stock</span> )}
+          <div className={`instock ${item.stock <= 0 ? 'out-of-stock' : ''}`}>
+            {item.stock > 0 ? (`In Stock ${item.stock} Left`) : (<span style={{ color: 'red' }}>Out Of Stock</span>)}
           </div>
-          
-          <div className={`showitemdropdown ${item && item.stock <= 0 ? 'out-of-stock' : ''}`}>
-            <label className={`showdropdownbutton ${isModalOpen ? 'modalopen' : ''}`} onClick={() => toggleDropdown()}>
+
+          <div className={`showitemdropdown ${item.stock <= 0 ? 'out-of-stock' : ''}`}>
+            <label className={`showdropdownbutton ${isModalOpen ? 'modalopen' : ''}`} onClick={toggleDropdown}>
               <div className="qtxcontainer">
-                Qty: <span className="qtytext" id="selectedQuantity">1</span>
+                Qty: <span className="qtytext" id="selectedQuantity">{selectedQuantity}</span>
               </div>
             </label>
             <div className="showdropdowncontent" id="dropdownContent">
-              <label htmlFor="quantity1" onClick={() => updateQuantity(1)}>1</label>
-              <label htmlFor="quantity2" onClick={() => updateQuantity(2)}>2</label>
-              <label htmlFor="quantity3" onClick={() => updateQuantity(3)}>3</label>
-              <label htmlFor="quantity4" onClick={() => updateQuantity(4)}>4</label>
-              <label htmlFor="quantity5" onClick={() => updateQuantity(5)}>5</label>
-              <label htmlFor="quantity6" onClick={() => updateQuantity(6)}>6</label>
-              <label htmlFor="quantity7" onClick={() => updateQuantity(7)}>7</label>
-              <label htmlFor="quantity8" onClick={() => updateQuantity(8)}>8</label>
-              <label htmlFor="quantity9" onClick={() => updateQuantity(9)}>9</label>
-              <label htmlFor="quantity10" onClick={() => updateQuantity(10)}>10</label>
+              {[...Array(10).keys()].map(i => (
+                <label key={i} htmlFor={`quantity${i+1}`} onClick={() => updateQuantity(i + 1)}>{i + 1}</label>
+              ))}
             </div>
           </div>
 
-          {item && item.stock > 0 && (
+          {item.stock > 0 && (
             <>
-              <button className="addtocartbutton" onClick={addToCart} disabled={item.stock <= 0}> 
+              <button className="addtocartbutton" onClick={addToCart} disabled={item.stock <= 0}>
                 Add to Cart
               </button>
-
               <button className="buynow" onClick={openModal} disabled={item.stock <= 0}>
                 Buy Now
               </button>
@@ -271,7 +240,7 @@ const ItemShow = () => {
 
       <div className="reviews"> Customers say
         <div className="customerreviews"> Customer reviews
-          <ReadOnlyStarRating rating={averageRating}></ReadOnlyStarRating> 
+          <ReadOnlyStarRating rating={averageRating}></ReadOnlyStarRating>
           <div className="totalratings">{totalRatings} global ratings</div>
 
           <hr className="formseperator" />

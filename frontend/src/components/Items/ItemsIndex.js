@@ -18,13 +18,11 @@ const ItemsIndex = () => {
 
     let filteredItems = Object.values(allItems);
 
-    if (finalSelectedCategory !== "All Departments" || finalSearchTerm!== '""') {
-        console.log(finalSearchTerm)
-
+    if (finalSelectedCategory !== "All Departments" && finalSearchTerm!== '""') {
         filteredItems = filteredItems.filter(item => {
             const matchesCategory = finalSelectedCategory === "All Departments" || item.category === finalSelectedCategory;
             const matchesSearchTerm = item.name.toLowerCase().startsWith(finalSearchTerm.toLowerCase());
-            return matchesCategory || matchesSearchTerm;
+            return matchesCategory && matchesSearchTerm;
         });
 
 

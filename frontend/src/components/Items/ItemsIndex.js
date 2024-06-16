@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItems, getItems } from '../../store/item.js';
+import ItemDisplay from './ItemDisplay.js';
 import './ItemsIndex.css';
 
 const ItemsIndex = () => {
     const dispatch = useDispatch();
     const allItems = useSelector(getItems);
-    const searchTerm = useSelector(state => state.term)
-    const selectedCategory = useSelector(state => state.category)
-    const finalSearchTerm = Object.keys(searchTerm).length === 0 ? '""' : searchTerm.receivedTerm;
-    const finalSelectedCategory = Object.keys(selectedCategory).length === 0 ? "All Departments" : selectedCategory.receivedCategory;
+    const searchTerm = useSelector(state => state.term.receivedTerm);
+    const selectedCategory = useSelector(state => state.category.receivedCategory);
 
     useEffect(() => {
         dispatch(fetchItems());
@@ -17,23 +16,23 @@ const ItemsIndex = () => {
 
     let filteredItems = Object.values(allItems);
 
-    if (finalSelectedCategory !== "All Departments" && finalSearchTerm!== '""') {
+    if (searchTerm === "") {
+        filteredItems = [];
+    } else {
         filteredItems = filteredItems.filter(item => {
-            const matchesCategory = finalSelectedCategory === "All Departments" || item.category === finalSelectedCategory;
-            const matchesSearchTerm = item.name.toLowerCase().startsWith(finalSearchTerm.toLowerCase());
+            const matchesCategory = selectedCategory === "All Departments" || item.category === selectedCategory;
+            const matchesSearchTerm = item.name.toLowerCase().startsWith(searchTerm.toLowerCase());
             return matchesCategory && matchesSearchTerm;
         });
-    } else {
-        filteredItems = allItems;
     }
 
-    // return (
-    //     // <div className="itemindex">
-    //     //     {filteredItems.map((item) => (
-    //     //         <ItemDisplay key={item.id} item={item} />
-    //     //     ))}
-    //     // </div>
-    // );
+    return (
+        <div className="itemindex">
+            {filteredItems.map(item => (
+                <ItemDisplay key={item.id} item={item} />
+            ))}
+        </div>
+    );
 }
 
 export default ItemsIndex;

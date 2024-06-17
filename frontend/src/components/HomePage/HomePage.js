@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
 import ItemsIndex from "../Items/ItemsIndex";
@@ -10,6 +10,8 @@ import "slick-carousel/slick/slick-theme.css";
 import CarouselImage1 from "../Images/CarouselImage1.jpg";
 import CarouselImage2 from "../Images/CarouselImage2.jpg";
 import CarouselImage3 from "../Images/CarouselImage3.jpg";
+import CarouselLeft from "../Images/CarouselLeft.png";
+import CarouselRight from "../Images/CarouselRight.png"
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -19,6 +21,8 @@ const HomePage = () => {
   const selectedCategory = useSelector((state) => state.category.receivedCategory);
   const sliderRef = useRef();
   const intervalRef = useRef(null);
+  const [showLeftOutline, setShowLeftOutline] = useState(false);
+  const [showRightOutline, setShowRightOutline] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCartItems());
@@ -27,10 +31,24 @@ const HomePage = () => {
   useEffect(() => {
     intervalRef.current = setInterval(() => {
       sliderRef.current.slickNext();
-    }, 30000);
+    }, 100000);
 
     return () => {
       clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleClickAway = (event) => {
+      if (!event.target.closest(".carouselprevdiv") && !event.target.closest(".carouselnextdiv")) {
+        setShowLeftOutline(false);
+        setShowRightOutline(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickAway);
+    return () => {
+      document.removeEventListener("click", handleClickAway);
     };
   }, []);
 
@@ -39,7 +57,8 @@ const HomePage = () => {
     sliderRef.current.slickPrev();
     intervalRef.current = setInterval(() => {
       sliderRef.current.slickNext();
-    }, 30000);
+    }, 100000);
+    setShowLeftOutline(true);
   };
 
   const handleNextClick = () => {
@@ -47,7 +66,9 @@ const HomePage = () => {
     sliderRef.current.slickNext();
     intervalRef.current = setInterval(() => {
       sliderRef.current.slickNext();
-    }, 30000);
+    }, 100000);
+    setShowRightOutline(true);
+    setTimeout(() => setShowRightOutline(false), 2000);
   };
 
   if (!session || !cartItems) return null;
@@ -58,9 +79,7 @@ const HomePage = () => {
     dots: false,
     arrows: false,
     infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    speed: 250,
   };
 
   return (
@@ -71,7 +90,11 @@ const HomePage = () => {
         <div className="pagecontent">
           <div className="backgroundimagediv">
             <div className="carousel-wrapper">
-              <button className="slick-arrow slick-prev" onClick={handlePrevClick}></button>
+              <div className={`carouselprevdiv ${showLeftOutline ? "show-outline" : ""}`} onClick={handlePrevClick}>
+                <div className="leftoutline">
+                  <img src={CarouselLeft} className="carouselleft" onClick={handlePrevClick}></img>
+                </div>
+              </div>
               <Slider {...settings} ref={sliderRef}>
                 {carouselImages.map((image, idx) => (
                   <div key={idx} className="carousel-image-container">
@@ -79,7 +102,11 @@ const HomePage = () => {
                   </div>
                 ))}
               </Slider>
-              <button className="slick-arrow slick-next" onClick={handleNextClick}></button>
+              <div className={`carouselnextdiv ${showRightOutline ? "show-outline" : ""}`} onClick={handleNextClick}>
+                <div className="rightoutline">
+                  <img src={CarouselRight} className="carouselright" onClick={handleNextClick}></img>
+                </div>
+              </div>
             </div>
           </div>
         </div>

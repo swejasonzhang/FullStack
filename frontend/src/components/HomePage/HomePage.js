@@ -95,6 +95,7 @@ const HomePage = () => {
                   <img src={CarouselLeft} className="carouselleft" onClick={handlePrevClick}></img>
                 </div>
               </div>
+
               <Slider {...settings} ref={sliderRef}>
                 {carouselImages.map((image, idx) => (
                   <div key={idx} className="carousel-image-container">
@@ -102,10 +103,31 @@ const HomePage = () => {
                   </div>
                 ))}
               </Slider>
+
               <div className={`carouselnextdiv ${showRightOutline ? "show-outline" : ""}`} onClick={handleNextClick}>
                 <div className="rightoutline">
                   <img src={CarouselRight} className="carouselright" onClick={handleNextClick}></img>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="suggestions">
+            <div className="itemscarousel">
+              <div className="container">
+                <h2 className="lastitemsbought">Pick up where you left off </h2>
+              </div>
+
+              <div className="container">
+                <h2 className="techitems">Women's fashion under $30</h2>
+              </div>
+
+              <div className="container">
+                <h2 className="catchup">Catch up on talked-about titles</h2>
+              </div>
+
+              <div className="returncontainer">
+                <h2 className="easyreturns">Easy returns</h2>
               </div>
             </div>
           </div>

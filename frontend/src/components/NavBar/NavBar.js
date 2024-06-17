@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faSearch, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { fetchCartItems } from "../../store/cartitems.js";
 import './NavBar.css';
 import { receiveCategory } from "../../store/category.js";
 import { receiveTerm } from "../../store/searchterm.js";
+import AddressPin from "../Images/AddressPin.png";
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -97,7 +98,7 @@ const NavBar = () => {
         <div className="delivery">
           <div className="delivertoname">Deliver to {username}
             <div className="address">
-              <FontAwesomeIcon className="locationicon" icon={faLocationDot} /> Narnia... 98765
+              <img src={AddressPin} className="locationicon" /> Narnia... 98765
             </div>
           </div>
         </div>

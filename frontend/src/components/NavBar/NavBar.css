@@ -55,13 +55,14 @@ body, html {
     justify-content: center; 
     left: 10px;
     height: 45px;
-    width: 120px;
+    width: 133px;
     margin: 0 auto; 
     border-radius: 2px;
     cursor: pointer;
 }
 
 .delivery:hover {
+    z-index: 1001;
     border: 1px solid white;
 }
 
@@ -71,7 +72,7 @@ body, html {
     font-size: 12px;
     line-height: 14px;
     height: 14px;
-    font-weight: 400;
+    font-weight: 700;
     color: #ccc;
     bottom: 8px;
 }
@@ -82,7 +83,16 @@ body, html {
     line-height: 15px;
     font-weight: 700;
     position: relative;
-    right: 15px;
+    right: 22px;
+    bottom: 11px;
+}
+
+.locationicon {
+    position: relative;
+    top: 3px;
+    left: 2px;
+    height: 23px;
+    width: 18px;
 }
 
 .amazeonhomepage {

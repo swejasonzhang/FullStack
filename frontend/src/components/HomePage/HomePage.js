@@ -92,21 +92,21 @@ const HomePage = () => {
             <div className="carousel-wrapper">
               <div className={`carouselprevdiv ${showLeftOutline ? "show-outline" : ""}`} onClick={handlePrevClick}>
                 <div className="leftoutline">
-                  <img src={CarouselLeft} className="carouselleft" onClick={handlePrevClick}></img>
+                  <img src={CarouselLeft} className="carouselleft" alt="left" onClick={handlePrevClick}></img>
                 </div>
               </div>
 
               <Slider {...settings} ref={sliderRef}>
                 {carouselImages.map((image, idx) => (
                   <div key={idx} className="carousel-image-container">
-                    <img src={image} alt={`carousel-image-${idx}`} className="carousel-image" />
+                    <img src={image} alt={`carousel${idx}`} className="carousel-image" />
                   </div>
                 ))}
               </Slider>
 
               <div className={`carouselnextdiv ${showRightOutline ? "show-outline" : ""}`} onClick={handleNextClick}>
                 <div className="rightoutline">
-                  <img src={CarouselRight} className="carouselright" onClick={handleNextClick}></img>
+                  <img src={CarouselRight} className="carouselright" alt="right" onClick={handleNextClick}></img>
                 </div>
               </div>
             </div>
@@ -128,6 +128,7 @@ const HomePage = () => {
 
               <div className="returncontainer">
                 <h2 className="easyreturns">Easy returns</h2>
+                <div className="returntext">Amazeon does not have flexible return shipping on orders & gifts</div>
               </div>
             </div>
           </div>

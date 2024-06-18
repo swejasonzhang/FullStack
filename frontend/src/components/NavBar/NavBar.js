@@ -9,6 +9,7 @@ import './NavBar.css';
 import { receiveCategory } from "../../store/category.js";
 import { receiveTerm } from "../../store/searchterm.js";
 import AddressPin from "../Images/AddressPin.png";
+import AmazeonHome from "../Images/AmazeonHome.png"
 
 const NavBar = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,8 @@ const NavBar = () => {
   const [isSearchBoxFocused, setIsSearchBoxFocused] = useState(false);
   const session = useSelector(state => state.session);
   const cartItems = useSelector(state => state.cartItems);
-  const searchTerm = useSelector(state => state.term.receivedTerm)
-  const selectedCategory = useSelector(state => state.category.receivedCategory)
+  const searchTerm = useSelector(state => state.term.receivedTerm);
+  const selectedCategory = useSelector(state => state.category.receivedCategory);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -31,7 +32,7 @@ const NavBar = () => {
   useEffect(() => {
     dispatch(fetchCartItems());
     dispatch(receiveCategory("All Departments"));
-    dispatch(receiveTerm(""))
+    dispatch(receiveTerm(""));
   }, [dispatch]);
 
   if (!session || !cartItems) return null;
@@ -45,39 +46,41 @@ const NavBar = () => {
   const signup = async(e) => {
     e.preventDefault();
     history.push('/signup');
-  }
+  };
 
   const login = async(e) => {
     e.preventDefault();
     history.push('/login');
-  }
+  };
 
   const redirectcart = async(e) => {
     e.preventDefault();
     history.push('/cart');
-  }
+  };
 
   const redirectToHomePage = (e) => {
     e.preventDefault();
-    dispatch(receiveCategory("All"))
-    dispatch(receiveTerm(""))
+    dispatch(receiveCategory("All"));
+    dispatch(receiveTerm(""));
     history.push('/');
-  }
+  };
 
   const totalItemsInCart = Object.values(cartItems).reduce((total, item) => total + item.quantity, 0);
 
   const handleCategoryChange = (e) => {
-    e.preventDefault();
     const newCategory = e.target.value;
-
-    dispatch(receiveCategory(newCategory))
+    dispatch(receiveCategory(newCategory));
   };
 
   const handleSearchChange = (e) => {
-    e.preventDefault();
     const newSearchTerm = e.target.value;
+    dispatch(receiveTerm(newSearchTerm));
+  };
 
-    dispatch(receiveTerm(newSearchTerm))
+  const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      searchForItems(searchTerm, selectedCategory);
+    }
   };
 
   const handleSearchFocus = () => {
@@ -88,17 +91,24 @@ const NavBar = () => {
     setIsSearchBoxFocused(false);
   };
 
+  const searchForItems = (searchTerm, selectedCategory) => {
+    dispatch(receiveTerm(searchTerm));
+    dispatch(receiveCategory(selectedCategory));
+  };
+
   return (
     <>
       <div className="navbar">
-        <div className="amazeonhome">
-          <img className="amazeonhomepage" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+Home+Page.jpeg"} onClick={redirectToHomePage} alt="amazeonhomelogo" />
-        </div>
+        <div className="logoanddelivery">
+          <div className="amazeonhome">
+            <img className="amazeonhomeimg" src={AmazeonHome} onClick={redirectToHomePage} alt="amazeonhomelogo" />
+          </div>
 
-        <div className="delivery">
-          <div className="delivertoname">Deliver to {username}
-            <div className="address">
-              <img src={AddressPin} className="locationicon" /> Narnia... 98765
+          <div className="delivery">
+            <div className="delivertoname">Deliver to {username}
+              <div className="address">
+                <img src={AddressPin} className="locationicon" alt="" /> Narnia... 98765
+              </div>
             </div>
           </div>
         </div>
@@ -128,8 +138,8 @@ const NavBar = () => {
 
           <FontAwesomeIcon className="triangledown" icon={faCaretDown} />
 
-          <input type="text" className="searchbox" placeholder="Search Amazeon" value={searchTerm} onChange={handleSearchChange} onFocus={handleSearchFocus} onBlur={handleSearchBlur} />
-          <button className="searchbutton" onClick={redirectToHomePage}>
+          <input type="text" className="searchbox" placeholder="Search Amazeon" value={searchTerm} onChange={handleSearchChange} onFocus={handleSearchFocus} onBlur={handleSearchBlur} onKeyDown={handleSearchKeyDown} />
+          <button className="searchbutton" onClick={() => searchForItems(searchTerm, selectedCategory)}>
             <div className="searchbuttonicon">
               <FontAwesomeIcon icon={faSearch} />
             </div>
@@ -183,9 +193,7 @@ const NavBar = () => {
       </div>
 
       <div className="navextra">
-        <div> 
-          
-        </div>
+        {/* Additional content */}
       </div>
     </>
   );

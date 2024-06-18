@@ -10,14 +10,16 @@ const ItemsIndex = () => {
     const searchTerm = useSelector(state => state.term.receivedTerm);
     const selectedCategory = useSelector(state => state.category.receivedCategory);
 
+    console.log(searchTerm, selectedCategory)
+
     useEffect(() => {
         dispatch(fetchItems());
     }, [dispatch]);
 
     let filteredItems = Object.values(allItems);
 
-    if (searchTerm === "") {
-        filteredItems = [];
+    if (searchTerm === "" && selectedCategory === "All Departments") {
+        filteredItems = allItems;
     } else {
         filteredItems = filteredItems.filter(item => {
             const matchesCategory = selectedCategory === "All Departments" || item.category === selectedCategory;

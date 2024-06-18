@@ -165,7 +165,8 @@ button.slick-arrow:hover {
     background-color: #fff;
     z-index: 1001;
     position: relative;
-    width: 355px;
+    left: 5px;
+    width: 350px;
     height: 150px;
     bottom: 25px;
     background: #fff;
@@ -189,4 +190,13 @@ button.slick-arrow:hover {
     color: #0f1111 !important;
     font-family: "Amazon Ember", Arial, sans-serif;
     font-size: 21px !important;
+}
+
+.returntext {
+    position: relative;
+    padding-left: 20px;
+    max-height: 38px;
+    font-size: 13px !important;
+    line-height: 19px !important;
+    bottom: 10px;
 }

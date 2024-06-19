@@ -11,6 +11,7 @@ body, html {
     flex-direction: row;
     color: white;
     align-items: center;
+    font-size: 14px;
 }
 
 .logoanddelivery {
@@ -71,11 +72,12 @@ body, html {
 
 .delivertoname {
     font-size: 0.75rem;
-    line-height: 0.0547rem;
+    line-height: 0.875rem;
     height: 0.875rem;
     font-weight: 700;
     color: #ccc;
-    bottom: 0.1rem;
+    position: relative;
+    bottom: 0.5rem;
     padding-left: 1rem;
 }
 
@@ -86,7 +88,7 @@ body, html {
     font-weight: 700;
     position: relative;
     right: 1.375rem;
-    bottom: 0.3rem;
+    bottom: 0.6rem;
 }
 
 .locationicon {
@@ -98,10 +100,35 @@ body, html {
 }
   
 .searchcontainer {
-    height: 3.75rem;
-    width: 63.75rem;
+    height: 3.75rem; 
+    width: auto;
+    display: flex;
+    align-items: center;
     position: relative;
-    left: 1.5rem;
+    right: 4px;
+    flex: 1; 
+    margin: 0 1.5rem; 
+}
+
+.closingdiv {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: calc(100% - 30px);
+    height: 2.5rem;
+    border-radius: 4px;
+    background-color: white;
+    flex: 1;
+}
+
+.closingdiv > * {
+    margin: 0; 
+    padding: 0;
+}
+
+.closingdiv.focused {
+    box-shadow: 0 0 0 0.125rem #f90, 0 0 0 0.1875rem rgba(255, 153, 0, 0.5);
+    z-index: 1001;
 }
 
 .categoriescontainer {
@@ -111,12 +138,12 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 1.875rem;
-    left: 0.0625rem;
+    background-color: #e6e6e6;
+    border-top-left-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
 }
 
 .categories {
-    text-align: center;
     background-color: #e6e6e6;
     border: 0.0625rem solid #cdcdcd;
     border-right: 0.0625rem solid #cdcdcd;
@@ -125,86 +152,59 @@ body, html {
     height: 2.5rem;
     width: 3.375rem;
     position: relative;
-    right: 0.1875rem;
-    margin-bottom: 0.125rem;
-    display: block;
     color: #0f1111;
     font-size: 0.75rem;
     line-height: 2.0625rem;
     min-width: 1.1875rem;
-    padding-right: 0.9375rem;
     appearance: none;
     outline: none;
     transition: box-shadow 0.3s ease-in-out;
+    padding-left: 0.6875rem;
 }
   
 .categories:focus {
     box-shadow: 0 0 0 0.125rem #f90, 0 0 0 0.1875rem rgba(255, 153, 0, 0.5);
     z-index: 1000;
 }
-
-.select .categories {
-    width: 12.5rem;
-    height: 1.875rem;
-    padding: 0.3125rem 0.625rem;
-}
   
 .triangledown {
     position: relative;
-    bottom: 4.5rem;
-    left: 2rem;
     pointer-events: none;
     color: #555;
     height: 0.9375rem;
     width: 0.5625rem;
-    transform: scale(0.78);
-    padding-right: 0.25rem;
-    padding-bottom: 0.125rem;
+    transform: scale(0.75);
     z-index: 1001;
+    right: 1.125rem;
+    bottom: 0.125rem;
 }
 
 input.searchbox {
     position: relative;
-    height: 2.375rem;
-    width: 54.375rem;
-    left: 2.25rem;
-    bottom: 4.59375rem;
+    height: 40px;
+    width: calc(100% - 10px);
     border: transparent;
     border-left: 0.0625rem solid #cdcdcd;
     font-size: 0.875rem;
     outline: none;
-    padding-left: 0.625rem;
+    padding-left: 0.5rem;
+    right: 10px;
 }
 
-.closingdiv {
-    position: relative;
-    top: 0.5625rem;
-    width: 61.125rem;
-    height: 2.5rem;
-    right: 0.125rem;
-    border-radius: 0.4375rem;
-}
-
-.closingdiv.focused {
-    box-shadow: 0 0 0 0.125rem #f90, 0 0 0 0.1875rem rgba(255, 153, 0, 0.5);
-    z-index: 1000;
-}
-  
 .searchbutton {
     position: relative;
-    bottom: 4.4375rem;
-    left: 2.1875rem;
     background-color: #febd69;
     color: #111;
-    width: 2.8125rem;
+    width: 2.85rem;
     height: 2.5rem;
     cursor: pointer;
     border-left: none;
     border-right: none;
     border-top: none;
     border-bottom: none;
-    border-top-right-radius: 0.3125rem;
-    border-bottom-right-radius: 0.3125rem;
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    left: 1px;
 }
 
 .searchbutton:hover {
@@ -218,11 +218,20 @@ input.searchbox {
 .searchbuttonicon {
     font-size: 1.25rem;
 }
+
+.otherinfo {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 25rem;
+    justify-content: space-evenly;
+}
   
 .dropdown {
     position: relative;
-    display: inline-block;
-    margin-left: 4.375rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
   
 .dropdownbutton {
@@ -239,25 +248,8 @@ input.searchbox {
 .accountdropdowncontent {
     display: flex;
     position: relative;
-    background-color: black;
 }
   
-.accountdropdowncontent a {
-    color: black;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    display: block;
-}
-  
-.accountdropdowncontent a:hover {
-    color: #e77600;
-    text-decoration: underline;
-}
-  
-.dropdown:hover .accountdropdowncontent {
-    display: block;
-}  
-
 .languagediv {
     display: flex;
     justify-content: center;
@@ -265,11 +257,11 @@ input.searchbox {
     text-align: center;
     position: relative;
     height: 2.8125rem;
-    width: 4.375rem;
+    width: 3rem;
     border-radius: 0.125rem;
-    left: 2.5rem;
     border: 0.0625rem solid #131921;
-    font-weight: bolder;
+    font-weight: 700;
+    margin-right: 30px;
 }
 
 .languagediv:hover {
@@ -305,8 +297,7 @@ input.searchbox {
   
 .greetingdiv {
     position: relative;
-    top: 0.0625rem;
-    right: 1.875rem;
+    right: 1.25rem;
     height: 2.8125rem;
     width: 8.125rem;
     border-radius: 0.125rem;
@@ -356,11 +347,12 @@ input.searchbox {
     height: 2.8125rem;
     width: 5rem;
     position: relative;
-    right: 1.5625rem;
+    right: 1rem;
     font-size: 0.75rem;
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
     cursor: pointer;
+    bottom: 0.05rem;
 }
 
 .returnsdiv:hover {
@@ -394,7 +386,7 @@ input.searchbox {
     position: relative;
     cursor: pointer;
     background-color: #131921;
-    right: 0.9375rem;
+    right: 0.25rem;
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
 }

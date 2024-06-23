@@ -34,6 +34,11 @@ function LoginPage() {
         history.push('/signup');
     };
 
+    const redirectToHomePage = (e) => {
+        e.preventDefault();
+        history.push('/');
+    };
+
     const demoSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
@@ -59,7 +64,7 @@ function LoginPage() {
     return (
         <>
             <div className="logincontainer">
-                <div className="amazeonlogincontainer">
+                <div className="amazeonlogincontainer" onClick={redirectToHomePage}>
                     <img className="amazeonlogin" src="https://amazeon-seeds.s3.amazonaws.com/Logo+For+SignUp+And+Login.jpeg" alt='amazeonloginmain'></img>
                 </div>
 

@@ -178,7 +178,7 @@ const NavBar = () => {
 
               {showModal && (
                 <div className="accountdropdowncontent" onMouseLeave={closeModal}>
-                  <h3>Your Account</h3>
+                  <h3 className="youraccount">Your Account</h3>
                   {session.user ? (
                     <div className="homesignoutlink">
                       <a href="/login" onClick={signout}>Sign Out</a>

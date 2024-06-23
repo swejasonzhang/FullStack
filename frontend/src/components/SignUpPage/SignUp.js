@@ -20,6 +20,11 @@ function SignUp() {
         history.push('/login');
     }
 
+    const redirectToHomePage = (e) => {
+        e.preventDefault();
+        history.push('/');
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
@@ -47,8 +52,8 @@ function SignUp() {
 
     return (
         <>
-            <div className='signupcontainer'>
-                <div className="amazeonsignupcontainer">
+            <div className='signupcontainer' onClick={redirectToHomePage}>
+                <div className="amazeonsignupcontainer" >
                     <img className="amazeonsignup" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+SignUp+And+Login.jpeg"} alt='amazeonsignupmain'></img>
                 </div>
 

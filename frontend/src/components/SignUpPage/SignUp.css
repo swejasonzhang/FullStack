@@ -1,7 +1,19 @@
+body, html {
+    font-family: "AmazonEmber", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+.signupcontainer {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
 .amazeonsignupcontainer {
-    width: 350px;
-    height: 70px;
-    margin-left: 13px;
+    width: 21.875rem;
+    height: 4.375rem;
+    margin-left: 0.725rem;
     position: relative;
 }
 
@@ -9,17 +21,18 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    height: 70px;
-    width: 350px;
+    height: 4.375rem;
+    width: 21.875rem;
     position: relative;
-    right: 8px;
+    right: 0.5rem;
     transform: scale(1.2);
 }
 
 .signupheader {
     position: relative;
-    bottom: 19px;
-    font-weight: 200;
+    bottom: 1.1875rem;
+    font-weight: 100;
+    font-size: 1.75rem;
 }
 
 .signupname,
@@ -27,73 +40,72 @@
 .signuppassword {
     font-weight: 800;
     position: relative;
-    bottom: 20px;
-    left: 2px;
-    font-size: 13px;
+    bottom: 1.25rem;
+    left: 0.125rem;
+    font-size: 0.8125rem;
 }
 
 .signuppasswordinput {
     position: relative;
-    top: -17px;
+    top: -1.0625rem;
 }
 
 .signuprepassword {
     font-weight: 800;
     position: relative;
-    bottom: 10px;
-    left: 2px;
-    font-size: 13px;
+    bottom: 0.625rem;
+    left: 0.125rem;
+    font-size: 0.8125rem;
 }
 
 .repassword {
     position: relative;
-    top: -10px;
+    top: -0.625rem;
 }
 
 .characters {
     position: relative;
-    font-size: 12px;
-    left: 15px;
-    bottom: 10px;
+    font-size: 0.75rem;
+    left: 0.9375rem;
+    bottom: 0.625rem;
 }
 
 .signup-container {
     background-color: white;
-    border: 1px solid #ddd;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    padding-left: 18px;
-    padding-right: 18px;
-    border-radius: 8px;
-    width: 312px;
-    height: 567.797px;
+    border: 0.0625rem solid #ddd;
+    padding-top: 0.875rem;
+    padding-bottom: 0.875rem;
+    padding-left: 1.125rem;
+    padding-right: 1.125rem;
+    border-radius: 0.5rem;
+    width: 19.5rem;
+    height: 35.4873rem;
     position: relative;
-    bottom: 57px;
-    margin-top: 50px;
-    left: 6px;
+    bottom: 3.5625rem;
+    margin-top: 3.125rem;
 }
 
 .signupform {
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
 }
 
 .signupform label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem;
 }
 
 .signupform input {
     width: 100%;
-    padding: 8px;
+    padding: 0.5rem;
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     position: relative;
-    bottom: 22px;
-    height: 30px;
-    border: 1px solid #a6a6a6;
+    bottom: 1.375rem;
+    height: 1.875rem;
+    border: 0.0625rem solid #a6a6a6;
     border-top-color: #949494;
-    border-radius: 3px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, .5), 0 1px 0 rgba(0, 0, 0, .07) inset;
+    border-radius: 0.1875rem;
+    box-shadow: 0 0.0625rem 0 rgba(255, 255, 255, .5), 0 0.0625rem 0 rgba(0, 0, 0, .07) inset;
 }
 
 .signupform button {
@@ -101,21 +113,21 @@
     justify-content: center;
     background-color: #FFD814;
     color: black;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-top: 0.0625rem;
+    padding-bottom: 0.0625rem;
+    padding-left: 0.375rem;
+    padding-right: 0.375rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    font-size: 13px;
-    width: 313px;
+    font-size: 0.8125rem;
+    width: 19.5625rem;
     font-family: 'AmazonEmber';
-    height: 31px;
+    height: 1.9375rem;
     text-align: center;
-    bottom: 10px;
+    bottom: 0.625rem;
     position: relative;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
     transition: background-color 0.1s ease; 
 }
 
@@ -123,62 +135,61 @@
     background-color: #f0b800;
 }
 
-
 .message {
-    font-size: 12px !important;
+    font-size: 0.75rem !important;
     line-height: 1.5 !important;
 }
 
 .linebreak {
     position: relative;
-    top: 28px;
+    top: 1.75rem;
     background-color: transparent;
     display: block;
-    height: 1px;
+    height: 0.0625rem;
     border-width: 0;
-    border-top: 1px solid #e7e7e7;
+    border-top: 0.0625rem solid #e7e7e7;
 }
 
 .socials {
     position: relative;
-    top: 40px;
+    top: 2.5rem;
     font-weight: 700 !important;
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 0.8125rem;
+    line-height: 1.1875rem;
 }
 
 .icon-link {
     display: inline-block;
-    margin-right: 10px; 
+    margin-right: 0.625rem;
 }
 
 .linkedin {
     position: relative;
     color: #0077B5;
-    top: 3px;
+    top: 0.1875rem;
 }
 
 .github {
     position: relative;
     color: #000000; 
-    top: 3px;
+    top: 0.1875rem;
 }
   
 .lastlinebreak {
     position: relative;
-    top: 55px;
+    top: 3.4375rem;
     background-color: transparent;
     display: block;
-    height: 1px;
+    height: 0.0625rem;
     border-width: 0;
     background-image: linear-gradient(to right, rgba(231, 231, 231, 0), #e7e7e7, rgba(231, 231, 231, 0));
-    box-shadow: 0 0px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0.0625rem rgba(0, 0, 0, 0.1);
 }
 
 .haveaccount {
     position: relative;
-    top: 70px;
-    font-size: 13px;
+    top: 4.375rem;
+    font-size: 0.8125rem;
 }
 
 .haveaccount a {
@@ -192,26 +203,26 @@
 
 .signupform input:focus {
     outline: none;
-    box-shadow: 0 0 0 3px #c8f3fa;
+    box-shadow: 0 0 0 0.1875rem #c8f3fa;
 }
 
 .signup-end-divider {
     position: absolute;
     width: 100%;
-    height: 1px; 
+    height: 0.0625rem;
     background-color: transparent;
     background: -webkit-linear-gradient(to right, rgba(231, 231, 231, 0), #e7e7e7, rgba(231, 231, 231, 0));
     background: linear-gradient(to right, rgba(231, 231, 231, 0), #e7e7e7, rgba(231, 231, 231, 0)); 
-    margin: 20px 0; 
+    margin: 1.25rem 0;
     left: 0;
-    bottom: 240px;
+    bottom: 15.6rem;
 }
 
 .signup-ending {
     text-align: center;
     position: relative;
-    top: 20px;
-    font-size: 11px !important;
+    top: 1.25rem;
+    font-size: 0.6875rem !important;
     line-height: 1.465 !important;
     font-weight: bold;
     color: #555 !important;

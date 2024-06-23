@@ -245,11 +245,6 @@ input.searchbox {
     font-weight: bold;
 }
   
-.accountdropdowncontent {
-    display: flex;
-    position: relative;
-}
-  
 .languagediv {
     display: flex;
     justify-content: center;
@@ -325,22 +320,29 @@ input.searchbox {
     transform: scale(0.8);
 }
 
+.accountdropdowncontent {
+    width: 200px;
+    z-index: 1100;
+    background-color: white;
+    position: absolute;
+    top: 2.8125rem; /* Aligns the dropdown just below the greetingdiv */
+    left: 0;
+    border-radius: 0.125rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 .accountdropdowncontent h3 {
-    color: black;
-    margin-left: 3.125rem;
-    margin-top: 1.25rem;
+    margin: 1rem;
+    font-size: 1rem;
 }
 
-.homesignoutlink {
-    padding: 0.3125rem;
-    margin-top: 6.25rem;
-    margin-left: 3.125rem;
+.homesignoutlink, .homesigninlink {
+    padding: 0.5rem 1rem;
 }
 
-.homesigninlink {
-    padding: 0.3125rem;
-    margin-top: 7.5rem;
-    margin-left: 3.125rem;
+.homesignoutlink a, .homesigninlink a {
+    color: #007185;
+    text-decoration: none;
 }
 
 .returnsdiv {
@@ -432,4 +434,44 @@ input.searchbox {
     height: 2.4375rem;
     width: 100%;
     background-color: #232f3e;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000; 
+}
+
+.modal {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 2001; 
+}
+
+.modal-content {
+    margin-bottom: 20px;
+}
+
+.modal-close {
+    background: #ff5f5f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    background: #ff4040;
 }

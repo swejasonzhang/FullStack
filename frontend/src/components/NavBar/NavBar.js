@@ -20,6 +20,7 @@ const NavBar = () => {
   const cartItems = useSelector(state => state.cartItems);
   const searchTerm = useSelector(state => state.term.receivedTerm);
   const selectedCategory = useSelector(state => state.category.receivedCategory);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -96,6 +97,14 @@ const NavBar = () => {
     dispatch(receiveCategory(selectedCategory));
   };
 
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <>
       <div className="navbar">
@@ -156,24 +165,28 @@ const NavBar = () => {
           </div>
 
           <div className="dropdown">
-            <div className="greetingdiv">
+            <div className="greetingdiv" onMouseEnter={openModal}>
               <div className="greeting">Hello, {username}</div> 
+
               <button className="dropdownbutton">Account & Lists 
                 <FontAwesomeIcon className="accounttriangle" icon={faCaretDown} />
               </button>
-              <div className="accountdropdowncontent">
-                <h3>Your Account</h3>
-                {session.user ? (
-                  <div className="homesignoutlink">
-                    <a href="/login" onClick={signout}>Sign Out</a>
-                  </div>
-                ) : (
-                  <div className="homesigninlink">
-                    <a href="/signup" onClick={signup}>Sign Up</a>
-                    <a href="/login" onClick={login}>Sign In</a>
-                  </div>
-                )}
-              </div>
+
+              {showModal && (
+                <div className="accountdropdowncontent" onMouseLeave={closeModal}>
+                  <h3>Your Account</h3>
+                  {session.user ? (
+                    <div className="homesignoutlink">
+                      <a href="/login" onClick={signout}>Sign Out</a>
+                    </div>
+                  ) : (
+                    <div className="homesigninlink">
+                      <a href="/signup" onClick={signup}>Sign Up</a>
+                      <a href="/login" onClick={login}>Sign In</a>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             <div className="returnsdiv"> 
@@ -194,9 +207,8 @@ const NavBar = () => {
         </div>
       </div>
 
-
       <div className="navextra">
-        {/* Additional content */}
+        
       </div>
     </>
   );

@@ -1,66 +1,80 @@
+body, html {
+    font-family: "AmazonEmber", Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+.logincontainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .amazeonlogincontainer {
-    width: 350px;
-    height: 70px;
-    margin-left: 13px;
+    width: 21.875rem;
+    height: 4.375rem;
+    margin-left: 0.8125rem;
     position: relative;
 }
 
 .amazeonlogin {
-    width: 300px;
-    height: 70px;
+    width: 18.75rem;
+    height: 4.375rem;
     object-fit: contain;
     position: relative;
-    left: 20px;
+    left: 1.25rem;
     transform: scale(1.2);
 }
 
 .loginheader {
     font-weight: 200;
     position: relative;
-    bottom: 18px;
+    bottom: 1.125rem;
+    font-size: 1.75rem;
 }
 
 .loginemail, .loginpassword {
     font-weight: 700;
     position: relative;
-    bottom: 20px;
+    bottom: 1.25rem;
 }
 
 .login-container {
     position: relative;
     background-color: white;
-    border: 1px solid #ddd;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 26px;
-    padding-right: 26px;
-    margin: 15px;
-    border-radius: 8px;
-    width: 296px;
-    height: 318.594px;
-    bottom: 22px;
+    border: 0.0625rem solid #ddd;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    padding-left: 1.625rem;
+    padding-right: 1.625rem;
+    margin: 0.9375rem;
+    border-radius: 0.5rem;
+    width: 18.5rem;
+    height: 19.912125rem;
+    bottom: 1.375rem;
 }
 
 .loginform {
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
 }
 
 .loginform label {
     display: block;
-    padding-left: 2px;
-    padding-bottom: 5px;
+    padding-left: 0.125rem;
+    padding-bottom: 0.3125rem;
     font-weight: 700;
+    font-size: 0.75rem;
 }
 
 .loginform input {
     width: 100%;
-    padding: 8px;
+    padding: 0.5rem;
     box-sizing: border-box;
-    border: 1px solid #a6a6a6;
-    border-radius: 3px;
+    border: 0.0625rem solid #a6a6a6;
+    border-radius: 0.1875rem;
     position: relative;
-    bottom: 20px;
-    height: 31px;
+    bottom: 1.25rem;
+    height: 1.9375rem;
 }
 
 .loginform button {
@@ -69,16 +83,16 @@
     align-items: center; 
     background-color: #FFD814;
     color: black;
-    padding: 10px;
+    padding: 0.625rem;
     border: none;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 0.8125rem;
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
-    bottom: 25px;
-    height: 30px;
+    bottom: 1.5625rem;
+    height: 1.875rem;
     text-align: center; 
 }
 
@@ -93,36 +107,35 @@
 
 .loginform input:focus {
     outline: none;
-    box-shadow: 0 0 0 3px #c8f3fa;
+    box-shadow: 0 0 0 0.1875rem #c8f3fa;
 }
 
 .divider {
     display: flex;
     align-items: center;
-    width: 92%;
+    width: 18%;
     background-color: transparent;
-    height: 1px;
+    height: 0.0625rem;
     position: relative;
-    left: 15px;
-    bottom: 7px;
+    bottom: 0.4375rem;
 }
 
 .divider-text {
     line-height: 1;
-    font-size: 12px;
+    font-size: 0.75rem;
     color: #767676;
     font-weight: 400;
     z-index: 2;
     position: relative;
     display: inline-block;
     background-color: #fff;
-    padding: 0 8px 0 7px;
+    padding: 0 0.5rem 0 0.4375rem;
 }
 
 .divider::before, .divider::after {
     content: '';
     flex: 1;
-    border-top: 1px solid #e7e7e7;
+    border-top: 0.0625rem solid #e7e7e7;
 }
 
 h5 {
@@ -142,19 +155,18 @@ h5 {
     align-items: center;
     background-color: #FFFFFF;
     color: #0F1111;
-    padding: 10px;
-    border: 1px solid #D5D9D9;
-    border-radius: 8px;
+    padding: 0.625rem;
+    border: 0.0625rem solid #D5D9D9;
+    border-radius: 0.5rem;
     cursor: pointer;
-    font-size: 13px;
-    width: 92%;
-    margin-left: 15px;
+    font-size: 0.8125rem;
+    width: 21.875rem;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
-    top: 10px;
-    height: 31px;
+    top: 0.625rem;
+    height: 1.9375rem;
     text-align: center;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
 .demologin button {
@@ -163,16 +175,16 @@ h5 {
     align-items: center; 
     background-color: #FFD814;
     color: #0F1111;
-    padding: 10px;
-    border: 1px solid #D5D9D9;
-    border-radius: 10px;
+    padding: 0.625rem;
+    border: 0.0625rem solid #D5D9D9;
+    border-radius: 0.625rem;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 0.8125rem;
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
     position: relative;
-    height: 30px;
-    bottom: 30px;
+    height: 1.875rem;
+    bottom: 1.875rem;
     text-align: center;
 }
 
@@ -184,54 +196,54 @@ h5 {
     position: relative;
     background-color: transparent;
     display: block;
-    height: 1px;
+    height: 0.0625rem;
     border-width: 0;
     background-color: #e7e7e7;
-    bottom: 20px;
+    bottom: 1.25rem;
 }
 
 .signin-socials {
     position: relative;
-    bottom: 5px;
+    bottom: 0.3125rem;
     font-weight: 700 !important;
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 0.8125rem;
+    line-height: 1.1875rem;
 }
 
 .icon-link {
     display: inline-block;
-    margin-right: 10px; 
+    margin-right: 0.625rem;
 }
 
 .linkedin {
     position: relative;
     color: #0077B5;
-    top: 3px;
+    top: 0.1875rem;
 }
 
 .github {
     position: relative;
     color: #000000; 
-    top: 3px;
+    top: 0.1875rem;
 }
 
 .end-divider {
     position: absolute;
     width: 100%;
-    height: 1px; 
+    height: 0.0625rem;
     background-color: transparent;
     background: -webkit-linear-gradient(to right, rgba(231, 231, 231, 0), #e7e7e7, rgba(231, 231, 231, 0));
     background: linear-gradient(to right, rgba(231, 231, 231, 0), #e7e7e7, rgba(231, 231, 231, 0)); 
-    margin: 20px 0; 
+    margin: 1.25rem 0;
     left: 0;
-    bottom: 400px;
+    bottom: 25rem;
 }
 
 .ending {
     text-align: center;
     position: relative;
-    top: 90px;
-    font-size: 11px !important;
+    top: 6.625rem;
+    font-size: 0.6875rem !important;
     line-height: 1.465 !important;
     font-weight: bold;
     color: #555 !important;

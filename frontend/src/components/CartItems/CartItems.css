@@ -4,10 +4,10 @@ body {
 }
 
 .cartindex {
-    top: 60px;
+    top: 3.75rem;
     left: 0;
     width: 100%;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 3.75rem);
     padding: 0;
     box-sizing: border-box;
     overflow-y: auto; 
@@ -17,55 +17,55 @@ body {
 
 .cartitems-container {
     background-color: white; 
-    border-radius: 5px; 
-    margin-bottom: 20px; 
+    border-radius: 0.3125rem; 
+    margin-bottom: 1.25rem; 
 }
 
 .shoppingcart {
     font-family: "AmazonEmber";
     position: relative;
-    left: 20px;
-    top: 60px;
-    padding: 20px;
-    width: 1000px;
-    height: 300px;
-    font-size: 30px;
+    left: 1.25rem;
+    top: 3.75rem;
+    padding: 1.25rem;
+    width: 62.5rem;
+    height: 18.75rem;
+    font-size: 1.875rem;
     background-color: white;
-    border: 1px solid white;
+    border: 0.0625rem solid white;
 }
 
 .itemsselected {
     font-family: "AmazonEmber";
     font-weight: none;
-    margin-top: 3px;
-    font-size: 15px;
+    margin-top: 0.1875rem;
+    font-size: 0.9375rem;
 }
 
 .price {
-    width: 33px;
+    width: 2.0625rem;
     color: grey;
     position: absolute;
-    right: 30px;
-    top: 60px; 
+    right: 1.875rem;
+    top: 3.75rem; 
     display: inline-block;
 }
 
 .grayline {
-    margin-top: 5px;
+    margin-top: 0.3125rem;
     width: 100%;
-    height: 1px; 
+    height: 0.0625rem; 
     background-color: #ccc; 
 }
 
 .cartitem {
     position: relative;
-    right: 20px;
+    right: 1.25rem;
     display: flex;
-    padding: 10px;
-    width: 1020px;
+    padding: 0.625rem;
+    width: 63.75rem;
     background-color: white;
-    border-bottom: 1px solid #ddd; 
-    height: 270px;
+    border-bottom: 0.0625rem solid #ddd; 
+    height: 16.875rem;
     align-items: center;
 }
 
@@ -73,20 +73,20 @@ body {
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-right: 15px;
+    margin-right: 0.9375rem;
     position: relative;
-    bottom: 30px;
+    bottom: 1.875rem;
 }
 
 .cartindeximgcontainer {
-    height: 200px;
-    width: 200px;
+    height: 12.5rem;
+    width: 12.5rem;
     overflow: hidden;
-    margin-right: 15px;
+    margin-right: 0.9375rem;
 }
 
 .cartindeximg {
-    right: 35px;
+    right: 2.1875rem;
     height: 100%;
     width: 100%;
     object-fit: contain;
@@ -99,48 +99,48 @@ body {
 .cartitem p {
     font-weight: bold;
     background-color: white;
-    font-size: 12px;
-    margin: 5px 0;
+    font-size: 0.75rem;
+    margin: 0.3125rem 0;
     display: inline-block;
 }
 
 .cartcheckbox {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 1.25rem;
 }
 
 .cartcheckbox input[type="checkbox"] {
-    margin-right: 10px;
+    margin-right: 0.625rem;
 }
 
 .cartcheckbox label {
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .cartitemname {
     font-family: "AmazonEmber";
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
     position: relative;
 }
 
 .descriptioncontainer {
-    width: 600px;   
-    height: 100px;
+    width: 37.5rem;   
+    height: 6.25rem;
     text-overflow: ellipsis;
 }
 
 .emptycartmessage {
     display: flex;
-    margin: 20px;
+    margin: 1.25rem;
     align-items: center;
     background-color: white;
-    height: 100px;
-    width: 650px;
-    font-size: 24px;
+    height: 6.25rem;
+    width: 40.625rem;
+    font-size: 1.5rem;
     color: #0F1111;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .empty-cart-message::before {
@@ -149,20 +149,20 @@ body {
 
 .costofitem {
     position: relative;
-    right: 20px;
+    right: 1.25rem;
     color: black;
     font-weight: bolder;
-    font-size: 20px;
-    margin-top: 8px;
+    font-size: 1.25rem;
+    margin-top: 0.5rem;
 }
 
 .checkout {
     position: relative;
     background-color: white;
-    width: 300px;
-    height: 150px;
-    left: 1100px;
-    bottom: 280px;
+    width: 18.75rem;
+    height: 9.375rem;
+    left: 68.75rem;
+    bottom: 17.5rem;
 }
 
 .subtotal {
@@ -174,45 +174,45 @@ body {
 
 .cartitemdropdown {
     position: relative;
-    top: 85px;
+    top: 5.3125rem;
     font-size: small;
-    width: 83px;
+    width: 5.1875rem;
 }
 
 .cartdropdownbutton {
     background-color: #F0F2F2;
     color: black;
-    border-radius: 5px;
-    padding: 8px 16px;
+    border-radius: 0.3125rem;
+    padding: 0.5rem 1rem;
     border: none;
     cursor: pointer;
     z-index: 1001;
     display: flex;
     align-items: center;
-    width: 50px;
+    width: 3.125rem;
     position: relative;
-    top: -3px;
+    top: -0.1875rem;
   }
 
 .cartdropdowncontent {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    width: 82px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 5.125rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
     z-index: 1005;
-    bottom: 2px;
+    bottom: 0.125rem;
     overflow: visible;
 }
 
 .cartdropdowncontent label {
     display: block;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     color: #333;
     text-decoration: none;
     cursor: pointer;
     text-align: center;
-    height: 10px;
+    height: 0.625rem;
 }
   
 .cartdropdowncontent label:hover {
@@ -225,22 +225,22 @@ body {
 
 .checkoutbutton {
     position: relative;
-    top: 30px;
-    right: 10px;
+    top: 1.875rem;
+    right: 0.625rem;
     background-color: #FFD700;
-    border-radius: 10px;
-    height: 30px;
-    width: 250px;
+    border-radius: 0.625rem;
+    height: 1.875rem;
+    width: 15.625rem;
     text-align: center;
     cursor: pointer;
-    line-height: 30px;
+    line-height: 1.875rem;
 }
 
 .deleteitem {
     position: relative;
     font-size: small;
-    left: 75px;
-    top: 20px;
+    left: 4.6875rem;
+    top: 1.25rem;
     cursor: pointer;
-    width: 40px;
+    width: 2.5rem;
 }

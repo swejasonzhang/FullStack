@@ -6,8 +6,8 @@ body {
 .creatingeareviewcontainer {
     position: fixed;
     width: 100%;
-    top: 60px;
-    height: calc(100% - 60px);
+    top: 3.75rem;
+    height: calc(100% - 3.75rem);
     font-family: 'AmazonEmber';
     left: 0;
     display: flex; 
@@ -16,18 +16,18 @@ body {
 }
 
 .createreview {
-    width: 800px;
-    height: 750px;
-    padding: 20px;
+    width: 50rem;
+    height: 46.875rem;
+    padding: 1.25rem;
     font-weight: bolder;
-    font-size: 25px;
+    font-size: 1.5625rem;
 }
 
 .reviewimagecontainer {
-    width: 120px;
-    height: 160px;
-    margin-top: 10px;
-    padding: 10px;
+    width: 7.5rem;
+    height: 10rem;
+    margin-top: 0.625rem;
+    padding: 0.625rem;
     display: inline-block;
     text-align: left;
 }
@@ -35,54 +35,54 @@ body {
 .reviewimage {
     width: 100%; 
     height: 100%; 
-    object-fit: fillq;
+    object-fit: fill;
 }
 
 .itemreviewname {
     position: relative;
-    width: 700px;
-    font-size: 14px;
-    bottom: 95px;
-    left: 135px;
+    width: 43.75rem;
+    font-size: 0.875rem;
+    bottom: 5.9375rem;
+    left: 8.4375rem;
 }
 
 .reviewseperator {
-    border: 1px solid gray;
+    border: 0.0625rem solid gray;
     width: 100%;
 }
 
 .overallrating {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .writtenreview {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
 .reviewtextarea {
-    width: 780px;
-    height: 200px;
-    border-radius: 10px;
-    margin-top: 20px;
-    padding: 10px;
+    width: 48.75rem;
+    height: 12.5rem;
+    border-radius: 0.625rem;
+    margin-top: 1.25rem;
+    padding: 0.625rem;
 }
 
 .submitbutton {
     position: relative;
     background-color: #FFD814;
-    border-radius: 10px;
-    left: 740px;
-    width: 50px;
-    height: 18px;
-    font-size: 12px;
-    padding: 5px;
+    border-radius: 0.625rem;
+    left: 46.25rem;
+    width: 3.125rem;
+    height: 1.125rem;
+    font-size: 0.75rem;
+    padding: 0.3125rem;
     text-align: center;
     cursor: pointer;
 }
 
 .error {
     color: red;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: bolder;
-} 
+}

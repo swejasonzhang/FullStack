@@ -1,11 +1,11 @@
 .displayitem {
     font-family: 'Amazon Ember';
-    width: 250px;
-    height: 250px;
-    padding: 25px;
-    border: 1px solid #ddd; 
-    border-radius: 5px; 
-    margin: 20px;
+    width: 15.625rem;
+    height: 15.625rem;
+    padding: 1.5625rem;
+    border: 0.0625rem solid #ddd; 
+    border-radius: 0.3125rem; 
+    margin: 1.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,9 +20,9 @@
 .itemName {
     color: black;
     font-weight: bold;
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 200px; 
+    padding: 0.625rem;
+    margin-bottom: 1.25rem;
+    width: 12.5rem; 
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis; 
@@ -30,14 +30,14 @@
 
 .itemCost {
     color: black;
-    font-size: 18px; 
+    font-size: 1.125rem; 
     font-weight: bold;
     margin-right: auto; 
 }
 
 .imgContainer {
-    width: 200px; 
-    height: 200px; 
+    width: 12.5rem; 
+    height: 12.5rem; 
     overflow: hidden;
 }
 

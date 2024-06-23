@@ -1,9 +1,9 @@
 .clearrating {
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
     position: relative;
-    left: 750px;
-    bottom: 40px;
+    left: 46.875rem;
+    bottom: 2.5rem;
     color: #007185;
 }
 

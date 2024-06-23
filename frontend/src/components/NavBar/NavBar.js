@@ -169,7 +169,7 @@ const NavBar = () => {
           </div>
 
           <div className="dropdown">
-            <div className="greetingdiv" onMouseEnter={openModal}>
+            <div className="greetingdiv" onMouseEnter={openModal} onMouseLeave={closeModal}>
               <div className="greeting">Hello, {username}</div> 
 
               <button className="dropdownbutton">Account & Lists 
@@ -177,7 +177,7 @@ const NavBar = () => {
               </button>
 
               {showModal && (
-                <div className={`accountdropdowncontent ${session.user ? 'user-logged-in' : 'user-logged-out'}`} >
+                <div className={`accountdropdowncontent ${session.user ? 'user-logged-in' : 'user-logged-out'}`} onMouseLeave={closeModal}>
                   {session.user ? (
                     <>
                       <div className="loginaccountdiv">

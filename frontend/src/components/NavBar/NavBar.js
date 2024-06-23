@@ -189,7 +189,7 @@ const NavBar = () => {
                           <div className="loginlistbreakline"></div>
 
                           <div className="loginaccount">Your Account
-                            
+                            <div className="logout" onClick={signout}>Logout</div>
                           </div>
                         </div>
                       </div>

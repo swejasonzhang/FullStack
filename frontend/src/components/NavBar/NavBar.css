@@ -1,6 +1,6 @@
 body, html {
     font-family: "AmazonEmber", Arial, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 .navbar {
@@ -11,7 +11,7 @@ body, html {
     flex-direction: row;
     color: white;
     align-items: center;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 .logoanddelivery {
@@ -105,7 +105,7 @@ body, html {
     display: flex;
     align-items: center;
     position: relative;
-    right: 4px;
+    right: 0.25rem;
     flex: 1; 
     margin: 0 1.5rem; 
 }
@@ -114,9 +114,9 @@ body, html {
     display: flex;
     align-items: center;
     position: relative;
-    width: calc(100% - 30px);
+    width: calc(100% - 1.875rem);
     height: 2.5rem;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     background-color: white;
     flex: 1;
 }
@@ -181,14 +181,14 @@ body, html {
 
 input.searchbox {
     position: relative;
-    height: 40px;
-    width: calc(100% - 10px);
+    height: 2.5rem;
+    width: calc(100% - 0.625rem);
     border: transparent;
     border-left: 0.0625rem solid #cdcdcd;
     font-size: 0.875rem;
     outline: none;
     padding-left: 0.5rem;
-    right: 10px;
+    right: 0.625rem;
 }
 
 .searchbutton {
@@ -204,7 +204,7 @@ input.searchbox {
     border-bottom: none;
     border-top-right-radius: 0.25rem;
     border-bottom-right-radius: 0.25rem;
-    left: 1px;
+    left: 0.0625rem;
 }
 
 .searchbutton:hover {
@@ -222,7 +222,7 @@ input.searchbox {
 .otherinfo {
     display: flex;
     align-items: center;
-    height: 60px;
+    height: 3.75rem;
     width: 25rem;
     justify-content: space-evenly;
 }
@@ -256,7 +256,7 @@ input.searchbox {
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
     font-weight: 700;
-    margin-right: 10px;
+    margin-right: 0.625rem;
     cursor: pointer;
 }
 
@@ -328,8 +328,8 @@ input.searchbox {
     top: 2.7rem;
     right: -7.3rem;
     border-radius: 0.125rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    box-shadow: 0 2rem 10rem rgba(0, 0, 0, 0.1);
+    border-radius: 0.3125rem;
 }
   
 .user-logged-in {
@@ -350,25 +350,25 @@ input.searchbox {
 
 .logoutaccountdiv {
     width: 100%;
-    height: 65px;
+    height: 4.0625rem;
     justify-content: center;
     display: flex;
     align-items: center;
     flex-direction: column;
     position: relative;
-    top: 5px;
+    top: 0.3125rem;
 }
 
 .accountsignin {
-    width: 225px;
+    width: 14.0625rem;
     position: relative;
-    left: 10px;
-    height: 30px;
+    left: 0.625rem;
+    height: 1.875rem;
     border: none;
     position: relative;
     cursor: pointer;
     background-color: #FFD814;
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 
 .accountsignin:hover {
@@ -377,28 +377,28 @@ input.searchbox {
 
 .customerdiv {
     width: 100%;
-    height: 10px;
+    height: 0.625rem;
     color: black;
     align-items: center;
     justify-content: center;
     display: flex;
     flex-direction: row;
-    font-size: 11px;
+    font-size: 0.6875rem;
     position: relative;
-    top: 5px;
-    padding-top: 3px;
+    top: 0.3125rem;
+    padding-top: 0.1875rem;
 }
 
 .breakline {
-    height: 1px;
+    height: 0.0625rem;
     width: 90%;
     background-color: #e0e0e0;
-    margin: 10px auto;
+    margin: 0.625rem auto;
 }
 
 .listandaccount {
-    width: 445px;
-    height: 410px;
+    width: 27.8125rem;
+    height: 25.625rem;
     display: flex;
     flex-direction: row;
     color: black;
@@ -406,33 +406,57 @@ input.searchbox {
 
 .listbreakline {
     height: 95%;
-    width: 1px;
+    width: 0.0625rem;
     background-color: #e0e0e0;
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 10px;
+    top: 0.625rem;
 }
 
 .list {
-    width: 220px;
-    height: 410px;
-    padding-top: 5px;
+    width: 13.75rem;
+    height: 25.625rem;
+    padding-top: 0.3125rem;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
+}
+
+.list div {
+    font-size: 0.875rem;
+    padding-top: 0.3125rem;
+    color: #444;
+}
+
+.list div:hover {
+    color: #FF9900;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .account {
-    width: 220px;
-    height: 410px;
-    padding-left: 10px;
-    padding-top: 5px;
+    width: 13.75rem;
+    height: 25.625rem;
+    padding-left: 0.625rem;
+    padding-top: 0.3125rem;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
+}
+
+.account div {
+    font-size: 0.875rem;
+    padding-top: 0.3125rem;
+    color: #444;
+}
+
+.account div:hover {
+    color: #FF9900;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .newcustomer {
-    padding-right: 3px;
+    padding-right: 0.1875rem;
 }
 
 .starthere {
@@ -446,53 +470,77 @@ input.searchbox {
 }
 
 .youraccount {
-    width: 50px;
-    height: 50px;
+    width: 3.125rem;
+    height: 3.125rem;
     color: black;
 }
 
 .loginaccountdiv {
-    border: 1px solid black;
     width: 90%;
-    height: 85%;
+    height: 53.125%;
     position: relative;
-    top: 70px;
+    top: 4.375rem;
 }
 
 .loginlistandaccount {
-    width: 445px;
-    height: 410px;
+    width: 27.8125rem;
+    height: 25.625rem;
     display: flex;
     flex-direction: row;
     color: black;
-    padding: 10px;
+    padding: 0.625rem;
+    position: relative;
 }
 
 .loginlistbreakline {
-    height: 520px;
-    width: 1px;
+    height: 34.375rem;
+    width: 0.0625rem;
     background-color: #e0e0e0;
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 10px;
+    top: 0.625rem;
 }
 
 .loginlist {
-    width: 220px;
-    height: 410px;
-    padding-top: 5px;
+    width: 13.75rem;
+    height: 25.625rem;
+    padding-top: 0.3125rem;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
+}
+
+.loginaccount div {
+    font-size: 0.875rem;
+    padding-top: 0.3125rem;
+    color: #444;
+}
+
+.loginalist div:hover {
+    color: #FF9900;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .loginaccount {
-    width: 220px;
-    height: 410px;
-    padding-left: 10px;
-    padding-top: 5px;
+    width: 13.75rem;
+    height: 25.625rem;
+    padding-left: 0.9375rem;
+    padding-top: 0.3125rem;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1rem;
+}
+
+.loginaccount div {
+    font-size: 0.875rem;
+    padding-top: 0.3125rem;
+    color: #444;
+}
+
+.loginaccount div:hover {
+    color: #FF9900;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .returnsdiv {

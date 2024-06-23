@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCaretDown, faSignIn } from '@fortawesome/free-solid-svg-icons';
 import { fetchCartItems } from "../../store/cartitems.js";
 import './NavBar.css';
 import { receiveCategory } from "../../store/category.js";
@@ -169,7 +169,7 @@ const NavBar = () => {
           </div>
 
           <div className="dropdown">
-            <div className="greetingdiv" onMouseEnter={openModal} onMouseLeave={closeModal}>
+            <div className="greetingdiv" onMouseEnter={openModal}>
               <div className="greeting">Hello, {username}</div> 
 
               <button className="dropdownbutton">Account & Lists 
@@ -177,17 +177,48 @@ const NavBar = () => {
               </button>
 
               {showModal && (
-                <div className="accountdropdowncontent" onMouseLeave={closeModal}>
-                  <h3 className="youraccount">Your Account</h3>
+                <div className={`accountdropdowncontent ${session.user ? 'user-logged-in' : 'user-logged-out'}`} >
                   {session.user ? (
-                    <div className="homesignoutlink">
-                      <a href="/login" onClick={signout}>Sign Out</a>
-                    </div>
+                    <>
+                      <div className="loginaccountdiv">
+                        <div className="loginlistandaccount">
+                          <div className="loginlist">
+                            <div className="loginlistheader">Your Lists</div>
+                          </div>
+
+                          <div className="loginlistbreakline"></div>
+
+                          <div className="loginaccount">Your Account
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </>
                   ) : (
-                    <div className="homesigninlink">
-                      <a href="/signup" onClick={signup}>Sign Up</a>
-                      <a href="/login" onClick={login}>Sign In</a>
-                    </div>
+                    <>
+                      <div className="logoutaccountdiv">
+                        <button className="accountsignin" onClick={login}>Sign In</button>
+
+                        <div className="customerdiv">
+                          <div className="newcustomer"> New customer?</div>
+                          <div className="starthere"> Start here.</div>
+                        </div>
+                      </div>
+
+                      <div className="breakline"></div>
+
+                      <div className="listandaccount">
+                        <div className="list">
+                          <div className="listheader">Your Lists</div>
+                        </div>
+
+                        <div className="listbreakline"></div>
+
+                        <div className="account">Your Account
+                          
+                        </div>
+                      </div>
+                    </>
                   )}
                 </div>
               )}

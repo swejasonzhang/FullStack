@@ -252,11 +252,12 @@ input.searchbox {
     text-align: center;
     position: relative;
     height: 2.8125rem;
-    width: 3rem;
+    width: 4rem;
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
     font-weight: 700;
-    margin-right: 30px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
 .languagediv:hover {
@@ -296,7 +297,6 @@ input.searchbox {
     height: 2.8125rem;
     width: 8.125rem;
     border-radius: 0.125rem;
-    cursor: pointer;
     border: 0.0625rem solid #131921;
 }
 
@@ -321,15 +321,128 @@ input.searchbox {
 }
 
 .accountdropdowncontent {
-    width: 31.25rem;
-    height: 650px;
+    transition: all 0.3s ease;
     z-index: 1100;
     background-color: white;
     position: absolute;
-    top: 3rem;
-    right: -7.5rem;
+    top: 2.7rem;
+    right: -7.3rem;
     border-radius: 0.125rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+  
+.user-logged-in {
+    width: 31.25rem; 
+    height: 40.625rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.user-logged-out {
+    width: 31rem; 
+    height: 32rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logoutaccountdiv {
+    width: 100%;
+    height: 65px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 5px;
+}
+
+.accountsignin {
+    width: 225px;
+    position: relative;
+    left: 10px;
+    height: 30px;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    background-color: #FFD814;
+    border-radius: 8px;
+}
+
+.accountsignin:hover {
+    text-decoration: underline;
+}
+
+.customerdiv {
+    width: 100%;
+    height: 10px;
+    color: black;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    font-size: 11px;
+    position: relative;
+    top: 5px;
+    padding-top: 3px;
+}
+
+.breakline {
+    height: 1px;
+    width: 90%;
+    background-color: #e0e0e0;
+    margin: 10px auto;
+}
+
+.listandaccount {
+    width: 445px;
+    height: 410px;
+    display: flex;
+    flex-direction: row;
+    color: black;
+}
+
+.listbreakline {
+    height: 95%;
+    width: 1px;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 10px;
+}
+
+.list {
+    width: 220px;
+    height: 410px;
+    padding-top: 5px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.account {
+    width: 220px;
+    height: 410px;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.newcustomer {
+    padding-right: 3px;
+}
+
+.starthere {
+    color: #0066c0;
+    cursor: pointer;
+}
+
+.starthere:hover {
+    color: #FF9900;
+    text-decoration: underline;
 }
 
 .youraccount {
@@ -338,13 +451,48 @@ input.searchbox {
     color: black;
 }
 
-.homesignoutlink, .homesigninlink {
-    padding: 0.5rem 1rem;
+.loginaccountdiv {
+    border: 1px solid black;
+    width: 90%;
+    height: 85%;
+    position: relative;
+    top: 70px;
 }
 
-.homesignoutlink a, .homesigninlink a {
-    color: #007185;
-    text-decoration: none;
+.loginlistandaccount {
+    width: 445px;
+    height: 410px;
+    display: flex;
+    flex-direction: row;
+    color: black;
+    padding: 10px;
+}
+
+.loginlistbreakline {
+    height: 520px;
+    width: 1px;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 10px;
+}
+
+.loginlist {
+    width: 220px;
+    height: 410px;
+    padding-top: 5px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.loginaccount {
+    width: 220px;
+    height: 410px;
+    padding-left: 10px;
+    padding-top: 5px;
+    font-weight: 700;
+    font-size: 16px;
 }
 
 .returnsdiv {
@@ -390,7 +538,7 @@ input.searchbox {
     position: relative;
     cursor: pointer;
     background-color: #131921;
-    right: 0.25rem;
+    right: 0.5rem;
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
 }

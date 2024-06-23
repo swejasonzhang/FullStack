@@ -98,13 +98,17 @@ const NavBar = () => {
   };
 
   const openModal = () => {
-    setShowModal(true);
+    setTimeout(() => {
+      setShowModal(true);
+    }, 300);
   };
-
+  
   const closeModal = () => {
-    setShowModal(false);
+    setTimeout(() => {
+      setShowModal(false);
+    }, 300); 
   };
-
+  
   return (
     <>
       <div className="navbar">
@@ -165,7 +169,7 @@ const NavBar = () => {
           </div>
 
           <div className="dropdown">
-            <div className="greetingdiv" onMouseEnter={openModal}>
+            <div className="greetingdiv" onMouseEnter={openModal} onMouseLeave={closeModal}>
               <div className="greeting">Hello, {username}</div> 
 
               <button className="dropdownbutton">Account & Lists 

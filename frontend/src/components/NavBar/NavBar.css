@@ -133,46 +133,56 @@ body, html {
 
 .categoriescontainer {
     height: 2.5rem;
-    width: 3.25rem;
-    position: relative;
-    display: flex;
-    justify-content: center;
+    width: auto;
+    display: inline-flex;
+    justify-content: space-evenly;
     align-items: center;
     background-color: #e6e6e6;
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+    white-space: nowrap;
+    flex: 1;
 }
 
 .categories {
     background-color: #e6e6e6;
     border: 0.0625rem solid #cdcdcd;
-    border-right: 0.0625rem solid #cdcdcd;
     border-top-left-radius: 0.3125rem;
     border-bottom-left-radius: 0.3125rem;
     height: 2.5rem;
-    width: 3.375rem;
-    position: relative;
+    width: auto !important;
     color: #0f1111;
     font-size: 0.75rem;
     line-height: 2.0625rem;
-    min-width: 1.1875rem;
     appearance: none;
     outline: none;
     transition: box-shadow 0.3s ease-in-out;
     padding-left: 0.6875rem;
+    display: inline-block;
+    white-space: nowrap;
 }
-  
+
+select {
+    width: auto !important;
+    display: inline-block; 
+}
+
+select option {
+    width: auto !important;
+    display: inline-block; 
+    white-space: nowrap;
+}
+
 .categories:focus {
     box-shadow: 0 0 0 0.125rem #f90, 0 0 0 0.1875rem rgba(255, 153, 0, 0.5);
     z-index: 1000;
 }
-  
+
 .triangledown {
     position: relative;
     pointer-events: none;
     color: #555;
     height: 0.9375rem;
-    width: 0.5625rem;
     transform: scale(0.75);
     z-index: 1001;
     right: 1.125rem;
@@ -256,7 +266,7 @@ input.searchbox {
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
     font-weight: 700;
-    margin-right: 0.625rem;
+    right: 0.825rem;
     cursor: pointer;
 }
 
@@ -402,6 +412,7 @@ input.searchbox {
     display: flex;
     flex-direction: row;
     color: black;
+    justify-content: space-evenly;
 }
 
 .listbreakline {
@@ -412,6 +423,15 @@ input.searchbox {
     flex-direction: column;
     position: relative;
     top: 0.625rem;
+}
+
+.listheader {
+    width: 13.75rem;
+    height: 25.625rem;
+    padding-left: 0.625rem;
+    padding-top: 0.3125rem;
+    font-weight: 700;
+    font-size: 1rem;
 }
 
 .list {
@@ -516,8 +536,7 @@ input.searchbox {
     color: #444;
 }
 
-.loginalist div:hover {
-    color: #FF9900;
+.loginlist div:hover {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -633,3 +652,4 @@ input.searchbox {
     width: 100%;
     background-color: #232f3e;
 }
+

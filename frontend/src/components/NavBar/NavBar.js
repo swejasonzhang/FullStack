@@ -182,8 +182,9 @@ const NavBar = () => {
                     <>
                       <div className="loginaccountdiv">
                         <div className="loginlistandaccount">
-                          <div className="loginlist">
-                            <div className="loginlistheader">Your Lists</div>
+                          
+                          <div className="loginlist">Your Lists
+                            <div className="loginlistheader"></div>
                           </div>
 
                           <div className="loginlistbreakline"></div>
@@ -191,6 +192,7 @@ const NavBar = () => {
                           <div className="loginaccount">Your Account
                             <div className="logout" onClick={signout}>Logout</div>
                           </div>
+
                         </div>
                       </div>
                     </>
@@ -208,8 +210,8 @@ const NavBar = () => {
                       <div className="breakline"></div>
 
                       <div className="listandaccount">
-                        <div className="list">
-                          <div className="listheader">Your Lists</div>
+                        <div className="listheader">Your Lists
+
                         </div>
 
                         <div className="listbreakline"></div>

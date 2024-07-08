@@ -173,6 +173,11 @@ button.slick-arrow:hover {
     margin-right: 0.3125rem;
 }
 
+.same-size {
+    height: 26.25rem;
+    width: 21.875rem;
+}
+
 .returncontainer h2 {
     padding-left: 1.25rem;
     padding-top: 0.3125rem;

@@ -11,11 +11,12 @@ import CarouselImage1 from "../Images/CarouselImage1.jpg";
 import CarouselImage2 from "../Images/CarouselImage2.jpg";
 import CarouselImage3 from "../Images/CarouselImage3.jpg";
 import CarouselLeft from "../Images/CarouselLeft.png";
-import CarouselRight from "../Images/CarouselRight.png"
+import CarouselRight from "../Images/CarouselRight.png";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const session = useSelector((state) => state.session);
+  const user = session.user;
   const cartItems = useSelector((state) => state.cartItems);
   const searchTerm = useSelector((state) => state.term.receivedTerm);
   const selectedCategory = useSelector((state) => state.category.receivedCategory);
@@ -29,14 +30,16 @@ const HomePage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      sliderRef.current.slickNext();
-    }, 100000);
+    if (searchTerm === "" && selectedCategory === "All Departments") {
+      intervalRef.current = setInterval(() => {
+        sliderRef.current.slickNext();
+      }, 5000);
 
-    return () => {
-      clearInterval(intervalRef.current);
-    };
-  }, []);
+      return () => {
+        clearInterval(intervalRef.current);
+      };
+    }
+  }, [searchTerm, selectedCategory]);
 
   useEffect(() => {
     const handleClickAway = (event) => {
@@ -46,18 +49,20 @@ const HomePage = () => {
       }
     };
 
-    document.addEventListener("click", handleClickAway);
-    return () => {
-      document.removeEventListener("click", handleClickAway);
-    };
-  }, []);
+    if (searchTerm === "" && selectedCategory === "All Departments") {
+      document.addEventListener("click", handleClickAway);
+      return () => {
+        document.removeEventListener("click", handleClickAway);
+      };
+    }
+  }, [searchTerm, selectedCategory]);
 
   const handlePrevClick = () => {
     clearInterval(intervalRef.current);
     sliderRef.current.slickPrev();
     intervalRef.current = setInterval(() => {
       sliderRef.current.slickNext();
-    }, 100000);
+    }, 5000);
     setShowLeftOutline(true);
   };
 
@@ -66,7 +71,7 @@ const HomePage = () => {
     sliderRef.current.slickNext();
     intervalRef.current = setInterval(() => {
       sliderRef.current.slickNext();
-    }, 100000);
+    }, 5000);
     setShowRightOutline(true);
     setTimeout(() => setShowRightOutline(false), 2000);
   };
@@ -115,21 +120,43 @@ const HomePage = () => {
           <div className="suggestions">
             <div className="itemscarousel">
               <div className="container">
-                <h2 className="lastitemsbought">Pick up where you left off </h2>
+                {user === null ? (
+                  <h2 className="lastitemsbought">New home arrivals under $50</h2>
+                ) : (
+                  <h2 className="lastitemsbought">Pick up where you left off</h2>
+                )}
               </div>
 
               <div className="container">
-                <h2 className="techitems">Women's fashion under $30</h2>
+                {user === null ? (
+                  <h2 className="lastitemsbought">Summer fashion for all</h2>
+                ) : (
+                  <h2 className="lastitemsbought">Women's fashion under $30</h2>
+                )}
               </div>
 
               <div className="container">
-                <h2 className="catchup">Catch up on talked-about titles</h2>
+                {user == null ? (
+                  <h2 className="catchup">Modify by Merch on Demand</h2>
+                ) : (
+                  <h2 className="catchup">Catch up on talked-about titles</h2>
+                )}
               </div>
 
-              <div className="returncontainer">
-                <h2 className="easyreturns">Easy returns</h2>
-                <div className="returntext">Amazeon does not have flexible return shipping on orders & gifts</div>
+              <div className={`returncontainer ${user === null ? 'same-size' : ''}`}>
+                {user === null ? (
+                  <div>
+                    <h2 className="easyreturns">Discover a new kind of soda</h2>
+                  </div>
+                ) : (
+                  <div>
+                    <h2 className="easyreturns">Easy returns</h2>
+                    <div className="returntext">Amazeon does not have flexible return shipping on orders & gifts</div>
+                  </div>
+                )}
               </div>
+
+              
             </div>
           </div>
         </div>

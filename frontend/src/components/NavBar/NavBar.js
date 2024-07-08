@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCaretDown, faSignIn } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { fetchCartItems } from "../../store/cartitems.js";
 import './NavBar.css';
 import { receiveCategory } from "../../store/category.js";
@@ -21,6 +21,9 @@ const NavBar = () => {
   const searchTerm = useSelector(state => state.term.receivedTerm);
   const selectedCategory = useSelector(state => state.category.receivedCategory);
   const [showModal, setShowModal] = useState(false);
+  const [categoryWidth, setCategoryWidth] = useState('50px');
+  const selectRef = useRef(null);
+  const padding = 30; 
 
   useEffect(() => {
     if (session && session.user && session.user.username) {
@@ -71,6 +74,10 @@ const NavBar = () => {
   const handleCategoryChange = (e) => {
     const newCategory = e.target.value;
     dispatch(receiveCategory(newCategory));
+
+    const optionText = e.target.options[e.target.selectedIndex].text;
+    const optionWidth = optionText.length * 8 + padding;
+    setCategoryWidth(`${optionWidth}px`);
   };
 
   const handleSearchChange = (e) => {
@@ -129,7 +136,7 @@ const NavBar = () => {
         <div className="searchcontainer">
           <div className={`closingdiv ${isSearchBoxFocused ? 'focused' : ''}`}>
             <div className="categoriescontainer">
-              <select className="categories" value={selectedCategory} onChange={handleCategoryChange}>
+              <select className="categories" style={{ width: categoryWidth, padding: '0 10px' }} value={selectedCategory} onChange={handleCategoryChange} ref={selectRef}>
                 <option value="All Departments">All</option>
                 <option value="Video Games">Video Games</option>
                 <option value="Headset">Headset</option>

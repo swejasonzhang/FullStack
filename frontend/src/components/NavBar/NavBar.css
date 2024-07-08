@@ -98,23 +98,23 @@ body, html {
     height: 1.4375rem;
     width: 1.125rem;
 }
-  
+
 .searchcontainer {
-    height: 3.75rem; 
+    height: 3.75rem;
     width: auto;
     display: flex;
     align-items: center;
     position: relative;
     right: 0.25rem;
-    flex: 1; 
-    margin: 0 1.5rem; 
+    flex: 1;
+    margin: 0 1.5rem;
 }
 
 .closingdiv {
     display: flex;
     align-items: center;
     position: relative;
-    width: calc(100% - 1.875rem);
+    width: 100%;
     height: 2.5rem;
     border-radius: 0.25rem;
     background-color: white;
@@ -122,7 +122,7 @@ body, html {
 }
 
 .closingdiv > * {
-    margin: 0; 
+    margin: 0;
     padding: 0;
 }
 
@@ -132,45 +132,29 @@ body, html {
 }
 
 .categoriescontainer {
-    height: 2.5rem;
-    width: auto;
-    display: inline-flex;
-    justify-content: space-evenly;
+    display: flex;
     align-items: center;
     background-color: #e6e6e6;
     border-top-left-radius: 0.5rem;
     border-bottom-left-radius: 0.5rem;
-    white-space: nowrap;
-    flex: 1;
+    width: auto;
 }
-
+  
 .categories {
     background-color: #e6e6e6;
     border: 0.0625rem solid #cdcdcd;
     border-top-left-radius: 0.3125rem;
     border-bottom-left-radius: 0.3125rem;
     height: 2.5rem;
-    width: auto !important;
     color: #0f1111;
     font-size: 0.75rem;
     line-height: 2.0625rem;
     appearance: none;
     outline: none;
     transition: box-shadow 0.3s ease-in-out;
-    padding-left: 0.6875rem;
     display: inline-block;
-    white-space: nowrap;
-}
-
-select {
-    width: auto !important;
-    display: inline-block; 
-}
-
-select option {
-    width: auto !important;
-    display: inline-block; 
-    white-space: nowrap;
+    text-align: center;
+    padding-right: 10px;
 }
 
 .categories:focus {
@@ -185,7 +169,7 @@ select option {
     height: 0.9375rem;
     transform: scale(0.75);
     z-index: 1001;
-    right: 1.125rem;
+    right: 0.85rem;
     bottom: 0.125rem;
 }
 
@@ -218,7 +202,7 @@ input.searchbox {
 }
 
 .searchbutton:hover {
-  background-color: #ddb347;
+    background-color: #ddb347;
 }
 
 .searchbutton:focus {
@@ -236,14 +220,14 @@ input.searchbox {
     width: 25rem;
     justify-content: space-evenly;
 }
-  
+
 .dropdown {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-  
+
 .dropdownbutton {
     position: relative;
     left: 0.3125rem;
@@ -254,7 +238,7 @@ input.searchbox {
     cursor: pointer;
     font-weight: bold;
 }
-  
+
 .languagediv {
     display: flex;
     justify-content: center;
@@ -262,12 +246,13 @@ input.searchbox {
     text-align: center;
     position: relative;
     height: 2.8125rem;
-    width: 4rem;
+    width: auto;
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
     font-weight: 700;
     right: 0.825rem;
     cursor: pointer;
+    padding: 0 0.5rem;
 }
 
 .languagediv:hover {
@@ -300,14 +285,15 @@ input.searchbox {
     font-size: 0.875rem;
     color: #fff;
 }
-  
+
 .greetingdiv {
     position: relative;
     right: 1.25rem;
     height: 2.8125rem;
-    width: 8.125rem;
+    width: auto;
     border-radius: 0.125rem;
     border: 0.0625rem solid #131921;
+    padding: 0 0.5rem;
 }
 
 .greetingdiv:hover {
@@ -341,17 +327,17 @@ input.searchbox {
     box-shadow: 0 2rem 10rem rgba(0, 0, 0, 0.1);
     border-radius: 0.3125rem;
 }
-  
+
 .user-logged-in {
-    width: 31.25rem; 
-    height: 40.625rem; 
+    width: 31.25rem;
+    height: 40.625rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
-  
+
 .user-logged-out {
-    width: 31rem; 
+    width: 31rem;
     height: 32rem;
     display: flex;
     flex-direction: column;
@@ -652,4 +638,3 @@ input.searchbox {
     width: 100%;
     background-color: #232f3e;
 }
-

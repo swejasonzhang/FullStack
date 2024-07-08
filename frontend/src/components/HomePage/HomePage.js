@@ -1,6 +1,6 @@
-// HomePage.js
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import "./HomePage.css";
 import ItemsIndex from "../Items/ItemsIndex";
 import { fetchCartItems } from "../../store/cartitems.js";
@@ -16,6 +16,7 @@ import CarouselRight from "../Images/CarouselRight.png";
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const session = useSelector((state) => state.session);
   const user = session.user;
   const cartItems = useSelector((state) => state.cartItems);
@@ -26,6 +27,11 @@ const HomePage = () => {
   const [showLeftOutline, setShowLeftOutline] = useState(false);
   const [showRightOutline, setShowRightOutline] = useState(false);
   const [isContentGrayedOut, setIsContentGrayedOut] = useState(false);
+
+  const login = (e) => {
+    e.preventDefault();
+    history.push('/login');
+  }
 
   useEffect(() => {
     dispatch(fetchCartItems());
@@ -123,7 +129,7 @@ const HomePage = () => {
             <div className="itemscarousel">
               <div className="container">
                 {user === null ? (
-                  <h2 className="lastitemsbought">New on Amazeon: Too Faced</h2>
+                  <h2 className="lastitemsbought">New home arrivals under $50</h2>
                 ) : (
                   <h2 className="lastitemsbought">Pick up where you left off</h2>
                 )}
@@ -149,9 +155,7 @@ const HomePage = () => {
                 {user === null ? (
                   <div>
                     <h2 className="easyreturns">Sign in for the best experience
-                      <div className="carouselsignin">Sign in securely
-
-                      </div>
+                      <div className="carouselsignin" onClick={login}>Sign in securely</div>
                     </h2>
                   </div>
                 ) : (

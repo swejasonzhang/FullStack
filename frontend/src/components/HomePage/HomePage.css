@@ -182,14 +182,14 @@ button.slick-arrow:hover {
 }
 
 .carouselsignin {
-    background-color: #ffd814;
+    background-color: #f7ca00;
     position: relative;
     top: 1rem;
     width: 95%;
     height: 2rem;
     border-radius: 8px;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     align-items: center;
     justify-content: center;
     display: flex;
@@ -198,7 +198,7 @@ button.slick-arrow:hover {
 }
 
 .carouselsignin:hover {
-    background-color: #d9bd21;
+    background-color: #f0b800;
 }
 
 .returncontainer h2 {

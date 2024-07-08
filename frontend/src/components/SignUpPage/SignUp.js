@@ -17,7 +17,7 @@ function SignUp() {
 
     const signuplogin = (e) => {
         e.preventDefault();
-        e.stopPropagation(); // Ensure the event doesn't bubble up to parent elements
+        e.stopPropagation();
         history.push('/login');
     }
 

@@ -52,7 +52,17 @@ body, html {
 
 .amazeonhome:hover {
     z-index: 1001;
+}
+
+.amazeonhome:hover::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
     border: 0.0625rem solid white;
+    border-radius: inherit;
 }
 
 .delivery {
@@ -67,9 +77,15 @@ body, html {
     box-sizing: border-box;
 }
 
-.delivery:hover {
-    z-index: 1001;
+.delivery:hover::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
     border: 0.0625rem solid white;
+    border-radius: inherit;
 }
 
 .delivertoname {
@@ -255,8 +271,15 @@ input.searchbox {
     padding: 0 0.5rem;
 }
 
-.languagediv:hover {
+.languagediv:hover::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
     border: 0.0625rem solid white;
+    border-radius: inherit;
 }
 
 .flagdiv {
@@ -296,8 +319,15 @@ input.searchbox {
     padding: 0 0.5rem;
 }
 
-.greetingdiv:hover {
+.greetingdiv:hover::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
     border: 0.0625rem solid white;
+    border-radius: inherit;
 }
 
 .greeting {
@@ -560,8 +590,15 @@ input.searchbox {
     bottom: 0.05rem;
 }
 
-.returnsdiv:hover {
+.returnsdiv:hover::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
     border: 0.0625rem solid white;
+    border-radius: inherit;
 }
 
 .returns {
@@ -596,8 +633,15 @@ input.searchbox {
     border: 0.0625rem solid #131921;
 }
 
-.amazeoncartsection:hover {
+.amazeoncartsection:hover::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
     border: 0.0625rem solid white;
+    border-radius: inherit;
 }
 
 .amazeoncartsection .amazeoncartimg {
@@ -635,6 +679,45 @@ input.searchbox {
 .navextra {
     position: relative;
     height: 2.4375rem;
-    width: 100%;
+    width: calc(100% - 15px);
     background-color: #232f3e;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    font-size: 14px;
+    overflow: hidden;
+    padding-left: 15px;
+}
+
+.faBarsText {
+    width: 61px;
+    padding: 0;
+    height: 37px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.faBars {
+    transform: scale(1.5);
+    position: relative;
+    font-size: 12px;
+    padding-right: 5px;
+}
+
+.navextra div:not(:first-child) {
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.navextra div:hover {
+    cursor: pointer;
+    outline: 1px solid white;
 }

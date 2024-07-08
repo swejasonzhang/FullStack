@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import * as sessionActions from "../../store/session";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faCaretDown, faBars } from '@fortawesome/free-solid-svg-icons';
 import { fetchCartItems } from "../../store/cartitems.js";
 import './NavBar.css';
 import { receiveCategory } from "../../store/category.js";
@@ -180,7 +180,7 @@ const NavBar = ({ setIsContentGrayedOut }) => {
 
           <div className="dropdown">
             <div className="greetingdiv" onMouseEnter={openModal} onMouseLeave={closeModal}>
-              <div className="greeting">Hello, {username}</div> 
+              <div className="greeting">{username === "User" ? "Hello, sign in" : `Hello, ${username}`}</div> 
 
               <button className="dropdownbutton">Account & Lists 
                 <FontAwesomeIcon className="accounttriangle" icon={faCaretDown} />
@@ -255,7 +255,28 @@ const NavBar = ({ setIsContentGrayedOut }) => {
       </div>
 
       <div className="navextra">
-        
+        <div className="faBarsText">
+          <FontAwesomeIcon className="faBars" icon={faBars} /> All
+        </div>
+        <div>Medical care</div>
+        <div>Groceries</div>
+        <div>Best Sellers</div>
+        <div>Amazeon Basics</div>
+        <div>Prime</div>
+        <div>New Releases</div>
+        <div>Today's Deals</div>
+        <div>Customer Service</div>
+        <div>Music</div>
+        <div>Amazeon Home</div>
+        <div>Registry</div>
+        <div>Books</div>
+        <div>Pharmacy</div>
+        <div>Gift Cards</div>
+        <div>Fashion</div>
+        <div>Smart Home</div>
+        <div>Toys & Games</div>
+        <div>Sell</div>
+        <div>Luxury Stores</div>
       </div>
     </>
   );

@@ -13,10 +13,11 @@ function SignUp() {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
-    const history = useHistory("");
+    const history = useHistory();
 
-    const signuplogin = async (e) => {
+    const signuplogin = (e) => {
         e.preventDefault();
+        e.stopPropagation(); // Ensure the event doesn't bubble up to parent elements
         history.push('/login');
     }
 
@@ -52,8 +53,8 @@ function SignUp() {
 
     return (
         <>
-            <div className='signupcontainer' onClick={redirectToHomePage}>
-                <div className="amazeonsignupcontainer" >
+            <div className='signupcontainer'>
+                <div className="amazeonsignupcontainer" onClick={redirectToHomePage}>
                     <img className="amazeonsignup" src={"https://amazeon-seeds.s3.amazonaws.com/Logo+For+SignUp+And+Login.jpeg"} alt='amazeonsignupmain'></img>
                 </div>
 
@@ -108,7 +109,7 @@ function SignUp() {
                         <div className='lastlinebreak'></div>
 
                         <div className='haveaccount'>
-                            <p>Already have an account? <a href="/login" onClick={signuplogin}>Sign in</a></p>
+                            <p>Already have an account? <span className="signin-link" onClick={signuplogin}>Sign in</span></p>
                         </div>
                     </form>
                 </div>

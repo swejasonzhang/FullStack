@@ -213,7 +213,7 @@ const NavBar = ({ setIsContentGrayedOut }) => {
 
                         <div className="customerdiv">
                           <div className="newcustomer"> New customer?</div>
-                          <div className="starthere"> Start here.</div>
+                          <div className="starthere" onClick={signup}> Start here.</div>
                         </div>
                       </div>
 

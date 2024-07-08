@@ -123,7 +123,7 @@ const HomePage = () => {
             <div className="itemscarousel">
               <div className="container">
                 {user === null ? (
-                  <h2 className="lastitemsbought">New home arrivals under $50</h2>
+                  <h2 className="lastitemsbought">New on Amazeon: Too Faced</h2>
                 ) : (
                   <h2 className="lastitemsbought">Pick up where you left off</h2>
                 )}
@@ -139,7 +139,7 @@ const HomePage = () => {
 
               <div className="container">
                 {user == null ? (
-                  <h2 className="catchup">Modify by Merch on Demand</h2>
+                  <h2 className="catchup">Save on school essentials</h2>
                 ) : (
                   <h2 className="catchup">Catch up on talked-about titles</h2>
                 )}
@@ -148,7 +148,11 @@ const HomePage = () => {
               <div className={`returncontainer ${user === null ? 'same-size' : ''}`}>
                 {user === null ? (
                   <div>
-                    <h2 className="easyreturns">Discover a new kind of soda</h2>
+                    <h2 className="easyreturns">Sign in for the best experience
+                      <div className="carouselsignin">Sign in securely
+
+                      </div>
+                    </h2>
                   </div>
                 ) : (
                   <div>

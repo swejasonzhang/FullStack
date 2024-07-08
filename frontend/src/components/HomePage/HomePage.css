@@ -172,9 +172,33 @@ button.slick-arrow:hover {
     margin-right: 0.3125rem;
 }
 
-.same-size {
-    height: 26.25rem;
-    width: 21.875rem;
+.easyreturns {
+    padding-left: 1.25rem;
+    padding-top: 0.3125rem;
+    font-weight: 700;
+    color: #0f1111 !important;
+    font-family: "Amazon Ember", Arial, sans-serif;
+    font-size: 1.3125rem !important;
+}
+
+.carouselsignin {
+    background-color: #ffd814;
+    position: relative;
+    top: 1rem;
+    width: 95%;
+    height: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 14px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-weight: 200;
+    cursor: pointer;
+}
+
+.carouselsignin:hover {
+    background-color: #d9bd21;
 }
 
 .returncontainer h2 {

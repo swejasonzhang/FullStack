@@ -228,3 +228,13 @@ body, html {
     font-weight: bold;
     color: #555 !important;
 }
+
+.signin-link {
+    color: #0066c0;
+    cursor: pointer;
+}
+
+.signin-link:hover {
+    text-decoration: underline;
+    color: #c45500;
+}

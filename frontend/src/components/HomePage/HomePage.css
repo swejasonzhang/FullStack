@@ -1,3 +1,4 @@
+/* HomePage.css */
 body {
     margin: 0;
     padding: 0;
@@ -111,10 +112,8 @@ button.slick-arrow:hover {
 
 .pagecontent {
     position: relative;
-    height: calc(100vh - 3.75rem);
-    left: 0;
+    height: 100%;
     width: 100%;
-    padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
     background-color: #E3E6E6;
@@ -150,7 +149,7 @@ button.slick-arrow:hover {
 
 .itemscarousel .container {
     background-color: #fff;
-    z-index: 1001;
+    z-index: 1;
     position: relative;
     height: 26.25rem;
     width: 21.875rem;
@@ -162,7 +161,7 @@ button.slick-arrow:hover {
 
 .returncontainer {
     background-color: #fff;
-    z-index: 1001;
+    z-index: 1;
     position: relative;
     left: 0.3125rem;
     width: 21.875rem;
@@ -181,10 +180,6 @@ button.slick-arrow:hover {
 .returncontainer h2 {
     padding-left: 1.25rem;
     padding-top: 0.3125rem;
-    font-weight: 700;
-    color: #0f1111 !important;
-    font-family: "Amazon Ember", Arial, sans-serif;
-    font-size: 1.3125rem !important;
 }
 
 .container h2 {
@@ -203,4 +198,15 @@ button.slick-arrow:hover {
     font-size: 0.8125rem !important;
     line-height: 1.1875rem !important;
     bottom: 0.625rem;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    pointer-events: none;
 }

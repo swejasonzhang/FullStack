@@ -11,7 +11,7 @@ import { receiveTerm } from "../../store/searchterm.js";
 import AddressPin from "../Images/AddressPin.png";
 import AmazeonHome from "../Images/AmazeonHome.png"
 
-const NavBar = () => {
+const NavBar = ({ setIsContentGrayedOut }) => { 
   const dispatch = useDispatch();
   const history = useHistory();
   const [username, setUsername] = useState(""); 
@@ -74,6 +74,7 @@ const NavBar = () => {
   const handleCategoryChange = (e) => {
     const newCategory = e.target.value;
     dispatch(receiveCategory(newCategory));
+    setIsContentGrayedOut(true);
 
     const optionText = e.target.options[e.target.selectedIndex].text;
     const optionWidth = optionText.length * 8 + padding;
@@ -92,10 +93,12 @@ const NavBar = () => {
   };
 
   const handleSearchFocus = () => {
+    setIsContentGrayedOut(true);
     setIsSearchBoxFocused(true);
   };
 
   const handleSearchBlur = () => {
+    setIsContentGrayedOut(false);
     setIsSearchBoxFocused(false);
   };
 

@@ -1,3 +1,4 @@
+// HomePage.js
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
@@ -24,6 +25,7 @@ const HomePage = () => {
   const intervalRef = useRef(null);
   const [showLeftOutline, setShowLeftOutline] = useState(false);
   const [showRightOutline, setShowRightOutline] = useState(false);
+  const [isContentGrayedOut, setIsContentGrayedOut] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCartItems());
@@ -89,12 +91,12 @@ const HomePage = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar setIsContentGrayedOut={setIsContentGrayedOut} />
 
       {searchTerm === "" && selectedCategory === "All Departments" ? (
-        <div className="pagecontent">
+        <div className={`pagecontent ${isContentGrayedOut ? 'grayed-out' : ''}`}>
           <div className="backgroundimagediv">
-            <div className="carousel-wrapper">
+            <div className={`carousel-wrapper`}>
               <div className={`carouselprevdiv ${showLeftOutline ? "show-outline" : ""}`} onClick={handlePrevClick}>
                 <div className="leftoutline">
                   <img src={CarouselLeft} className="carouselleft" alt="left" onClick={handlePrevClick}></img>
@@ -155,10 +157,9 @@ const HomePage = () => {
                   </div>
                 )}
               </div>
-
-              
             </div>
           </div>
+          {isContentGrayedOut && <div className="overlay"></div>}
         </div>
       ) : (
         <div className="itemsindex">

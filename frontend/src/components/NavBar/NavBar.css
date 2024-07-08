@@ -1,4 +1,6 @@
 body, html {
+    margin: 0;
+    padding: 0;
     font-family: "AmazonEmber", Arial, Helvetica, sans-serif;
     font-size: 1rem;
 }
@@ -139,7 +141,7 @@ body, html {
     border-bottom-left-radius: 0.5rem;
     width: auto;
 }
-  
+
 .categories {
     background-color: #e6e6e6;
     border: 0.0625rem solid #cdcdcd;
@@ -153,8 +155,6 @@ body, html {
     outline: none;
     transition: box-shadow 0.3s ease-in-out;
     display: inline-block;
-    text-align: center;
-    padding-right: 10px;
 }
 
 .categories:focus {
@@ -169,7 +169,7 @@ body, html {
     height: 0.9375rem;
     transform: scale(0.75);
     z-index: 1001;
-    right: 0.85rem;
+    right: 1rem;
     bottom: 0.125rem;
 }
 

@@ -1,4 +1,3 @@
-/* HomePage.css */
 body {
     margin: 0;
     padding: 0;
@@ -54,7 +53,7 @@ button.slick-arrow:hover {
 }
 
 .carouselprevdiv {
-    z-index: 1001;
+    z-index: 1000;
     position: absolute;
     height: 15.625rem;
     width: 5rem;
@@ -82,7 +81,7 @@ button.slick-arrow:hover {
     justify-content: center;
     align-items: center;
     display: flex;
-    z-index: 1001;
+    z-index: 1000;
     top: 0;
     right: 0;
     position: absolute;
@@ -213,6 +212,7 @@ button.slick-arrow:hover {
     color: #0f1111 !important;
     font-family: "Amazon Ember", Arial, sans-serif;
     font-size: 1.3125rem !important;
+    flex: 0 1 auto;
 }
 
 .returntext {
@@ -231,6 +231,223 @@ button.slick-arrow:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
+    z-index: 1001;
     pointer-events: none;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.5; 
+}
+
+.carouselprevdiv.disabled .carouselleft,
+.carouselnextdiv.disabled .carouselright {
+    opacity: 0.5; 
+}
+
+.homearrivals {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.homearrivals div {
+    width: 150px;
+    height: 115px;
+    margin-bottom: 50px;
+    text-align: left;
+    cursor: pointer;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.homeall {
+    position: relative;
+    left: 15px;
+    bottom: 10px;
+    font-size: 13px;
+    color: #007185;
+    width: 100%;
+}
+
+.homeall:hover {
+    cursor: pointer;
+    color: #c07a11;
+}
+
+.summerfashion {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.summerfashion div {
+    width: 150px;
+    height: 115px;
+    margin-bottom: 50px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.summershop {
+    position: relative;
+    left: 20px;
+    font-size: 13px;
+    color: #007185;
+    width: 100%;
+    bottom: 10px;
+}
+
+.summershop:hover {
+    cursor: pointer;
+    color: #c07a11;
+}
+
+.school {
+    position: relative;
+    width: 310px;
+    height: 320px;
+    padding: 0px;
+    left: 20px;
+    bottom: 13px;
+}
+
+.schoolimg {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.schoolshop {
+    position: relative;
+    left: 20px;
+    font-size: 13px;
+    color: #007185;
+    width: 100%;
+}
+
+.schoolshop:hover {
+    cursor: pointer;
+    color: #c07a11;
+}
+
+.makeupdiv {
+    position: relative;
+    width: 310px;
+    height: 320px;
+    padding: 0px;
+    left: 20px;
+    bottom: 13px;
+}
+
+.makeupimg {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.shopmakeup {
+    position: relative;
+    left: 20px;
+    font-size: 13px;
+    color: #007185;
+    width: 100%;
+}
+
+.shopmakeup:hover {
+    cursor: pointer;
+    color: #c07a11;
+}
+
+.sodadiv {
+    position: relative;
+    width: 310px;
+    height: 320px;
+    padding: 0px;
+    left: 20px;
+    bottom: 13px;
+}
+
+.sodaimg {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.shopsoda {
+    position: relative;
+    left: 20px;
+    font-size: 13px;
+    color: #007185;
+    width: 100%;
+}
+
+.shopsoda:hover {
+    cursor: pointer;
+    color: #c07a11;
+}
+
+.merchdiv {
+    position: relative;
+    width: 310px;
+    height: 320px;
+    padding: 0px;
+    left: 20px;
+    bottom: 13px;
+}
+
+.merchimg {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.shopmerch {
+    position: relative;
+    left: 20px;
+    font-size: 13px;
+    color: #007185;
+    width: 100%;
+}
+
+.shopmerch:hover {
+    cursor: pointer;
+    color: #c07a11;
+}
+
+.snacksdiv {
+    position: relative;
+    width: 310px;
+    height: 320px;
+    padding: 0px;
+    left: 20px;
+    bottom: 13px;
+}
+
+.snacksimg {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.shopsnacks {
+    position: relative;
+    left: 20px;
+    font-size: 13px;
+    color: #007185;
+    width: 100%;
+}
+
+.shopsnacks:hover {
+    cursor: pointer;
+    color: #c07a11;
 }

@@ -10,8 +10,6 @@ const ItemsIndex = () => {
     const searchTerm = useSelector(state => state.term.receivedTerm);
     const selectedCategory = useSelector(state => state.category.receivedCategory);
 
-    console.log(searchTerm, selectedCategory)
-
     useEffect(() => {
         dispatch(fetchItems());
     }, [dispatch]);

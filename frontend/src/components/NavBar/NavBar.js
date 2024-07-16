@@ -87,6 +87,10 @@ const NavBar = ({ setIsContentGrayedOut }) => {
   };
 
   const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter' && searchTerm === '' && selectedCategory === "All Departments") {
+      history.push('/')
+    }
+
     if (e.key === 'Enter') {
       searchForItems(searchTerm, selectedCategory);
     }

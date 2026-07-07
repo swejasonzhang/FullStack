@@ -81,9 +81,24 @@ Open http://localhost:3000 and sign in with the demo account:
 | `npm run preview` | Preview the production build |
 | `npm run lint` | Run ESLint |
 | `npm run typecheck` | Run the TypeScript compiler |
+| `npm run test` | Run the Vitest suite |
 
-## Production build
-From the repository root, `npm run build` type-checks and bundles the SPA into `/public`, which
-Rails serves (with a catch-all route so client-side routing works on deep links). A production
-deploy needs `SECRET_KEY_BASE` and `DATABASE_URL` environment variables; `bin/render-build.sh`
-runs the full build, migrate, and seed sequence.
+## Testing
+- **Backend** (RSpec): model specs and request specs for every API endpoint.
+  ```bash
+  bundle exec rspec
+  ```
+- **Frontend** (Vitest + Testing Library): Redux slice/selector tests and component tests.
+  ```bash
+  cd frontend && npm run test
+  ```
+
+## Deployment (Render)
+The SPA builds into `/public`, which Rails serves (a catch-all route keeps client-side routing
+working on deep links). Configure the web service as:
+
+- **Build Command:** `bin/render-build.sh` (installs gems + builds the SPA)
+- **Start Command:** `bin/render-predeploy.sh && bundle exec rails server` (migrates + seeds at
+  runtime, then boots — the Pre-Deploy Command is paid-only, so migrations run in the start command)
+- **Environment:** `SECRET_KEY_BASE` and a `DATABASE_URL` pointing at a PostgreSQL instance in the
+  same region as the web service

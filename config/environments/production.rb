@@ -5,7 +5,7 @@ Rails.application.configure do
   config.eager_load = true
   config.consider_all_requests_local = false
 
-  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  config.public_file_server.enabled = true
 
   config.active_storage.service = :local
 

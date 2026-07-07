@@ -20,7 +20,7 @@ function renderApplication() {
 }
 
 if (sessionStorage.getItem("X-CSRF-Token") === null) {
-  restoreCSRF().then(renderApplication);
+  restoreCSRF().then(renderApplication).catch(renderApplication);
 } else {
   renderApplication();
 }

@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
 import { useAppSelector } from "@/app/hooks";
 import NavBar from "@/components/NavBar/NavBar";
@@ -7,7 +8,6 @@ import CarouselImage1 from "@/assets/images/CarouselImage1.jpg";
 import CarouselImage2 from "@/assets/images/CarouselImage2.jpg";
 import CarouselImage3 from "@/assets/images/CarouselImage3.jpg";
 import CarouselLeft from "@/assets/images/CarouselLeft.png";
-import CarouselRight from "@/assets/images/CarouselRight.png";
 import KitchenPot from "@/assets/images/KitchenPot.jpg";
 import Paint from "@/assets/images/Paint.jpg";
 import Decor from "@/assets/images/Decor.jpg";
@@ -25,8 +25,8 @@ import Snacks from "@/assets/images/Snacks.jpg";
 const carouselImages = [CarouselImage1, CarouselImage2, CarouselImage3];
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const user = useAppSelector((state) => state.session.user);
-  const [isContentGrayedOut, setIsContentGrayedOut] = useState(false);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
   const scrollPrev = useCallback(() => {
@@ -55,7 +55,7 @@ export default function HomePage() {
 
   return (
     <>
-      <NavBar setIsContentGrayedOut={setIsContentGrayedOut} />
+      <NavBar />
 
       <div className="relative min-h-screen w-full bg-amz-bg">
         <div className="relative w-full overflow-hidden">
@@ -98,8 +98,8 @@ export default function HomePage() {
             className="absolute right-2 top-1/2 -translate-y-1/2 z-20 hidden md:flex items-center justify-center cursor-pointer"
           >
             <img
-              src={CarouselRight}
-              className="w-12 h-auto object-contain"
+              src={CarouselLeft}
+              className="w-12 h-auto object-contain -scale-x-100"
               alt=""
               aria-hidden="true"
             />
@@ -200,13 +200,16 @@ export default function HomePage() {
               )}
             </div>
 
-            <div className={card}>
+            <div className={`${card} self-start`}>
               {user === null ? (
                 <>
                   <h2 className={cardHeading}>Sign in for the best experience</h2>
-                  <div className="mt-auto pt-4 w-full py-2 px-4 rounded-full text-center text-sm flex items-center justify-center font-medium cursor-pointer bg-amz-cart hover:bg-amz-cart-hover text-amz-ink">
+                  <button
+                    onClick={() => navigate("/signin")}
+                    className="mt-3 w-full rounded-full bg-amz-cart px-4 py-2 text-center text-sm font-medium cursor-pointer hover:bg-amz-cart-hover text-amz-ink"
+                  >
                     Sign in securely
-                  </div>
+                  </button>
                 </>
               ) : (
                 <>
@@ -279,10 +282,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-        {isContentGrayedOut && (
-          <div className="absolute inset-0 w-full h-full bg-black/60 z-30 pointer-events-none" />
-        )}
       </div>
     </>
   );

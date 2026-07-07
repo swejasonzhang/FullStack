@@ -46,7 +46,7 @@ const ItemShow = () => {
 
   const addToCart = () => {
     if (!session.user) {
-      navigate("/login");
+      navigate("/signin");
       return;
     }
 
@@ -98,7 +98,7 @@ const ItemShow = () => {
 
   const writeReview = () => {
     if (!session.user) {
-      navigate("/login");
+      navigate("/signin");
       return;
     }
     navigate(`/items/${itemId}/review`, { state: { item } });

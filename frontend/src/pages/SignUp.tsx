@@ -153,7 +153,7 @@ export default function SignUp() {
               Already have an account?{" "}
               <span
                 className="cursor-pointer text-amz-link hover:text-amz-link-hover hover:underline"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/signin")}
               >
                 Sign in
               </span>

@@ -41,10 +41,10 @@ cd frontend && npm install
 
 ### Run (two terminals)
 ```bash
-bin/rails server                 # API on http://localhost:5000
+bin/rails server                 # API on http://localhost:3001
 ```
 ```bash
-cd frontend && npm run dev       # app on http://localhost:3000 (proxies /api to :5000)
+cd frontend && npm run dev       # app on http://localhost:3000 (proxies /api to :3001)
 ```
 
 Open http://localhost:3000 and sign in with the demo account:

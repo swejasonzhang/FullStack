@@ -8,12 +8,16 @@
   },
   "scripts": {
     "dev": "npm run dev --prefix frontend",
-    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install --prefix frontend && npm run build --prefix frontend",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Helionster/FullStack.git"
+    "url": "git+https://github.com/swejasonzhang/FullStack.git"
   },
   "license": "ISC",
-  "homepage": "https://github.com/Helionster/FullStack#readme"
+  "homepage": "https://github.com/swejasonzhang/FullStack#readme"
 }

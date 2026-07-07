@@ -12,6 +12,7 @@ import ReadOnlyStarRating from "@/components/StarRating/ReadableStarRating";
 import ReviewStarRating from "@/components/StarRating/ReviewStarRating";
 import OnlyStars from "@/components/StarRating/OnlyStars";
 import NavBar from "@/components/NavBar/NavBar";
+import Spinner from "@/components/Spinner";
 
 const ItemShow = () => {
   const dispatch = useAppDispatch();
@@ -32,10 +33,22 @@ const ItemShow = () => {
     dispatch(fetchReviews());
   }, [dispatch, itemId]);
 
-  if (!item) return null;
+  if (!item) {
+    return (
+      <>
+        <NavBar />
+        <div className="min-h-screen w-full bg-amz-bg">
+          <Spinner label="Loading product" />
+        </div>
+      </>
+    );
+  }
 
   const totalRatings = reviews.length;
-  const itemRatings = reviews.reduce((total, [, review]) => total + review.ratings, 0);
+  const itemRatings = reviews.reduce(
+    (total, [, review]) => total + review.ratings,
+    0
+  );
   const averageRating =
     totalRatings > 0 ? Math.ceil((itemRatings / totalRatings) * 10) / 10 : 0;
 
@@ -140,13 +153,18 @@ const ItemShow = () => {
                   {item.name || "Unknown Name"}
                 </h1>
                 <div className="mt-2">
-                  <ReviewStarRating rating={averageRating} totalRatings={totalRatings} />
+                  <ReviewStarRating
+                    rating={averageRating}
+                    totalRatings={totalRatings}
+                  />
                 </div>
               </div>
 
               <div className="min-w-0 lg:col-start-2 lg:row-start-2">
                 <hr className="border-amz-border" />
-                <h2 className="mt-4 text-lg font-bold md:text-xl">About this item</h2>
+                <h2 className="mt-4 text-lg font-bold md:text-xl">
+                  About this item
+                </h2>
                 <p className="mt-2 text-sm text-amz-ink md:text-base">
                   {item.description || "Unknown Description"}
                 </p>
@@ -159,7 +177,9 @@ const ItemShow = () => {
 
                 <div className="mt-4 text-lg font-medium">
                   {item.stock > 0 ? (
-                    <span className="text-amz-success">In Stock {item.stock} left</span>
+                    <span className="text-amz-success">
+                      In Stock {item.stock} left
+                    </span>
                   ) : (
                     <span className="text-amz-price">Out of Stock</span>
                   )}
@@ -215,7 +235,9 @@ const ItemShow = () => {
               <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
                 <div className="w-full max-w-md rounded-lg bg-white p-5 shadow-xl">
                   <div className="mb-3 flex items-center justify-between">
-                    <h2 className="text-lg font-medium">Buy now: {item.name}</h2>
+                    <h2 className="text-lg font-medium">
+                      Buy now: {item.name}
+                    </h2>
                     <button
                       onClick={closeModal}
                       className="cursor-pointer text-xl text-amz-muted hover:text-amz-ink"
@@ -276,31 +298,34 @@ const ItemShow = () => {
                   <div className="flex flex-col divide-y divide-amz-border">
                     {reviews.map(([id, review]) => (
                       <div key={id} className="py-4 first:pt-0">
-                        <div className="text-sm font-medium">{review.author}</div>
+                        <div className="text-sm font-medium">
+                          {review.author}
+                        </div>
                         <div className="mt-1">
                           <OnlyStars rating={review.ratings} />
                         </div>
                         <p className="mt-2 text-sm text-amz-ink md:text-base">
                           {review.body}
                         </p>
-                        {session.user && session.user.username === review.author && (
-                          <div className="mt-2 flex gap-4 text-sm text-amz-link">
-                            <button
-                              type="button"
-                              className="hover:text-amz-link-hover hover:underline"
-                              onClick={() => editingReview(id, review)}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              type="button"
-                              className="hover:text-amz-link-hover hover:underline"
-                              onClick={() => deletingReview(id)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        )}
+                        {session.user &&
+                          session.user.username === review.author && (
+                            <div className="mt-2 flex gap-4 text-sm text-amz-link">
+                              <button
+                                type="button"
+                                className="hover:text-amz-link-hover hover:underline"
+                                onClick={() => editingReview(id, review)}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                type="button"
+                                className="hover:text-amz-link-hover hover:underline"
+                                onClick={() => deletingReview(id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
                       </div>
                     ))}
                   </div>

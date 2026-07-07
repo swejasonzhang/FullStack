@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useAppDispatch } from "@/app/hooks";
 import { login } from "@/features/session/sessionSlice";
-import AmazeonHome from "@/assets/images/AmazeonHome.png";
+import AmazeonLogo from "@/assets/images/AmazeonLogoLight.png";
 
 export default function LoginPage() {
   const dispatch = useAppDispatch();
@@ -14,7 +14,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<string[]>([]);
 
-  const attemptLogin = async (creds: { credential: string; password: string }) => {
+  const attemptLogin = async (creds: {
+    credential: string;
+    password: string;
+  }) => {
     setErrors([]);
     try {
       await dispatch(login(creds));
@@ -49,7 +52,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4 py-8 font-sans">
       <img
         className="w-full max-w-48 cursor-pointer object-contain"
-        src={AmazeonHome}
+        src={AmazeonLogo}
         alt="Amazeon"
         onClick={() => navigate("/")}
       />

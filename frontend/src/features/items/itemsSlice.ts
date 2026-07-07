@@ -32,10 +32,9 @@ export const fetchItems =
   () =>
   async (dispatch: AppDispatch): Promise<void> => {
     const res = await fetch("/api/items");
-    if (res.ok) {
-      const items: ItemsById = await res.json();
-      dispatch(receiveItems(items));
-    }
+    if (!res.ok) throw new Error("Failed to load items");
+    const items: ItemsById = await res.json();
+    dispatch(receiveItems(items));
   };
 
 export const fetchItem =

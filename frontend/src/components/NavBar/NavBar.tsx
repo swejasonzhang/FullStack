@@ -1,7 +1,15 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCaretDown, faBars, faFlagUsa, faLocationDot, faXmark, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faCaretDown,
+  faBars,
+  faFlagUsa,
+  faLocationDot,
+  faXmark,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { logout } from "@/features/session/sessionSlice";
 import { fetchCartItems, selectCartCount } from "@/features/cart/cartSlice";
@@ -28,15 +36,39 @@ const categoryOptions = [
 ];
 
 const navExtraLinks = [
-  "Medical care", "Groceries", "Best Sellers", "Amazeon Basics", "Prime",
-  "New Releases", "Today's Deals", "Customer Service", "Music", "Amazeon Home",
-  "Registry", "Books", "Pharmacy", "Gift Cards", "Fashion", "Smart Home",
-  "Toys & Games", "Sell", "Luxury Stores",
+  "Medical care",
+  "Groceries",
+  "Best Sellers",
+  "Amazeon Basics",
+  "Prime",
+  "New Releases",
+  "Today's Deals",
+  "Customer Service",
+  "Music",
+  "Amazeon Home",
+  "Registry",
+  "Books",
+  "Pharmacy",
+  "Gift Cards",
+  "Fashion",
+  "Smart Home",
+  "Toys & Games",
+  "Sell",
+  "Luxury Stores",
 ];
 
 function CartIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 44 34" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+    <svg
+      viewBox="0 0 44 34"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
       <path d="M2 4h5.2l3.4 16.6h20.6l4-11.6" />
       <circle cx="16" cy="28.5" r="2.6" fill="currentColor" stroke="none" />
       <circle cx="30" cy="28.5" r="2.6" fill="currentColor" stroke="none" />
@@ -60,23 +92,30 @@ const NavBar = () => {
 
   const username = user?.username ?? "User";
   const displayName = username === "User" ? "sign in" : username;
-  const selectedLabel = categoryOptions.find((o) => o.value === selectedCategory)?.label ?? "All";
+  const selectedLabel =
+    categoryOptions.find((o) => o.value === selectedCategory)?.label ?? "All";
 
   useEffect(() => {
-    dispatch(fetchCartItems());
-    dispatch(fetchItems());
+    dispatch(fetchCartItems()).catch(() => {});
+    dispatch(fetchItems()).catch(() => {});
     dispatch(setCategory("All Departments"));
     dispatch(setTerm(""));
   }, [dispatch]);
 
   useLayoutEffect(() => {
-    if (measureRef.current) setSelectWidth(measureRef.current.offsetWidth + 30);
+    if (measureRef.current) setSelectWidth(measureRef.current.offsetWidth + 26);
   }, [selectedLabel]);
 
   const suggestions = searchTerm.trim()
     ? items
-        .filter((i) => i.name.toLowerCase().includes(searchTerm.trim().toLowerCase()))
-        .filter((i) => selectedCategory === "All Departments" || i.category === selectedCategory)
+        .filter((i) =>
+          i.name.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        )
+        .filter(
+          (i) =>
+            selectedCategory === "All Departments" ||
+            i.category === selectedCategory
+        )
         .slice(0, 8)
     : [];
 
@@ -116,7 +155,8 @@ const NavBar = () => {
 
   const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      if (searchTerm === "" && selectedCategory === "All Departments") navigate("/");
+      if (searchTerm === "" && selectedCategory === "All Departments")
+        navigate("/");
       else searchForItems(searchTerm, selectedCategory);
       setIsSearchBoxFocused(false);
     }
@@ -137,12 +177,16 @@ const NavBar = () => {
   const searchGroup = (collapsibleSelect: boolean) => (
     <div
       className={`relative flex h-10 w-full items-center rounded bg-white ${
-        isSearchBoxFocused ? "shadow-[0_0_0_0.125rem_#f90,0_0_0_0.1875rem_rgba(255,153,0,0.5)]" : ""
+        isSearchBoxFocused
+          ? "shadow-[0_0_0_0.125rem_#f90,0_0_0_0.1875rem_rgba(255,153,0,0.5)]"
+          : ""
       }`}
     >
-      <div className={`relative h-full shrink-0 items-center rounded-l bg-[#e6e6e6] ${collapsibleSelect ? "hidden sm:flex" : "flex"}`}>
+      <div
+        className={`relative h-full shrink-0 items-center rounded-l bg-[#e6e6e6] ${collapsibleSelect ? "hidden sm:flex" : "flex"}`}
+      >
         <select
-          className="h-10 appearance-none rounded-l border border-[#cdcdcd] bg-[#e6e6e6] pr-6 pl-2.5 text-xs text-amz-ink outline-none focus:z-10"
+          className="h-10 appearance-none rounded-l border border-[#cdcdcd] bg-[#e6e6e6] pr-4 pl-2 text-xs text-amz-ink outline-none focus:z-10"
           style={{ width: selectWidth || undefined }}
           value={selectedCategory}
           onChange={handleCategoryChange}
@@ -153,7 +197,10 @@ const NavBar = () => {
             </option>
           ))}
         </select>
-        <FontAwesomeIcon className="pointer-events-none absolute right-2 h-3 scale-75 text-[#555]" icon={faCaretDown} />
+        <FontAwesomeIcon
+          className="pointer-events-none absolute right-1 h-3 scale-75 text-[#555]"
+          icon={faCaretDown}
+        />
       </div>
 
       <input
@@ -196,32 +243,55 @@ const NavBar = () => {
 
   return (
     <>
-      <span ref={measureRef} className="invisible fixed -left-[9999px] px-2.5 text-xs whitespace-nowrap" aria-hidden="true">
+      <span
+        ref={measureRef}
+        className="invisible fixed -left-[9999px] text-xs whitespace-nowrap"
+        aria-hidden="true"
+      >
         {selectedLabel}
       </span>
 
       <header className="hidden w-full flex-col lg:flex">
         <div className="flex w-full items-center gap-1 bg-amz-navy px-2 py-2 text-sm text-white">
-          <div className="group relative box-border flex shrink-0 cursor-pointer items-center justify-center rounded-sm px-1 py-1" onClick={redirectToHomePage}>
-            <img className="h-11 w-auto object-contain" src={AmazeonHome} alt="amazeonhomelogo" />
+          <div
+            className="group relative box-border flex shrink-0 cursor-pointer items-center justify-center rounded-sm px-1 py-1"
+            onClick={redirectToHomePage}
+          >
+            <img
+              className="h-11 w-auto object-contain"
+              src={AmazeonHome}
+              alt="amazeonhomelogo"
+            />
             <span className="pointer-events-none absolute -inset-px hidden rounded-sm border border-white group-hover:block" />
           </div>
 
           <div className="group relative box-border hidden shrink-0 cursor-pointer items-center gap-1 rounded-sm px-2 py-1 lg:flex">
-            <FontAwesomeIcon className="mb-1 text-lg text-white" icon={faLocationDot} />
+            <FontAwesomeIcon
+              className="mb-1 text-lg text-white"
+              icon={faLocationDot}
+            />
             <div className="leading-tight">
-              <div className="text-xs text-[#ccc]">Deliver to {displayName}</div>
-              <div className="text-sm font-bold text-white">Narnia... 98765</div>
+              <div className="text-xs text-[#ccc]">
+                Deliver to {displayName}
+              </div>
+              <div className="text-sm font-bold text-white">
+                Narnia... 98765
+              </div>
             </div>
             <span className="pointer-events-none absolute -inset-px hidden rounded-sm border border-white group-hover:block" />
           </div>
 
-          <div className="flex min-w-0 flex-1 items-center">{searchGroup(false)}</div>
+          <div className="flex min-w-0 flex-1 items-center">
+            {searchGroup(false)}
+          </div>
 
           <div className="group relative hidden shrink-0 cursor-pointer items-center gap-1 rounded-sm px-2 py-1 xl:flex">
             <FontAwesomeIcon className="text-white" icon={faFlagUsa} />
             <span className="text-sm font-bold text-white">US EN</span>
-            <FontAwesomeIcon className="scale-75 text-[#d6d6d6]" icon={faCaretDown} />
+            <FontAwesomeIcon
+              className="scale-75 text-[#d6d6d6]"
+              icon={faCaretDown}
+            />
             <span className="pointer-events-none absolute -inset-px hidden rounded-sm border border-white group-hover:block" />
           </div>
 
@@ -230,10 +300,18 @@ const NavBar = () => {
             onMouseEnter={() => setShowModal(true)}
             onMouseLeave={() => setShowModal(false)}
           >
-            <div className="text-xs leading-tight">{username === "User" ? "Hello, sign in" : `Hello, ${username}`}</div>
-            <button className="flex cursor-pointer items-center border-none bg-transparent p-0 text-sm font-bold text-white" onClick={user ? undefined : goToSignin}>
+            <div className="text-xs leading-tight">
+              {username === "User" ? "Hello, sign in" : `Hello, ${username}`}
+            </div>
+            <button
+              className="flex cursor-pointer items-center border-none bg-transparent p-0 text-sm font-bold text-white"
+              onClick={user ? undefined : goToSignin}
+            >
               Account &amp; Lists
-              <FontAwesomeIcon className="ml-1 scale-75 text-[#d6d6d6]" icon={faCaretDown} />
+              <FontAwesomeIcon
+                className="ml-1 scale-75 text-[#d6d6d6]"
+                icon={faCaretDown}
+              />
             </button>
             <span className="pointer-events-none absolute -inset-px hidden rounded-sm border border-white group-hover:block" />
 
@@ -246,7 +324,10 @@ const NavBar = () => {
                       <div className="w-px self-stretch bg-[#e0e0e0]" />
                       <div className="text-base font-bold">
                         Your Account
-                        <div className="cursor-pointer pt-1 text-sm font-normal text-[#444] hover:text-amz-orange hover:underline" onClick={signout}>
+                        <div
+                          className="cursor-pointer pt-1 text-sm font-normal text-[#444] hover:text-amz-orange hover:underline"
+                          onClick={signout}
+                        >
                           Logout
                         </div>
                       </div>
@@ -255,12 +336,20 @@ const NavBar = () => {
                 ) : (
                   <>
                     <div className="flex w-full flex-col items-center justify-center gap-2">
-                      <button className="w-full cursor-pointer rounded-lg border-none bg-amz-cart px-6 py-1 hover:bg-amz-cart-hover" onClick={goToSignin}>
+                      <button
+                        className="w-full cursor-pointer rounded-lg border-none bg-amz-cart px-6 py-1 hover:bg-amz-cart-hover"
+                        onClick={goToSignin}
+                      >
                         Sign In
                       </button>
                       <div className="flex flex-row items-center justify-center gap-1 text-xs text-black">
                         <div>New customer?</div>
-                        <div className="cursor-pointer text-amz-link hover:text-amz-orange hover:underline" onClick={goToSignup}>Start here.</div>
+                        <div
+                          className="cursor-pointer text-amz-link hover:text-amz-orange hover:underline"
+                          onClick={goToSignup}
+                        >
+                          Start here.
+                        </div>
                       </div>
                     </div>
                     <div className="my-2.5 h-px w-full bg-[#e0e0e0]" />
@@ -275,16 +364,24 @@ const NavBar = () => {
             )}
           </div>
 
-          <button className="group relative hidden shrink-0 cursor-pointer flex-col justify-center rounded-sm border-none bg-transparent px-2 py-1 text-left text-white lg:flex" onClick={() => navigate("/orders")}>
+          <button
+            className="group relative hidden shrink-0 cursor-pointer flex-col justify-center rounded-sm border-none bg-transparent px-2 py-1 text-left text-white lg:flex"
+            onClick={() => navigate("/orders")}
+          >
             <div className="text-xs leading-tight">Returns</div>
             <div className="text-sm font-bold">&amp; Orders</div>
             <span className="pointer-events-none absolute -inset-px hidden rounded-sm border border-white group-hover:block" />
           </button>
 
-          <button className="group relative flex shrink-0 cursor-pointer items-end gap-1 rounded-sm border-none bg-amz-navy px-2 py-1" onClick={redirectCart}>
+          <button
+            className="group relative flex shrink-0 cursor-pointer items-end gap-1 rounded-sm border-none bg-amz-navy px-2 py-1"
+            onClick={redirectCart}
+          >
             <div className="relative">
               <CartIcon className="h-8 w-11 text-white" />
-              <span className="absolute top-0 left-[45%] -translate-x-1/2 text-[0.9375rem] leading-none font-bold text-amz-orange">{cartCount}</span>
+              <span className="absolute top-0 left-[45%] -translate-x-1/2 text-[0.9375rem] leading-none font-bold text-amz-orange">
+                {cartCount}
+              </span>
             </div>
             <span className="text-sm font-bold text-white">Cart</span>
             <span className="pointer-events-none absolute -inset-px hidden rounded-sm border border-white group-hover:block" />
@@ -292,11 +389,17 @@ const NavBar = () => {
         </div>
 
         <div className="hidden w-full flex-nowrap items-center gap-1 overflow-x-auto bg-amz-slate px-3 py-1 text-sm whitespace-nowrap text-white [-ms-overflow-style:none] [scrollbar-width:none] md:flex [&::-webkit-scrollbar]:hidden">
-          <button className="flex shrink-0 cursor-pointer items-center gap-1 border-none bg-transparent px-2 py-1 font-bold text-white hover:bg-amz-slate-hover" onClick={() => setDrawerOpen(true)}>
+          <button
+            className="flex shrink-0 cursor-pointer items-center gap-1 border-none bg-transparent px-2 py-1 font-bold text-white hover:bg-amz-slate-hover"
+            onClick={() => setDrawerOpen(true)}
+          >
             <FontAwesomeIcon className="text-base" icon={faBars} /> All
           </button>
           {navExtraLinks.map((link) => (
-            <div key={link} className="flex shrink-0 cursor-pointer items-center px-3 py-1 hover:bg-amz-slate-hover">
+            <div
+              key={link}
+              className="flex shrink-0 cursor-pointer items-center px-3 py-1 hover:bg-amz-slate-hover"
+            >
               {link}
             </div>
           ))}
@@ -305,53 +408,96 @@ const NavBar = () => {
 
       <header className="flex w-full flex-col bg-amz-navy text-white lg:hidden">
         <div className="flex w-full items-center gap-2 px-3 py-2">
-          <button className="flex shrink-0 cursor-pointer items-center justify-center rounded-sm border border-transparent bg-transparent p-2 text-white hover:border-white" onClick={() => setDrawerOpen(true)} aria-label="Open menu">
+          <button
+            className="flex shrink-0 cursor-pointer items-center justify-center rounded-sm border border-transparent bg-transparent p-2 text-white hover:border-white"
+            onClick={() => setDrawerOpen(true)}
+            aria-label="Open menu"
+          >
             <FontAwesomeIcon className="text-xl" icon={faBars} />
           </button>
 
-          <div className="flex shrink-0 cursor-pointer items-center" onClick={redirectToHomePage}>
-            <img className="h-9 w-auto object-contain" src={AmazeonHome} alt="amazeonhomelogo" />
+          <div
+            className="flex shrink-0 cursor-pointer items-center"
+            onClick={redirectToHomePage}
+          >
+            <img
+              className="h-9 w-auto object-contain"
+              src={AmazeonHome}
+              alt="amazeonhomelogo"
+            />
           </div>
 
           <div className="flex-1" />
 
-          <button className="flex shrink-0 cursor-pointer flex-col items-center gap-0.5 border-none bg-transparent px-1 text-white" onClick={user ? undefined : goToSignin} aria-label="Account">
+          <button
+            className="flex shrink-0 cursor-pointer flex-col items-center gap-0.5 border-none bg-transparent px-1 text-white"
+            onClick={user ? undefined : goToSignin}
+            aria-label="Account"
+          >
             <FontAwesomeIcon className="text-xl" icon={faUser} />
           </button>
 
-          <button className="relative flex shrink-0 cursor-pointer items-center border-none bg-transparent px-1 text-white" onClick={redirectCart} aria-label="Cart">
+          <button
+            className="relative flex shrink-0 cursor-pointer items-center border-none bg-transparent px-1 text-white"
+            onClick={redirectCart}
+            aria-label="Cart"
+          >
             <div className="relative">
               <CartIcon className="h-7 w-10 text-white" />
-              <span className="absolute top-0 left-[45%] -translate-x-1/2 text-xs leading-none font-bold text-amz-orange">{cartCount}</span>
+              <span className="absolute top-0 left-[45%] -translate-x-1/2 text-xs leading-none font-bold text-amz-orange">
+                {cartCount}
+              </span>
             </div>
           </button>
         </div>
 
-        <div className="flex w-full items-center px-3 pb-2">{searchGroup(true)}</div>
+        <div className="flex w-full items-center px-3 pb-2">
+          {searchGroup(true)}
+        </div>
 
         <div className="flex w-full items-center gap-1 bg-amz-slate px-3 py-1 text-xs text-white">
           <FontAwesomeIcon className="text-sm" icon={faLocationDot} />
-          <span className="font-bold">Deliver to {displayName} - Narnia... 98765</span>
+          <span className="font-bold">
+            Deliver to {displayName} - Narnia... 98765
+          </span>
         </div>
       </header>
 
-      <div className={`fixed inset-0 z-1200 ${drawerOpen ? "" : "pointer-events-none"}`}>
-        <div className={`absolute inset-0 bg-black/50 transition-opacity ${drawerOpen ? "opacity-100" : "opacity-0"}`} onClick={() => setDrawerOpen(false)} />
-        <div className={`fixed top-0 left-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white text-amz-ink shadow-2xl transition-transform ${drawerOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <div
+        className={`fixed inset-0 z-1200 ${drawerOpen ? "" : "pointer-events-none"}`}
+      >
+        <div
+          className={`absolute inset-0 bg-black/50 transition-opacity ${drawerOpen ? "opacity-100" : "opacity-0"}`}
+          onClick={() => setDrawerOpen(false)}
+        />
+        <div
+          className={`fixed top-0 left-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white text-amz-ink shadow-2xl transition-transform ${drawerOpen ? "translate-x-0" : "-translate-x-full"}`}
+        >
           <div className="flex items-center gap-3 bg-amz-slate px-4 py-4 text-white">
             <FontAwesomeIcon className="text-2xl" icon={faUser} />
-            <span className="text-lg font-bold">{username === "User" ? "Hello, sign in" : `Hello, ${username}`}</span>
-            <button className="ml-auto cursor-pointer border-none bg-transparent text-2xl text-white" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
+            <span className="text-lg font-bold">
+              {username === "User" ? "Hello, sign in" : `Hello, ${username}`}
+            </span>
+            <button
+              className="ml-auto cursor-pointer border-none bg-transparent text-2xl text-white"
+              onClick={() => setDrawerOpen(false)}
+              aria-label="Close menu"
+            >
               <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>
 
           <div className="border-b border-amz-border py-3">
-            <div className="px-4 pb-2 text-lg font-bold">Shop by Department</div>
+            <div className="px-4 pb-2 text-lg font-bold">
+              Shop by Department
+            </div>
             <ul>
               {categoryOptions.map((opt) => (
                 <li key={opt.value}>
-                  <button className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg" onClick={() => handleDrawerCategory(opt.value)}>
+                  <button
+                    className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg"
+                    onClick={() => handleDrawerCategory(opt.value)}
+                  >
                     {opt.label}
                   </button>
                 </li>
@@ -360,27 +506,46 @@ const NavBar = () => {
           </div>
 
           <div className="border-b border-amz-border py-3">
-            <div className="px-4 pb-2 text-lg font-bold">Help &amp; Settings</div>
-            <button className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg" onClick={() => { setDrawerOpen(false); navigate("/orders"); }}>
+            <div className="px-4 pb-2 text-lg font-bold">
+              Help &amp; Settings
+            </div>
+            <button
+              className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg"
+              onClick={() => {
+                setDrawerOpen(false);
+                navigate("/orders");
+              }}
+            >
               Returns &amp; Orders
             </button>
             {user ? (
-              <button className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg" onClick={signout}>
+              <button
+                className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg"
+                onClick={signout}
+              >
                 Sign Out
               </button>
             ) : (
-              <button className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg" onClick={goToSignin}>
+              <button
+                className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg"
+                onClick={goToSignin}
+              >
                 Sign In
               </button>
             )}
           </div>
 
           <div className="py-3">
-            <div className="px-4 pb-2 text-lg font-bold">Trending &amp; More</div>
+            <div className="px-4 pb-2 text-lg font-bold">
+              Trending &amp; More
+            </div>
             <ul>
               {navExtraLinks.map((link) => (
                 <li key={link}>
-                  <button className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg" onClick={() => setDrawerOpen(false)}>
+                  <button
+                    className="w-full cursor-pointer border-none bg-transparent px-4 py-2 text-left text-sm hover:bg-amz-bg"
+                    onClick={() => setDrawerOpen(false)}
+                  >
                     {link}
                   </button>
                 </li>

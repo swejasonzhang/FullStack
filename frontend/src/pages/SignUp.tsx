@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useAppDispatch } from "@/app/hooks";
 import { signup } from "@/features/session/sessionSlice";
-import AmazeonHome from "@/assets/images/AmazeonHome.png";
+import AmazeonLogo from "@/assets/images/AmazeonLogoLight.png";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -20,7 +20,9 @@ export default function SignUp() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      setErrors(["Re-enter password field must be the same as the password field"]);
+      setErrors([
+        "Re-enter password field must be the same as the password field",
+      ]);
       return;
     }
 
@@ -40,7 +42,7 @@ export default function SignUp() {
     <div className="flex min-h-screen flex-col items-center justify-center gap-4 px-4 py-8 font-sans">
       <img
         className="w-full max-w-48 cursor-pointer object-contain"
-        src={AmazeonHome}
+        src={AmazeonLogo}
         alt="Amazeon"
         onClick={() => navigate("/")}
       />

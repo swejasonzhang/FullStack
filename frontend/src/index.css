@@ -1,4 +1,78 @@
+@import "tailwindcss";
+
 @font-face {
-    font-family: 'AmazonEmber';
-    src: url('fonts/AmazonEmber_Rg.ttf') format('opentype');
+  font-family: "AmazonEmber";
+  src: url("./assets/fonts/AmazonEmber_Lt.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AmazonEmber";
+  src: url("./assets/fonts/AmazonEmber_Rg.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AmazonEmber";
+  src: url("./assets/fonts/Amazon-Ember-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AmazonEmber";
+  src: url("./assets/fonts/AmazonEmber_Bd.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: "AmazonEmber", ui-sans-serif, system-ui, sans-serif;
+
+  --color-amz-navy: #131921;
+  --color-amz-slate: #232f3e;
+  --color-amz-slate-hover: #37475a;
+  --color-amz-orange: #ff9900;
+  --color-amz-yellow: #febd69;
+  --color-amz-yellow-hover: #f3a847;
+  --color-amz-cart: #ffd814;
+  --color-amz-cart-hover: #f7ca00;
+  --color-amz-buynow: #ffa41c;
+  --color-amz-buynow-hover: #fa8900;
+  --color-amz-link: #007185;
+  --color-amz-link-hover: #c7511f;
+  --color-amz-price: #b12704;
+  --color-amz-star: #ffa41c;
+  --color-amz-success: #007600;
+  --color-amz-deal: #cc0c39;
+  --color-amz-bg: #eaeded;
+  --color-amz-ink: #0f1111;
+  --color-amz-muted: #565959;
+  --color-amz-border: #d5d9d9;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-size: clamp(0.875rem, 0.82rem + 0.35vw, 1.0625rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    color: var(--color-amz-ink);
+    background-color: var(--color-amz-bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
 }

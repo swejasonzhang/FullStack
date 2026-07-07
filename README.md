@@ -1,27 +1,89 @@
-![plot](./AmazeonHome.png)
+# Amazeon
 
-# Description
-Amazeon, a clone of Amazon, is an e-commerce company that allows users to purchase a wide range of products from life necessities to items of passion. 
+A full-stack Amazon marketplace clone — browse a catalog by category, search, read and write
+reviews, manage a cart, and check out. Built with a Ruby on Rails API and a React + TypeScript
+single-page app.
 
-# Controls
-You navigate to different pages by clicking certain items and buttons to display more information about or check said item/s.
+![Amazeon home page](docs/AmazeonHome.jpg)
 
-# Technical Details
-Amazeon was coded using React-Redux for the frontend and as for the backend, it was coded by using JS. I also implemented HTML and CSS. 
+## Tech stack
 
-# Feature Implementation
-![plot](./TotalSelectedAndInCart.png) 
+**Frontend** — React 19 · TypeScript · Vite · Redux Toolkit · React Router 7 · Tailwind CSS 4 · Embla Carousel
 
-The function totalItemsInCart allows the user to see how many items there are in the cart by iterating through an object of cart items and getting the quantity of every item, then adding it to the total. The function totalSelectedItems allows us to see how many items are selected by seeing if there is a quantity if an item, if there is add one to the total, if not then set the total to zero.
+**Backend** — Ruby on Rails 7 (API-only) · PostgreSQL · Active Record · Active Storage · bcrypt session auth with CSRF
 
-![plot](./CheckboxChange.png) 
+## Highlights
 
-This function handleCheckboxChange checks if the item is currently checked or not. We first check if the index is in the selectedItems array aka if it's checked. If it's not checked then selectedIndex will be -1. If it's -1 push the item into a new array. If it's not -1 then we know it's in the array and so we can filter it out from the rest of the array.
+- **Session-token authentication** with CSRF-protected requests (sign up, log in, log out)
+- **Catalog** with category filtering and prefix search
+- **Product pages** with stock, quantity selection, and average star ratings
+- **Reviews** — create, edit, and delete your own
+- **Cart** with per-item quantities, selection, live subtotal, and a checkout that decrements stock
+- **Typed Redux store** (Redux Toolkit) and a fully typed component tree
+- **Runs with zero secrets** — images are stored on local disk, so a fresh clone works out of the box
 
-![plot](./CalcuateSelectedItemsCost.png) 
+## Getting started
 
-This function iterates through an array of all the selected items gets their cost and multiplies it with their quantity to result in the total cost of all the items that are selected.
+### Prerequisites
+- Ruby 3.1.1
+- Node.js 20+
+- PostgreSQL
 
-![plot](./CartQuanityAndSize.png) 
+### Setup
+```bash
+# 1. Backend
+bundle install
+bin/rails db:create db:migrate db:seed   # seeds 17 products + a demo user
 
-These functions grabs the quantity from the cart and change the font depending on how many items are in the cart.
+# 2. Frontend
+cd frontend && npm install
+```
+
+### Run (two terminals)
+```bash
+bin/rails server                 # API on http://localhost:5000
+```
+```bash
+cd frontend && npm run dev       # app on http://localhost:3000 (proxies /api to :5000)
+```
+
+Open http://localhost:3000 and sign in with the demo account:
+
+> **Email:** `Demouser@gmail.com`  **Password:** `Password`
+
+## Project structure
+
+```
+.
+├── app/
+│   ├── controllers/api/     REST controllers (items, reviews, cart, sessions, users)
+│   ├── models/              User, Item, Review, CartItem
+│   └── views/api/           jbuilder JSON views
+├── config/                  Routes and Rails configuration
+├── db/                      Migrations, schema, and seeds
+├── docs/                    README screenshots
+└── frontend/
+    └── src/
+        ├── app/             Store configuration and typed hooks
+        ├── features/        Redux Toolkit slices (session, items, cart, reviews, nav)
+        ├── components/      Reusable UI (NavBar, StarRating, Items)
+        ├── pages/           Route-level views
+        ├── lib/             CSRF fetch helper
+        ├── types/           Shared TypeScript types
+        └── assets/          Images and fonts
+```
+
+## Frontend scripts
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server |
+| `npm run build` | Type-check and build the production bundle into `/public` |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+| `npm run typecheck` | Run the TypeScript compiler |
+
+## Production build
+From the repository root, `npm run build` type-checks and bundles the SPA into `/public`, which
+Rails serves (with a catch-all route so client-side routing works on deep links). A production
+deploy needs `SECRET_KEY_BASE` and `DATABASE_URL` environment variables; `bin/render-build.sh`
+runs the full build, migrate, and seed sequence.

@@ -1,5 +1,7 @@
-class User < ApplicationRecord  
+class User < ApplicationRecord
     has_secure_password
+
+    has_many :cart_items, dependent: :destroy
 
     validates :username,
         uniqueness: true
